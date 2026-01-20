@@ -1,0 +1,135 @@
+@import "tailwindcss"; 
+
+@plugin "@tailwindcss/forms";
+
+@source "../views";
+@source "../../content";
+
+
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+@theme {
+    /* Blue */
+    --color-bkkBlue-950: #020D31;
+    --color-bkkBlue-900: #021245;
+    --color-bkkBlue-800: #042181;
+    --color-bkkBlue-700: #073AE4;
+    --color-bkkBlue-600: #3261F9;
+    --color-bkkBlue-500: #698BFA;
+    --color-bkkBlue-400: #97AEFC;
+    --color-bkkBlue-300: #BCCBFD;
+    --color-bkkBlue-200: #D9E2FE;
+    --color-bkkBlue-100: #EEF2FE;
+    --color-bkkBlue-50: #FBFCFF;
+
+    /* Yellow */
+    --color-bkkYellow-950: #332500;
+    --color-bkkYellow-900: #4B3700;
+    --color-bkkYellow-800: #926B00;
+    --color-bkkYellow-700: #FFBE0A;
+    --color-bkkYellow-600: #FFCD44;
+    --color-bkkYellow-500: #FFDA75;
+    --color-bkkYellow-400: #FFE69F;
+    --color-bkkYellow-300: #FFEFC2;
+    --color-bkkYellow-200: #FFF6DD;
+    --color-bkkYellow-100: #FFFBF0;
+    --color-bkkYellow-50: #FFFEFB;
+
+    /* Neutral */
+    --color-bkkNeutral-950: #14181F;
+    --color-bkkNeutral-900: #181D25;
+    --color-bkkNeutral-800: #232B36;
+    --color-bkkNeutral-700: #364153;
+    --color-bkkNeutral-600: #596B88;
+    --color-bkkNeutral-500: #8091AC;
+    --color-bkkNeutral-400: #A7B3C6;
+    --color-bkkNeutral-300: #C7CEDA;
+    --color-bkkNeutral-200: #DFE4EA;
+    --color-bkkNeutral-100: #F1F3F6;
+    --color-bkkNeutral-50: #FBFCFD;
+}
+
+/* desktop */
+@media (min-width: 1200px) {
+  /* Heading Styles */
+
+  .heading-72 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 130%;
+  }
+
+  /* Paragraph Styles */
+
+  .paragraph-14r {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+  }
+  .paragraph-16s {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+  }
+}
+
+
+
+@layer utilities {
+  .container {
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1200px;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hidescroll::-webkit-scrollbar {
+  display: none;
+}
+
+.animate-shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
