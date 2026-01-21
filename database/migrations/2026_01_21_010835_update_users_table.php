@@ -12,21 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'nama_lengkap');
+            $table->renameColumn('name', 'full_name');
             $table->string('nisn')->unique()->nullable();
-            $table->date('tanggal_lahir')->nullable();
-            $table->string('tempat_lahir')->nullable();
-            $table->text('alamat')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->text('address')->nullable();
             $table->string('no_hp')->nullable();
-            $table->enum('agama', ["islam","protestan","kristen","buddha","hindu","konghucu"])->nullable();
-            $table->enum('jenis_kelamin', ["laki-laki","perempuan"])->nullable();
-            $table->enum('jurusan', ["rpl","tkj","mekatronika","tl"])->nullable();
+            $table->enum('religion', ["islam","protestan","kristen","buddha","hindu","konghucu"])->nullable();
+            $table->enum('gender', ["laki-laki","perempuan"])->nullable();
+            $table->enum('major', ["rpl","tkj","mekatronika","tl"])->nullable();
             $table->string('CVuser')->nullable();
-            $table->string('sertifikat')->nullable();
+            $table->string('certificate')->nullable();
             $table->enum('status', ["bekerja","kuliah","wiraswasta","menganggur"])->nullable();
-            $table->date('tahun_lulus')->nullable();
+            $table->date('graduation_year')->nullable();
             $table->enum('role', ["admin","user"]);
-            $table->index(['nisn', 'nama_lengkap', 'jenis_kelamin', 'jurusan', 'status']);
+            $table->index(['nisn', 'full_name', 'gender', 'major', 'status']);
         });
     }
 
@@ -36,13 +36,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropIndex(['nisn', 'nama_lengkap', 'jenis_kelamin', 'jurusan', 'status']);
+            $table->dropIndex(['nisn', 'full_name', 'gender', 'major', 'status']);
             $table->dropColumn([
-                'nisn', 'tanggal_lahir', 'tempat_lahir', 'alamat', 'no_hp',
-                'agama', 'jenis_kelamin', 'jurusan', 'CVuser', 'sertifikat',
-                'status', 'tahun_lulus', 'role'
+                'nisn', 'birth_date', 'birth_place', 'address', 'no_hp',
+                'religion', 'gender', 'major', 'CVuser', 'certificate',
+                'status', 'graduation_year', 'role'
             ]);
-            $table->renameColumn('nama_lengkap', 'name');
+            $table->renameColumn('full_name', 'name');
         });
     }
 };

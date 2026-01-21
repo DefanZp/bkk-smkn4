@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('kerja_fill', function (Blueprint $table) {
+        Schema::create('work_fills', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->date('waktu_mulai');
-            $table->enum('jenis_kontrak', ["kontrak","pekerja-tetap","freelance"]);
-            $table->enum('waktu_kerja', ["part-time","full-time","freelance"]);
-            $table->text('bidang_pekerjaan');
-            $table->enum('gaji', ["sesuai-umr","dibawah-umr","diatas-umr"]);
-            $table->string('lokasi');
-            $table->string('nama_perusahaan');
+            $table->date('start_date');
+            $table->enum('contract_type', ["kontrak","pekerja-tetap","freelance"]);
+            $table->enum('work_time', ["part-time","full-time","freelance"]);
+            $table->text('job_field');
+            $table->enum('salary', ["sesuai-umr","dibawah-umr","diatas-umr"]);
+            $table->string('location');
+            $table->string('company_name');
             $table->dateTime('createAt');
         });
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kerja_fill');
+        Schema::dropIfExists('work_fills');
     }
 };

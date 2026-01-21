@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('wirausaha_fill', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->date('waktu_mulai');
-            $table->string('lokasi');
-            $table->string('nama_perusahaan');
-            $table->text('bidang');
+            $table->string('companies_name');
+            $table->string('companies_logo');
+            $table->text('companies_profile');
+            $table->string('location');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wirausaha_fill');
+        Schema::dropIfExists('perusahaan');
     }
 };

@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('lamaran', function (Blueprint $table) {
+        Schema::create('entrepeneur_fills', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_loker');
-            $table->foreign('id_loker')->references('id')->on('lowongan_kerja');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->enum('status', ["dikirim","diproses","diterima","ditolak"]);
-            $table->dateTime('create_date');
+            $table->date('start_date');
+            $table->string('location');
+            $table->string('company_name');
+            $table->text('field');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lamaran');
+        Schema::dropIfExists('wirausaha_fill');
     }
 };

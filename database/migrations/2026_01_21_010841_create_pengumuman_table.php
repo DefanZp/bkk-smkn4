@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('pengumuman', function (Blueprint $table) {
+        Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->dateTime('createAt');
-            $table->string('judul');
-            $table->text('isi');
-            $table->string('gambar');
-            $table->date('aktif_sampai');
+            $table->string('headline');
+            $table->text('content');
+            $table->string('image');
+            $table->date('active_until');
         });
 
         Schema::enableForeignKeyConstraints();

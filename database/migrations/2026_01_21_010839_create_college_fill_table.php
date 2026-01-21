@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('perusahaan', function (Blueprint $table) {
+        Schema::create('college_fills', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_perusahaan');
-            $table->string('logo_perusahaan');
-            $table->text('profil_perusahaan');
-            $table->string('lokasi');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->date('start_date');
+            $table->enum('degre', ["s1","d3","d4"]);
+            $table->string('major');
+            $table->string('university_name');
+            $table->dateTime('createAt');
         });
 
         Schema::enableForeignKeyConstraints();
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perusahaan');
+        Schema::dropIfExists('kuliah_fill');
     }
 };

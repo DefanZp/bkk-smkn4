@@ -13,25 +13,24 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('kuliah_fill', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_vacancy');
+            $table->foreign('id_vacancy')->references('id')->on('vacancies');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->date('waktu_mulai');
-            $table->enum('jenjang', ["s1","d3","d4"]);
-            $table->string('jurusan');
-            $table->string('nama_universitas');
-            $table->dateTime('createAt');
+            $table->enum('status', ["dikirim","diproses","diterima","ditolak"]);
+            $table->dateTime('create_date');
         });
 
         Schema::enableForeignKeyConstraints();
     }
-
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('kuliah_fill');
+        Schema::dropIfExists('applications');
     }
 };
