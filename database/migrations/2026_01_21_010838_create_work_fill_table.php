@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('salary', ["sesuai-umr","dibawah-umr","diatas-umr"]);
             $table->string('location');
             $table->string('company_name');
-            $table->dateTime('createAt');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

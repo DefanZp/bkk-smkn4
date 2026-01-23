@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('company_name');
             $table->text('field');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

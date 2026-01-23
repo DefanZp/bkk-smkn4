@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
             $table->enum('status', ["dikirim","diproses","diterima","ditolak"]);
-            $table->dateTime('create_date');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

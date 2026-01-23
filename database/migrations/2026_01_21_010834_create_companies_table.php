@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('companies_logo');
             $table->text('companies_profile');
             $table->string('location');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

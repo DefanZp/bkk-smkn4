@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('degre', ["s1","d3","d4"]);
             $table->string('major');
             $table->string('university_name');
-            $table->dateTime('createAt');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

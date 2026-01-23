@@ -15,11 +15,11 @@ return new class extends Migration
 
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('createAt');
             $table->string('headline');
             $table->text('content');
             $table->string('image');
             $table->date('active_until');
+            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();

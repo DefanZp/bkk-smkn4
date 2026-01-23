@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->enum('religion', ["islam","protestan","kristen","buddha","hindu","konghucu"])->nullable();
             $table->enum('gender', ["laki-laki","perempuan"])->nullable();
-            $table->enum('major', ["rpl","tkj","mekatronika","tl"])->nullable();
+            $table->enum('major', ['Animasi', 'Desain Komunikasi Visual', 'Logistik', 'Perhotelan','Teknik Grafika', 'Teknik Komputer dan Jaringan', 'Rekayasa Perangkat Lunak'])->nullable();
             $table->string('CVuser')->nullable();
             $table->string('certificate')->nullable();
             $table->enum('status', ["bekerja","kuliah","wiraswasta","menganggur"])->nullable();

@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Filament\Resources\Announcements;
+
+use App\Filament\Resources\Announcements\Pages\CreateAnnouncement;
+use App\Filament\Resources\Announcements\Pages\EditAnnouncement;
+use App\Filament\Resources\Announcements\Pages\ListAnnouncements;
+use App\Filament\Resources\Announcements\Schemas\AnnouncementForm;
+use App\Filament\Resources\Announcements\Tables\AnnouncementsTable;
+use App\Models\Announcement;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+
+class AnnouncementResource extends Resource
+{
+    protected static ?string $model = Announcement::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $recordTitleAttribute = 'announcement';
+
+    public static function form(Schema $schema): Schema
+    {
+        return $schema->schema([
+            TextInput::make('headline')->required()->label('judul pengumuman'),
+            FileUpload::make('image')->required()->label('gambar pengumuman'),
+            Textarea::make('content')->required()->label('isi pengumuman'),
+            DatePicker::make('active_until')->required()->label('aktif hingga'),
+        ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table->columns([
+            Tables\Columns\TextColumn::make('headline')->label('judul pengumuman')->searchable()->sortable(),
+            Tables\Columns\ImageColumn::make('image')->label('gambar pengumuman'),
+            Tables\Columns\TextColumn::make('content')->label('isi pengumuman')->limit(50),
+            Tables\Columns\TextColumn::make('active_until')->label('aktif hingga')->date()->sortable(),
+        ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListAnnouncements::route('/'),
+            'create' => CreateAnnouncement::route('/create'),
+            'edit' => EditAnnouncement::route('/{record}/edit'),
+        ];
+    }
+}
