@@ -61,6 +61,48 @@
     font-size: 72px;
     line-height: 130%;
   }
+  
+  .heading-56s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 130%;
+  }
+
+  .heading-48s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 130%;
+  }
+
+  .heading-42s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 130%;
+  }
+
+  .heading-24s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 175%;
+  }
+
+  .heading-22s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 175%;
+  }
+
+  .heading-20s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 175%;
+  }
 
   /* Paragraph Styles */
 
@@ -70,11 +112,17 @@
     font-size: 14px;
     line-height: 130%;
   }
+  .paragraph-16r {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 175%;
+  }
   .paragraph-16s {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 16px;
-    line-height: 130%;
+    line-height: 175%;
   }
 }
 

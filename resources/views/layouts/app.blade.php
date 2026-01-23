@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Bkk Smkn 4 Malang') }}</title>
+        <title>{{ $title ?? 'BKK SMKN 4 MALANG' }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,36 +27,118 @@
             body {
                 height: 100%;
                 overflow: auto;
+                background-color: #FBFCFD;
             }
         </style>
     </head>
     <body>
         <div>
             {{-- Navbar Dekstop --}}
-            <nav class="bg-bkkNeutral-50">
-                <div class="container mx-auto hidden lg:flex justify-between items-center lg:px-0 px-5 my-7">
+            <nav class="bg-bkkNeutral-50 fixed top-0 z-[99] w-full">
+                <div 
+                    x-data="{openDropdown : null}"
+                    @mouseleave="openDropdown = null"
+                    class="container mx-auto hidden lg:flex justify-between items-center lg:px-0 px-5 my-5">
                     <div class="w-[124px]">
                         <img 
                             class="w-full h-full object-contain object-center"
                             src="{{ asset('/assets/static/logo/logo-bkk.png') }}"/>
                     </div>
-                    <div class="flex items-center gap-6">
-                        <a href="{{ route('home') }}" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Beranda</a>
-                        <a href="#" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Tentang BKK</a>
-                        <a href="#" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Lowongan</a>
-                        <a href="#" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Survei Kepuasan</a>
-                        <a href="#" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Informasi & Berita</a>
-                        <a href="#" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">FAQ</a>
-                        <a href="#" class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Kontak</a>
+                    <div 
+                        class="flex items-center gap-6">
+                        <a 
+                            @mouseenter="openDropdown = null"
+                            href="{{ route('home') }}" 
+                            class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                            Beranda
+                        </a>
+                        <div class="relative">
+                            <a 
+                                href="#" 
+                                class="flex items-center gap-3 paragraph-16s transition duration-300"
+                                :class="openDropdown === 'profilBkk' ? 'text-bkkBlue-700' : 'text-bkkNeutral-900 hover:text-bkkBlue-700'"
+                                @mouseenter="openDropdown = 'profilBkk'">
+                                <span>
+                                    Profil Bkk
+                                </span>
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            {{-- DropdownMenu --}}
+
+                            <div
+                                x-cloak
+                                x-show="openDropdown === 'profilBkk'"
+                                class="absolute top-8 -left-3  bg-white shadow-xl z-50 border border-bkkNeutral-100 rounded-2xl p-5 w-[200px]">
+                                <div class="flex flex-col gap-4">
+                                    <a href="{{ route('visi-misi') }}" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Visi & Misi</a>
+                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Struktur Organisasi</a>
+                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Program Kerja</a>
+                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Alur Kegiatan</a>
+                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Dokumen Pendukung</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a 
+                            href="#" 
+                            class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
+                            @mouseenter="openDropdown = null">
+                            Lowongan
+                        </a>
+                        <a 
+                            href="#" 
+                            class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
+                            @mouseenter="openDropdown = null">
+                            Survei Kepuasan
+                        </a>
+                        <div class="relative">
+                            <a 
+                                href="#" 
+                                class="flex items-center gap-3 paragraph-16s transition duration-300"
+                                :class="openDropdown === 'informasiBerita' ? 'text-bkkBlue-700' : 'text-bkkNeutral-900 hover:text-bkkBlue-700'"
+                                @mouseenter="openDropdown = 'informasiBerita'">
+                                <span>
+                                    Informasi & Berita
+                                </span>
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            {{-- DropdownMenu --}}
+
+                            <div
+                                x-cloak
+                                x-show="openDropdown === 'informasiBerita'"
+                                class="absolute top-8 -left-3  bg-white shadow-xl z-50 border border-bkkNeutral-100 rounded-2xl p-5 w-[234px]">
+                                <div class="flex flex-col gap-4">
+                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Pengumuman & Informasi</a>
+                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Tracer Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a 
+                            href="{{ route('faq') }}" 
+                            class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
+                            @mouseenter="openDropdown = null">
+                            FAQ
+                        </a>
+                        <a 
+                            href="#" 
+                            class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
+                            @mouseenter="openDropdown = null">
+                            Kontak
+                        </a>
                     </div>
+
                     <div class="flex items-center gap-3">
-                        <a href="#" class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-3 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700">Masuk</a>
-                        <a href="#" class="bg-transparent hover:bg-bkkBlue-700 px-4 py-3 paragraph-16s text-bkkNeutral-600 hover:text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkNeutral-600 hover:border-bkkBlue-700">Daftar</a>
+                        <a href="#" class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700">Masuk</a>
+                        <a href="#" class="bg-transparent hover:bg-bkkBlue-700 px-4 py-2 paragraph-16s text-bkkNeutral-600 hover:text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkNeutral-600 hover:border-bkkBlue-700">Daftar</a>
                     </div>
                 </div>
             </nav>
             {{-- Navbar Mobile --}}
-            <nav x-data="{open: false}" class="lg:hidden relative">
+            <nav x-data="{open: false}" class="lg:hidden bg-bkkNeutral-50 fixed top-0 z-[99] w-full">
                 <div class="relative z-50 bg-bkkNeutral-50 py-8 shadow-sm">
                     <div class="container mx-auto flex justify-between items-center px-5">
                         <div class="w-[124px]">
