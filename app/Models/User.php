@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel;
 
 
 class User extends Authenticatable
@@ -41,7 +42,7 @@ class User extends Authenticatable
 {
     static::creating(function ($user) {
         if (empty($user->password)) {
-            $user->password = Hash::make('pass00' . $user->nisn);
+            $user->password = 'pass00' . $user->nisn;
         }
     });
 }
