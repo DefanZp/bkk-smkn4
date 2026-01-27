@@ -40,7 +40,7 @@ class UserResource extends Resource
             TextInput::make('email')->email()->unique(ignoreRecord: true)->label('Email'),
             Select::make('major')->options(User::MAJORS)->required()->label('Jurusan'),
             Select::make('role')->options(User::ROLES)->label('role'),
-            TextInput::make('birth_date')->label('tanggal lahir'),
+            DatePicker::make('birth_date')->label('tanggal lahir'),
             TextInput::make('birth_place')->label('tempat lahir'),
             TextArea::make('address')->label('alamat'),    
             TextInput::make('no_hp')->tel()->label('nomor hp'),
