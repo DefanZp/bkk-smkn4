@@ -6,7 +6,7 @@
             <div class="absolute inset-0 bg-linear-to-t from-bkkNeutral-900/90 to-88% to-bkkNeutral-900/45 z-1"></div>
             <div class="relative z-2 w-full h-full flex flex-col justify-center mx-0 lg:mx-14">
                 <div class="flex items-center gap-2.5 paragraph-16s text-bkkNeutral-50 mb-7">
-                    <a href="{{ route('home') }}">Beranda</a>
+                    <a href="{{ route('beranda') }}">Beranda</a>
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L5 5L1 9" stroke="#FBFCFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -58,6 +58,7 @@
             <div class="w-full lg:w-[75%]">
                 @foreach ($documentContent as $document)
                     <div 
+                        x-cloak
                         x-show="selectedContent === '{{ $document['title'] }}'">
                         {{-- Sarpras --}}
                         @if ($document['type'] === 'manyContent')  

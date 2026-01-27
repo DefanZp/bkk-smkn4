@@ -32,7 +32,9 @@
         </style>
     </head>
     <body>
-        <div>
+        <div
+            x-data="{openModalLogin: false}"
+            class="relative">
             {{-- Navbar Dekstop --}}
             <nav class="bg-bkkNeutral-50 fixed top-0 z-[99] w-full">
                 <div 
@@ -48,7 +50,7 @@
                         class="flex items-center gap-6">
                         <a 
                             @mouseenter="openDropdown = null"
-                            href="{{ route('home') }}" 
+                            href="{{ route('beranda') }}" 
                             class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                             Beranda
                         </a>
@@ -104,12 +106,6 @@
                             @mouseenter="openDropdown = null">
                             Lowongan
                         </a>
-                        <a 
-                            href="#" 
-                            class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
-                            @mouseenter="openDropdown = null">
-                            Survei Kepuasan
-                        </a>
                         <div class="relative">
                             <a 
                                 href="#" 
@@ -156,7 +152,9 @@
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <a href="#" class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700">Masuk</a>
+                        <a 
+                            @click="openModalLogin = true"
+                            class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700 cursor-pointer">Masuk</a>
                     </div>
                 </div>
             </nav>
@@ -193,6 +191,18 @@
                     <div class="heading-24b">Test 3</div>
                 </div>
             </nav>
+
+            {{-- Modal Login --}}
+            <div 
+                x-cloak
+                class="fixed inset-0 flex items-center justify-center bg-black/50 z-99"
+                x-show="openModalLogin === true">
+                <div 
+                    @click.outside = "openModalLogin = false"
+                    class="w-[900px] h-[550px] p-10 bg-bkkNeutral-50 rounded-2xl">
+                    <livewire:components.login />
+                </div>
+            </div>
             <!-- Page Content -->
             <main>
                 {{ $slot }}
