@@ -61,7 +61,10 @@
                                 <span>
                                     Profil Bkk
                                 </span>
-                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg 
+                                    class="transition duration-300"
+                                    :class=" openDropdown === 'profilBkk' ? 'transform rotate-180' : ''"
+                                width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
@@ -72,11 +75,26 @@
                                 x-show="openDropdown === 'profilBkk'"
                                 class="absolute top-8 -left-3  bg-white shadow-xl z-50 border border-bkkNeutral-100 rounded-2xl p-5 w-[200px]">
                                 <div class="flex flex-col gap-4">
-                                    <a href="{{ route('visi-misi') }}" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Visi & Misi</a>
-                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Struktur Organisasi</a>
-                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Program Kerja</a>
-                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Alur Kegiatan</a>
-                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Dokumen Pendukung</a>
+                                    <a href="{{ route('visi-misi') }}" 
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Visi & Misi
+                                    </a>
+                                    <a href="{{ route('struktur-organisasi') }}" 
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Struktur Organisasi
+                                    </a>
+                                    <a href="{{ route('program-kerja') }}" 
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Program Kerja
+                                    </a>
+                                    <a href="{{ route('alur-kegiatan') }}" 
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Alur Kegiatan
+                                    </a>
+                                    <a href="{{ route('dokumen-pendukung') }}" 
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Dokumen Pendukung
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +119,10 @@
                                 <span>
                                     Informasi & Berita
                                 </span>
-                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg 
+                                    class="transition duration-300"
+                                    :class=" openDropdown === 'informasiBerita' ? 'transform rotate-180' : ''"
+                                 width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
@@ -112,7 +133,10 @@
                                 x-show="openDropdown === 'informasiBerita'"
                                 class="absolute top-8 -left-3  bg-white shadow-xl z-50 border border-bkkNeutral-100 rounded-2xl p-5 w-[234px]">
                                 <div class="flex flex-col gap-4">
-                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Pengumuman & Informasi</a>
+                                    <a href="{{ route('pengumuman') }}"
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Pengumuman & Informasi
+                                    </a>
                                     <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Tracer Study</a>
                                 </div>
                             </div>
@@ -133,7 +157,6 @@
 
                     <div class="flex items-center gap-3">
                         <a href="#" class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700">Masuk</a>
-                        <a href="#" class="bg-transparent hover:bg-bkkBlue-700 px-4 py-2 paragraph-16s text-bkkNeutral-600 hover:text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkNeutral-600 hover:border-bkkBlue-700">Daftar</a>
                     </div>
                 </div>
             </nav>
