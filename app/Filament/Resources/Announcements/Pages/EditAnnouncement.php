@@ -10,6 +10,8 @@ class EditAnnouncement extends EditRecord
 {
     protected static string $resource = AnnouncementResource::class;
 
+    protected static ?string $title = 'Edit Pengumuman';
+
     protected function getHeaderActions(): array
     {
         return [

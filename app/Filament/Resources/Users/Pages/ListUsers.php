@@ -16,19 +16,20 @@ class ListUsers extends ListRecords
 {
     protected static string $resource = UserResource::class;
 
+    protected static ?string $title = 'Daftar Pengguna';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+            ->label('tambah user baru'),
             
             Action::make('import')
-                ->label('Import Users')
-                ->icon('heroicon-o-arrow-up-tray')
+                ->label('Import pengguna baru')
                 ->color('success')
                 ->form([
                     Action::make('downloadTemplate')
                         ->label('Download Template')
-                        ->icon('heroicon-o-arrow-down-tray')
                         ->color('info')
                         ->action(function () {
                         return Excel::download(new UsersTemplateExport, 'template_import_user.xlsx');

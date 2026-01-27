@@ -10,10 +10,13 @@ class ListVacancies extends ListRecords
 {
     protected static string $resource = VacancieResource::class;
 
+    protected static ?string $title = 'Daftar Lowongan';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Buat Lowongan Baru'),
         ];
     }
 }

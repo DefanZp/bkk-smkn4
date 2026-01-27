@@ -29,11 +29,12 @@ class ApplicationResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'id';
 
-    protected static ?string $navigationLabel = 'Applications';
+    protected static ?string $navigationLabel = 'Lamaran';
 
-    protected static ?string $modelLabel = 'Application';
+    protected static ?string $modelLabel = 'Lamaran';
 
-    protected static ?string $pluralModelLabel = 'Applications';
+    protected static ?string $pluralModelLabel = 'Lamaran';
+    
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([

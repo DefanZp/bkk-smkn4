@@ -29,6 +29,12 @@ class VacancieResource extends Resource
 {
     protected static ?string $model = \App\Models\vacancie::class;
 
+    protected static ?string $navigationLabel = 'Lowongan';
+
+    protected static ?string $modelLabel = 'Lowongan';
+
+    protected static ?string $pluralModelLabel = 'Daftar Lowongan';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'vacancie';
@@ -45,44 +51,56 @@ class VacancieResource extends Resource
             ->preload(),
 
             TextInput::make('vacancy_name')
+            ->label('nama lowongan')
             ->required(),
 
             TextInput::make('location')
+            ->label('lokasi')
             ->required(),
 
             TextInput::make('salary')
+            ->label('gaji')
             ->numeric()
             ->required(),
 
             CheckboxList::make('major')
+                ->label('jurusan')
                 ->options(vacancie::MAJORS)
                 ->required(), 
 
             Select::make('employment_classification')
+            ->label('tipe pekerjaan')
             ->options(vacancie::EMPLOYMENT_TYPES)
             ->required(),
 
             TextInput::make('jobdesk')
+            ->label('deskripsi pekerjaan')
             ->required(),
 
             Textarea::make('requirements')
+            ->label('persyaratan')
             ->required(),
 
             DatePicker::make('deadline')
+            ->label('batas akhir')
             ->required(),
 
             Select::make('loker_tipe')
+            ->label('tipe loker')
             ->options(vacancie::LOKER_TYPES)
             ->required(),
 
             TextInput::make('contact_person')
+            ->label('kontak person')
             ->required(),
 
             TextInput::make('vacancy_number')
+            ->label('nomor lowongan')
             ->numeric()
             ->required(), 
 
             FileUpload::make('image')
+            ->label('gambar lowongan')
             ->required(),
 
             ]);

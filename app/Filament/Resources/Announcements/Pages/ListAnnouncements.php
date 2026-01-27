@@ -10,10 +10,13 @@ class ListAnnouncements extends ListRecords
 {
     protected static string $resource = AnnouncementResource::class;
 
+    protected static ?string $title = 'Daftar Pengumuman';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+            ->label('Buat Pengumuman Baru'),
         ];
     }
 }
