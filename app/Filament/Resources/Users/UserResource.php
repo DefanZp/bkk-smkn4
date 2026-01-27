@@ -56,14 +56,12 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('nisn')->label('NISN')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('nisn')->label('NISN')->searchable(),
             Tables\Columns\TextColumn::make('full_name')->label('Nama Lengkap')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('email')->label('Email')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('email')->label('Email'),
             Tables\Columns\TextColumn::make('major')->label('Jurusan')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('birth_date')->label('Tanggal Lahir')->sortable(),
-            Tables\Columns\TextColumn::make('birth_place')->label('Tempat Lahir')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('no_hp')->label('Nomor HP')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('religion')->label('Agama')->searchable()->sortable(),]);
+            Tables\Columns\TextColumn::make('status')->label('Status')->sortable(),
+            Tables\Columns\TextColumn::make('no_hp')->label('Nomor HP')->searchable(),]);
     }
 
     public static function getRelations(): array
