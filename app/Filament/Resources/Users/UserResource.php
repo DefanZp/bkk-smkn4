@@ -27,6 +27,12 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?string $navigationLabel = 'Pengguna';
+
+    protected static ?string $modelLabel = 'Pengguna';
+
+    protected static ?string $pluralModelLabel = 'Daftar Pengguna';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'user';
@@ -46,8 +52,8 @@ class UserResource extends Resource
             TextInput::make('no_hp')->tel()->label('nomor hp'),
             Select::make('religion')->options(User::RELIGIONS)->label('agama'),
             Select::make('gender')->options(User::GENDERS)->label('jenis kelamin'),
-            FileUpload::make('CVuser')->label('CV')->acceptedFileTypes(['application/pdf'])->directory('cv-users'),
-            FileUpload::make('certificate')->label('sertifikat')->acceptedFileTypes(['application/pdf','image/jpeg','image/png','image/jpg'])->directory('certificate'),
+            FileUpload::make('CVuser')->label('CV')->directory('cv-users'),
+            FileUpload::make('certificate')->label('sertifikat')->directory('certificate'),
             Select::make('status')->options(User::STATUSES)->label('status'),
             DatePicker::make('graduation_year')->label('tahun kelulusan'),
         ]);

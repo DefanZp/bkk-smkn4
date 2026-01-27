@@ -10,6 +10,8 @@ class EditVacancie extends EditRecord
 {
     protected static string $resource = VacancieResource::class;
 
+    protected static ?string $title = 'Edit Lowongan';
+
     protected function getHeaderActions(): array
     {
         return [

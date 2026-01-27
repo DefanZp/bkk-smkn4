@@ -23,6 +23,12 @@ class CompanieResource extends Resource
 {
     protected static ?string $model = Companie::class;
 
+    protected static ?string $navigationLabel = 'Perusahaan';
+
+    protected static ?string $modelLabel = 'Perusahaan';
+
+    protected static ?string $pluralModelLabel = 'Daftar Perusahaan';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'companie';

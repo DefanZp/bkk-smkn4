@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAnnouncement extends CreateRecord
 {
     protected static string $resource = AnnouncementResource::class;
+
+    protected static ?string $title = 'Buat Pengumuman Baru';
 }

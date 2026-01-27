@@ -10,10 +10,13 @@ class ListCompanies extends ListRecords
 {
     protected static string $resource = CompanieResource::class;
 
+    protected static ?string $title = 'Daftar Perusahaan';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+            ->label('tambah perusahaan baru'),
         ];
     }
 }
