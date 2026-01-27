@@ -12,7 +12,7 @@ use App\Livewire\Profil\VisiMisi;
 use App\Livewire\Profil\WorkProgram;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Homepage::class)->name('home');
+Route::get('/', Homepage::class)->name('beranda');
 Route::get('/faq', Faq::class)->name('faq');
 
 // ProfilRoute
@@ -24,9 +24,6 @@ Route::get('/dokumen-pendukung', SupportingDocuments::class)->name('dokumen-pend
 
 // Informasi dan berita route
 Route::get('/pengumuman', Announcement::class)->name('pengumuman');
-
-// Auth
-Route::get('/login', Login::class)->name('login');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -241,7 +241,7 @@
             </div>
         </div>
         <a  href="#"
-            class="w-full lg::w-auto justify-self-center flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
+            class="w-full lg:w-auto justify-self-center flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
             <span class="paragraph-16s text-bkkNeutral-50">Lihat Laporan Tracer Study</span>
             <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 6L14 1M19 6L14 11M19 6H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -318,7 +318,7 @@
                 <h2 class="heading-42s text-bkkNeutral-900 mb-4">Survei Kepuasan</h2>
                 <div class="paragraph-16r text-bkkNeutral-700 mb-12">Bantu kami meningkatkan layanan BKK dengan mengisi survei kepuasan. Partisipasi anda sangat berarti untuk kemajuan sekolah kami.</div>
                 <a  href="{{ $berita['detail_link'] }}"
-                    class="w-full lg::w-auto justify-self-start flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
+                    class="w-full lg:w-auto justify-self-start flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
                     <span class="paragraph-16s text-bkkNeutral-50">Isi Survei Kepuasan</span>
                     <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 6L14 1M19 6L14 11M19 6H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

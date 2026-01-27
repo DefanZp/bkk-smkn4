@@ -3,14 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Panel;
+use Maatwebsite\Excel;
+use Illuminate\Support\Facades\Hash;
+use Filament\Models\Contracts\HasName;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasName
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -46,6 +49,15 @@ class User extends Authenticatable
         }
     });
 }
+    public function getFilamentName(): string
+    {
+        return $this->full_name ?? 'Admin';
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === 'admin';
+    }
 
     public const MAJORS = [
         'Animasi' => 'Animasi',
