@@ -35,7 +35,7 @@ class VacancieResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Daftar Lowongan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 
     protected static ?string $recordTitleAttribute = 'vacancie';
 

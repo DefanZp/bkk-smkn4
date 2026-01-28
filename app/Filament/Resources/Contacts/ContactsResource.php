@@ -35,7 +35,7 @@ class ContactsResource extends Resource
 
     protected static ?string $pluralModelLabel = 'daftar pesan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInboxStack;
 
     protected static ?string $recordTitleAttribute = 'contact';
 

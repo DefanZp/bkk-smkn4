@@ -29,7 +29,7 @@ class CompanieResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Daftar Perusahaan';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
 
     protected static ?string $recordTitleAttribute = 'companie';
 

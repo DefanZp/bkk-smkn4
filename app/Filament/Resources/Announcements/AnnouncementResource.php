@@ -30,7 +30,7 @@ class AnnouncementResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Daftar Pengumuman';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBellAlert;
 
     protected static ?string $recordTitleAttribute = 'announcement';
 
