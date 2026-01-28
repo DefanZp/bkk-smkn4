@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <a 
-                            href="#" 
+                            href="{{ route('lowongan') }}" 
                             class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
                             @mouseenter="openDropdown = null">
                             Lowongan
@@ -134,7 +134,9 @@
                                         class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                                         Pengumuman & Informasi
                                     </a>
-                                    <a href="#" class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Tracer Study</a>
+                                    <a href="{{ route('tracer-study') }}"
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">Tracer Study
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +240,7 @@
                         </div>
                     </div>
                     <a 
-                        href="#" 
+                        href="{{ route('lowongan') }}" 
                         class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                         Lowongan
                     </a>
@@ -268,7 +270,7 @@
                                 Pengumuman & Informasi
                             </a>
                             <a 
-                                href="#" 
+                                href="{{ route('tracer-study') }}"
                                 class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                                 Tracer Study
                             </a>
@@ -356,7 +358,6 @@
                                     <h3 class="paragraph-16s text-bkkNeutral-50">Layanan Kami</h3>
                                     <div class="space-y-4">
                                         <a href="#" class="paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 block">Lowongan Kerja</a>
-                                        <a href="#" class="paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 block">Survei Kepuasan</a>
                                         <a href="#" class="paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 block">Tracer Study</a>
                                         <a href="#" class="paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 block">Pengumuman</a>
                                         <a href="#" class="paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 block">Tentang Kami</a>
