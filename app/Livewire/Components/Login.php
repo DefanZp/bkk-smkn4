@@ -21,6 +21,7 @@ class Login extends Component
             $this->remember)) 
         {
             session()->regenerate();
+            $this->dispatch('close-modal');
             return redirect()->intended(route('beranda'));
         }
 

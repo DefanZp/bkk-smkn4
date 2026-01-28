@@ -44,12 +44,12 @@
             id="main-container"
             class="container flex flex-col lg:flex-row gap-10 mx-auto px-5 lg:px-0 relative scroll-mt-30">
             <div 
-                class="w-full lg:w-[25%] flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-auto rounded-2xl shadow-lg p-4 lg:p-6 lg:sticky top-30 self-start hidescroll">
+                class="w-full lg:w-[25%] flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-auto rounded-2xl shadow-lg py-4 lg:py-6 lg:sticky top-30 self-start hidescroll">
                 <h2 class="hidden lg:block border-l-4 border-l-transparent border-b border-b-bkkNeutral-200 px-6 heading-20s text-bkkNeutral-900 pb-6">Daftar Isi</h2>
                 @foreach ($documentContent as $document)
                     <div 
                         @click="selectedContent = '{{ $document['title'] }}'"
-                        class="min-w-max border-l-4 border-l-transparent border-b border-b-bkkNeutral-200 py-4 px-6 paragraph-16s cursor-pointer transition duration-300"
+                        class="min-w-max border-l-4 border-l-transparent border-b border-b-bkkNeutral-200 py-4 px-6 paragraph-16s cursor-pointer transition duration-300 last:border-b-0"
                         :class="selectedContent === '{{ $document['title'] }}' ? 'border-l-bkkBlue-700! text-bkkBlue-700 bg-bkkBlue-100' : ' text-bkkNeutral-700 bg-transparent'">
                         {{ $document['title'] }}
                     </div>

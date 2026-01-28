@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Contact;
 use App\Livewire\Faq;
 use App\Livewire\Homepage;
 use App\Livewire\Information\Announcement;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Homepage::class)->name('beranda');
 Route::get('/faq', Faq::class)->name('faq');
+Route::get('/kontak', Contact::class)->name('kontak');
 
 // ProfilRoute
 Route::get('/visi-misi', VisiMisi::class)->name('visi-misi')->prefix('profil');

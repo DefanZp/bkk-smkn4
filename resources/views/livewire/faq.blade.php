@@ -23,7 +23,7 @@
     </section>
     <section class="py-15 lg:py-20">
         <div class="container mx-auto px-5 lg:px-0">
-            <h1 class="heading-42s text-bkkNeutral-900 mb-4">Pertanyaan Umum BKK</h1>
+            <h2 class="heading-42s text-bkkNeutral-900 mb-4">Pertanyaan Umum BKK</h2>
             <div class="paragraph-16r text-bkkNeutral-700 mb-9">Jawaban atas berbagai pertanyaan umum terkait layanan BKK yang sering dibutuhkan guna membantu memahami layanan BKK.</div>
             <div 
                 class="lg:p-10 lg:shadow-lg rounded-3xl space-y-4">

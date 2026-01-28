@@ -34,6 +34,7 @@
     <body>
         <div
             x-data="{openModalLogin: false}"
+            x-on:close-modal.window="openModalLogin = false"
             class="relative">
             {{-- Navbar Dekstop --}}
             <nav class="bg-bkkNeutral-50 fixed top-0 z-[99] w-full">
@@ -144,7 +145,7 @@
                             FAQ
                         </a>
                         <a 
-                            href="#" 
+                            href="{{ route('kontak') }}" 
                             class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300"
                             @mouseenter="openDropdown = null">
                             Kontak
@@ -154,7 +155,7 @@
                     <div class="flex items-center gap-3">
                         <a 
                             @click="openModalLogin = true"
-                            class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700 cursor-pointer">Masuk</a>
+                            class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700 cursor-pointer">Masuk sebagai Alumni</a>
                     </div>
                 </div>
             </nav>
@@ -177,7 +178,9 @@
                     </div>
                 </div>
 
-                <div x-show="open" 
+                <div 
+                    x-show="open" 
+                    x-data="{openMobile: false, openDropdownMobile : null}"
                     x-transition:enter="transition ease-out duration-300 transform"
                     x-transition:enter-start="-translate-y-full" 
                     x-transition:enter-end="translate-y-0"
@@ -185,10 +188,102 @@
                     x-transition:leave-start="translate-y-0" 
                     x-transition:leave-end="-translate-y-full" 
                     x-cloak
-                    class="fixed top-0 left-0 pt-30 w-full h-full bg-bkkNeutral-50 z-40 flex flex-col p-5 space-y-4">
-                    <div class="heading-24b">Test 1</div>
-                    <div class="heading-24b">Test 2</div>
-                    <div class="heading-24b">Test 3</div>
+                    class="fixed top-0 left-0 pt-30 w-full h-full bg-bkkNeutral-50 z-40 flex flex-col p-5 space-y-2">
+                    <a 
+                        href="{{ route('beranda') }}" 
+                        class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 py-2">
+                        Beranda
+                    </a>
+                    {{-- Profil Menu Mobile --}}
+                    <div 
+                        @click="openMobile = !openMobile; openDropdownMobile = 'profilBkk'"
+                        :class="openMobile && openDropdownMobile === 'profilBkk' ? 'text-bkkBlue-700' : 'text-bkkNeutral-900'"
+                        class="py-2">
+                        <div class="flex items-center justify-between">
+                            <div 
+                                class="paragraph-16s transition duration-300">
+                                Profil Bkk
+                            </div>
+                            <svg 
+                                class="transition duration-300"
+                                :class="openMobile && openDropdownMobile === 'profilBkk' ? 'transform rotate-180' : ''"
+                                width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div 
+                            x-collapse
+                            x-show="openMobile && openDropdownMobile == 'profilBkk'"
+                            class="pt-4 flex flex-col gap-2">
+                            <a href="{{ route('visi-misi') }}" 
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 py-1">
+                                Visi & Misi
+                            </a>
+                            <a href="{{ route('struktur-organisasi') }}" 
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 py-1">
+                                Struktur Organisasi
+                            </a>
+                            <a href="{{ route('program-kerja') }}" 
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 py-1">
+                                Program Kerja
+                            </a>
+                            <a href="{{ route('alur-kegiatan') }}" 
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 py-1">
+                                Alur Kegiatan
+                            </a>
+                            <a href="{{ route('dokumen-pendukung') }}" 
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 py-1">
+                                Dokumen Pendukung
+                            </a>
+                        </div>
+                    </div>
+                    <a 
+                        href="#" 
+                        class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                        Lowongan
+                    </a>
+                    {{-- Informasi & Berita --}}
+                    <div 
+                        @click="openMobile = !openMobile; openDropdownMobile = 'informasi'"
+                        :class="openMobile && openDropdownMobile === 'informasi' ? 'text-bkkBlue-700' : 'text-bkkNeutral-900'"
+                        class="py-2">
+                        <div class="flex items-center justify-between">
+                            <div 
+                                class="paragraph-16s transition duration-300">
+                                Informasi & Berita
+                            </div>
+                            <svg 
+                                class="transition duration-300"
+                                :class="openMobile && openDropdownMobile === 'informasi' ? 'transform rotate-180' : ''"
+                                width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 1L5 5L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div 
+                            x-collapse
+                            x-show="openMobile && openDropdownMobile == 'informasi'"
+                            class="pt-4 flex flex-col gap-2">
+                            <a href="{{ route('pengumuman') }}"
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                Pengumuman & Informasi
+                            </a>
+                            <a 
+                                href="#" 
+                                class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                Tracer Study
+                            </a>
+                        </div>
+                    </div>
+                    <a 
+                        href="{{ route('faq') }}" 
+                        class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                        FAQ
+                    </a>
+                    <a 
+                        href="{{ route('kontak') }}" 
+                        class="paragraph-16s text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                        Kontak
+                    </a>
                 </div>
             </nav>
 
@@ -199,7 +294,7 @@
                 x-show="openModalLogin === true">
                 <div 
                     @click.outside = "openModalLogin = false"
-                    class="w-[900px] h-[550px] p-10 bg-bkkNeutral-50 rounded-2xl">
+                    class="w-full md:w-[500px] min-h-[400px] px-16 pt-15 pb-8 bg-bkkNeutral-50 rounded-2xl relative mx-5 lg:mx-0">
                     <livewire:components.login />
                 </div>
             </div>
