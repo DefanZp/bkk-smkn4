@@ -101,6 +101,9 @@ class VacancieResource extends Resource
 
             FileUpload::make('image')
             ->label('gambar lowongan')
+            ->disk('public')
+            ->directory('vacancies')
+            ->image()
             ->required(),
 
             ]);

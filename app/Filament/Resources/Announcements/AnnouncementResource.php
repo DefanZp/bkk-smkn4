@@ -38,7 +38,7 @@ class AnnouncementResource extends Resource
     {
         return $schema->schema([
             TextInput::make('headline')->required()->label('judul pengumuman'),
-            FileUpload::make('image')->required()->label('gambar pengumuman'),
+            FileUpload::make('image')->required()->label('gambar pengumuman')->disk('public')->directory('announcements')->image(),
             Textarea::make('content')->required()->label('isi pengumuman'),
             DatePicker::make('active_until')->required()->label('aktif hingga'),
         ]);

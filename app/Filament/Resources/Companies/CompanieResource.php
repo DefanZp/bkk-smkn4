@@ -37,7 +37,7 @@ class CompanieResource extends Resource
     {
         return $schema->schema([
             TextInput::make('companies_name')->required()->label('nama perusahaan'),
-            FileUpload::make('companies_logo')->required()->label('logo perusahaan'),
+            FileUpload::make('companies_logo')->required()->label('logo perusahaan')->disk('public')->directory('companies')->image(),
             Textarea::make('companies_profile')->required()->label('profil perusahaan'),
             TextInput::make('location')->required()->label('lokasi perusahaan'),
         ]);

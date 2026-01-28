@@ -52,8 +52,8 @@ class UserResource extends Resource
             TextInput::make('no_hp')->tel()->label('nomor hp'),
             Select::make('religion')->options(User::RELIGIONS)->label('agama'),
             Select::make('gender')->options(User::GENDERS)->label('jenis kelamin'),
-            FileUpload::make('CVuser')->label('CV')->directory('cv-users'),
-            FileUpload::make('certificate')->label('sertifikat')->directory('certificate'),
+            FileUpload::make('CVuser')->label('CV')->disk('public')->directory('cv-users'),
+            FileUpload::make('certificate')->label('sertifikat')->disk('public')->directory('certificates'),
             Select::make('status')->options(User::STATUSES)->label('status'),
             DatePicker::make('graduation_year')->label('tahun kelulusan'),
         ]);
