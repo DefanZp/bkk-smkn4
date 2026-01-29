@@ -39,7 +39,8 @@ class User extends Authenticatable implements FilamentUser, HasName
         'certificate',
         'status',
         'graduation_year', 
-        'role'
+        'role',
+        'nik'
     ];
     protected static function booted(): void
 {
@@ -52,6 +53,26 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function getFilamentName(): string
     {
         return $this->full_name ?? 'Admin';
+    }
+
+    public function workFill()
+    {
+        return $this->hasOne(WorkFill::class, 'id_user');
+    }
+
+    public function collegeFill()
+    {
+        return $this->hasOne(CollegeFill::class, 'id_user');
+    }
+
+    public function entrepreneurFill()
+    {
+        return $this->hasOne(EntrepreneurFill::class, 'id_user');
+    }
+
+    public function unemployedFill()
+    {
+        return $this->hasOne(UnemployedFill::class, 'id_user');
     }
 
     public function canAccessPanel(Panel $panel): bool

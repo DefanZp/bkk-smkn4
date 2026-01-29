@@ -19,6 +19,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
 
         <style>
             /* Disable overscroll */
@@ -438,5 +439,6 @@
                 </div>
             </footer>
         </div>
+        @livewireScripts
     </body>
 </html>
