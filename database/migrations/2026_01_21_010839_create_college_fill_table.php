@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
             $table->date('start_date');
-            $table->enum('degre', ["s1","d3","d4"]);
+            $table->enum('degree', ["s1","d3","d4"]);
             $table->string('major');
             $table->string('university_name');
             $table->timestamps();
