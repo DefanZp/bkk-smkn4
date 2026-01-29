@@ -7,6 +7,9 @@
 
         <title>{{ $title ?? 'BKK SMKN 4 MALANG' }}</title>
 
+        {{-- Icon --}}
+        <link rel="icon" type="image/png" href="/assets/static/logo/icon/logo-bkk-crop.webp">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,11 +157,39 @@
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-3">
-                        <a 
-                            @click="openModalLogin = true"
-                            class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700 cursor-pointer">Masuk sebagai Alumni</a>
-                    </div>
+                    @auth
+                        <div 
+                            x-data="{openUserDropdown : false}"
+                            class="text-bkkNeutral-900 relative">
+                            <svg  
+                                @click="openUserDropdown = !openUserDropdown"
+                                class="shrink-0 cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.2166 17.3323C13.9349 15.9008 12.0727 15 10 15C7.92734 15 6.06492 15.9008 4.7832 17.3323M10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 14.9706 14.9706 19 10 19ZM10 12C8.34315 12 7 10.6569 7 9C7 7.34315 8.34315 6 10 6C11.6569 6 13 7.34315 13 9C13 10.6569 11.6569 12 10 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            {{-- User Dropdown --}}
+                            <div
+                                x-cloak
+                                x-show="openUserDropdown"
+                                class="absolute top-8 -right-3 bg-white shadow-xl z-50 border border-bkkNeutral-100 rounded-2xl p-5 w-[234px]">
+                                <div class="flex flex-col gap-4">
+                                    <a href="#"
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Profile
+                                    </a>
+                                    <a href="#"
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="flex items-center gap-3">
+                            <a 
+                                @click="openModalLogin = true"
+                                class="bg-bkkBlue-700 hover:bg-bkkBlue-800 px-4 py-2 paragraph-16s text-bkkNeutral-50 transition duration-300 rounded-[8px] border-[1px] border-bkkBlue-700 cursor-pointer">Masuk sebagai Alumni</a>
+                        </div>
+                    @endauth
                 </div>
             </nav>
             {{-- Navbar Mobile --}}

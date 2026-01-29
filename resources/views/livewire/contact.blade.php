@@ -37,38 +37,38 @@
                         wire:submit.prevent="sendContact">
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="w-full md:w-[50%] flex flex-col gap-3">
-                                <label for="firstName" class="paragraph-16r text-bkkNeutral-900">Nama Depan</label>
+                                <label for="firstName" class="heading-16 text-bkkNeutral-900">Nama Depan</label>
                                 <input 
                                     id="firstName"
                                     type="text" 
                                     wire:model="firstName" 
                                     placeholder="Masukkan nama depan"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
-                                    border border-bkkNeutral-100 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
+                                    border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
                             </div>
                             <div class="w-full md:w-[50%] flex flex-col gap-3">
-                                <label for="lastName" class="paragraph-16r text-bkkNeutral-900">Nama Depan</label>
+                                <label for="lastName" class="heading-16 text-bkkNeutral-900">Nama Depan</label>
                                 <input 
                                     id="lastName"
                                     type="text" 
                                     wire:model="lastName" 
                                     placeholder="Masukkan nama belakang"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
-                                    border border-bkkNeutral-100 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
+                                    border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
                             </div>
                         </div>
                         <div class="w-full flex flex-col gap-3">
-                            <label for="email" class="paragraph-16r text-bkkNeutral-900">Email</label>
+                            <label for="email" class="heading-16 text-bkkNeutral-900">Email</label>
                             <input 
                                     id="email"
                                     type="email" 
                                     wire:model="email" 
                                     placeholder="Masukkan email"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
-                                    border border-bkkNeutral-100 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
+                                    border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
                         </div>
                         <div class="w-full flex flex-col gap-3">
-                            <label for="sugest" class="paragraph-16r text-bkkNeutral-900">
+                            <label for="sugest" class="heading-16 text-bkkNeutral-900">
                                 Apa yang bisa kami bantu?
                             </label>
                             <textarea 
@@ -77,7 +77,7 @@
                                     placeholder="Tuliskan pesan atau masukan"
                                     rows="5"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
-                                    border border-bkkNeutral-100 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6">
+                                    border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6">
                             </textarea>
                         </div>
                         <div class="flex justify-end">
