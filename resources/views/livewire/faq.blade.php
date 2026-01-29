@@ -30,13 +30,13 @@
                 @foreach ($faqContent as $faq)
                     <div 
                         x-data="{open: false,openFaq : null}"
-                        class="p-4 rounded-[20px] border border-bkkNeutral-100">
+                        class="p-4 rounded-[20px] border border-bkkNeutral-200">
                         <div 
-                            class="flex items-center justify-between transition duration-300"
+                            @click="open = !open; openFaq = {{ $loop->index }}"
+                            class="flex items-center justify-between transition duration-300 cursor-pointer"
                             :class="open === true && openFaq == {{ $loop->index }} ? 'text-bkkBlue-700' : 'text-bkkNeutral-900'">
-                            <h2 class="heading-20s">{{ $faq['title'] }}</h2>
+                            <h2 class="heading-16s">{{ $faq['title'] }}</h2>
                             <div 
-                                @click="open = !open; openFaq = {{ $loop->index }}"
                                 class="w-12 h-12 flex items-center justify-center rounded-full cursor-pointer">
                                 <svg
                                     class="transition duration-300"
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div 
-                            class="paragraph-16r text-bkkNeutral-700 mt-4"
+                            class="paragraph-14r text-bkkNeutral-700 mt-4"
                             x-collapse
                             x-cloak
                             x-show="open && openFaq == {{ $loop->index }}">

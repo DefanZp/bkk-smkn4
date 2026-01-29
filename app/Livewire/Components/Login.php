@@ -17,8 +17,7 @@ class Login extends Component
             'password' => 'required|min:8|max:20',
         ]);
 
-        if (Auth::attempt(['nisn' => $this->nisn, 'password' => $this->password], 
-            $this->remember)) 
+        if (Auth::attempt(['nisn' => $this->nisn, 'password' => $this->password])) 
         {
             session()->regenerate();
             $this->dispatch('close-modal');
