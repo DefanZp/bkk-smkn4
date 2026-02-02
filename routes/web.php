@@ -35,8 +35,7 @@ Route::get('/tracer-study', TracerStudy::class)->name('tracer-study');
 Route::get('/lowongan', Vacancy::class)->name('lowongan');
 
 // Route User Login
-Route::get('/isi-tracer-study', FillTracerStudy::class)->name('isi-tracer-study')->prefix('user');
-
+Route::get('/user/isi-tracer-study', FillTracerStudy::class)->middleware('auth')->name('isi-tracer-study');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

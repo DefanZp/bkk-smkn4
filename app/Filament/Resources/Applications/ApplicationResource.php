@@ -20,6 +20,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\BulkAction;
+use Illuminate\Support\Facades\App;
 
 class ApplicationResource extends Resource
 {
@@ -37,36 +38,13 @@ class ApplicationResource extends Resource
     
     public static function form(Schema $schema): Schema
     {
-        return $schema->schema([
-            Select::make('id_user')
-                ->label('Pelamar')
-                ->options(User::query()->pluck('full_name', 'id'))
-                ->searchable()
-                ->preload()
-                ->required(),
-
-            Select::make('id_vacancy')
-                ->label('Lowongan')
-                ->options(vacancie::query()->pluck('vacancy_name', 'id'))
-                ->searchable()
-                ->preload()
-                ->required(),
-
-            Select::make('status')
-                ->label('Status')
-                ->options(Application::STATUSES)
-                ->default('dikirim')
-                ->required(),
-        ]);
+        return ApplicationForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.nisn')
-                    ->label('NISN')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('user.full_name')
                     ->label('Nama Pelamar')
                     ->searchable()
@@ -98,10 +76,6 @@ class ApplicationResource extends Resource
                     ->searchable()
                     ->preload(),
             ])
-            ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
-            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -120,6 +94,29 @@ class ApplicationResource extends Resource
                                 $record->update(['status' => $data['status']]);
                             });
                         })
+                        ->deselectRecordsAfterCompletion(),
+
+                    BulkAction::make('export')
+                        ->label('Export Terpilih')
+                        ->icon('heroicon-o-arrow-down-tray')
+                        ->action(function (\Illuminate\Database\Eloquent\Collection $records) {
+                            $firstApp = $records->first();
+                            if (!$firstApp || !$firstApp->vacancy) {
+                                return;
+                            }
+
+                            $service = new \App\Services\ApplicationExportService();
+                            $zipPath = $service->exportToZip(
+                                $records,
+                                $firstApp->vacancy->vacancy_name ?? 'Lowongan',
+                                $firstApp->vacancy->company->companies_name ?? 'Perusahaan'
+                            );
+
+                            return response()->download($zipPath)->deleteFileAfterSend(true);
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Export Lamaran')
+                        ->modalDescription('Download data kandidat terpilih beserta CV dan Sertifikat sebagai ZIP?')
                         ->deselectRecordsAfterCompletion(),
                 ]),
             ]);

@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Filament\Widgets;
+
+use Filament\Tables;
+use Filament\Tables\Table;
+use Filament\Widgets\TableWidget as BaseWidget;
+use App\Models\WorkFill;
+
+class WorkFillsTableWidget extends BaseWidget
+{
+    protected static ?string $heading = 'Data Alumni Bekerja';
+    protected int|string|array $columnSpan = 'full';
+    protected static ?int $sort = 3;
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->query(WorkFill::query()->with('user'))
+            ->columns([
+                Tables\Columns\TextColumn::make('user.full_name')
+                    ->label('Nama')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.nisn')
+                    ->label('NISN')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('company_name')
+                    ->label('Perusahaan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('position')
+                    ->label('Posisi'),
+                Tables\Columns\TextColumn::make('location')
+                    ->label('Lokasi'),
+                Tables\Columns\TextColumn::make('salary')
+                    ->label('Gaji'),
+                Tables\Columns\TextColumn::make('major_relevance')
+                    ->label('Kesesuaian Jurusan')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'sesuai' => 'success',
+                        'tidak sesuai' => 'danger',
+                        'mungkin' => 'warning',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('start_date')
+                    ->label('Mulai Bekerja')
+                    ->date(),
+            ])
+            ->defaultSort('created_at', 'desc');
+    }
+}
