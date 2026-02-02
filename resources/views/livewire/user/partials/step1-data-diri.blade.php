@@ -19,9 +19,8 @@
                 NISN <span class="text-red-500">*</span>
             </label>
             <input type="text" wire:model="nisn"
-                class="w-full px-4 py-3 border border-bkkNeutral-300 rounded-xl focus:ring-2 focus:ring-bkkBlue-700 focus:border-transparent"
-                placeholder="Masukkan NISN">
-            @error('nisn') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                class="w-full px-4 py-3 border border-bkkNeutral-300 rounded-xl bg-bkkNeutral-100 text-bkkNeutral-500 cursor-not-allowed"
+                readonly>
         </div>
 
         <!-- NIK -->

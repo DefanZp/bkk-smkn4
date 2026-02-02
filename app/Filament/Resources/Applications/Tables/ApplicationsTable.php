@@ -7,6 +7,10 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\BulkAction;
+use App\Services\ApplicationExportService;
+use Illuminate\Support\Collection;
+use App\Models\Application;
 
 class ApplicationsTable
 {
@@ -40,6 +44,27 @@ class ApplicationsTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+
+                    BulkAction::make('export')
+                        ->label('Export Terpilih')
+                        ->icon('heroicon-o-arrow-down-tray')
+                        ->action(function (Collection $records) {
+                            $firstApp = $records->first();
+                            if (!$firstApp || !$firstApp->vacancy) {
+                                return;
+                            }
+                            $service = new ApplicationExportService();
+                            $zipPath = $service->exportToZip(
+                                $records,
+                                $firstApp->vacancy->vacancy_name ?? 'Lowongan',
+                                $firstApp->vacancy->company->companies_name ?? 'Perusahaan'
+                            );
+                            return response()->download($zipPath)->deleteFileAfterSend(true);
+                        })
+                        ->requiresConfirmation()
+                        ->modalHeading('Export Lamaran')
+                        ->modalDescription('Download data kandidat terpilih sebagai ZIP?')
+                        ->deselectRecordsAfterCompletion(),
                 ]),
             ]);
     }

@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 use App\Models\User;
 use App\Models\vacancie;
 use App\Models\Application;
+
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -21,6 +22,7 @@ class StatsOverview extends StatsOverviewWidget
             Stat::make('Total lamaran', Application::count())
             ->description('lamaran yang masuk')
             ->icon('heroicon-o-document-text'),
+            
         ];
     }
 }
