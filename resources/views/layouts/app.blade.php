@@ -170,9 +170,13 @@
                             {{-- User Dropdown --}}
                             <div
                                 x-cloak
+                                @click.outside="openUserDropdown = false"
                                 x-show="openUserDropdown"
                                 class="absolute top-8 -right-3 bg-white shadow-xl z-50 border border-bkkNeutral-100 rounded-2xl p-5 w-[234px]">
                                 <div class="flex flex-col gap-4">
+                                    <div class="paragraph-16r capitalize">
+                                        {{ Auth::user()->full_name }}
+                                    </div>
                                     <a href="#"
                                         class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                                         Profile

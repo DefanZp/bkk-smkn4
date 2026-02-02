@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div 
-                            class="paragraph-14r text-bkkNeutral-700 mt-4"
+                            class="paragraph-14r text-bkkNeutral-700 mt-1"
                             x-collapse
                             x-cloak
                             x-show="open && openFaq == {{ $loop->index }}">
