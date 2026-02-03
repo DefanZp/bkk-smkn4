@@ -83,6 +83,13 @@
     line-height: 130%;
   }
 
+  .heading-32s {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 130%;
+  }
+
   .heading-24s {
     font-family: "Poppins", sans-serif;
     font-weight: 600;

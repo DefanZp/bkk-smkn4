@@ -61,10 +61,10 @@
                     <ol class="paragraph-14r text-bkkNeutral-700 list-decimal list-inside space-y-2">
                         <li>Memberikan layanan informasi dunia kerja yang sesuai dengan kebutuhan.</li>
                         <li>Mempromosikan tenaga kerja lulusan SMK ke dunia industri.</li>
-                        <li>Merekrut dan menyalurkan calon tenaga kerja ke perusahaan-perusahaan.</ul>
-                        <li>Memberikan pelayanan pelatihan untuk pemantapan memasuki dunia kerja.</ul>
-                        <li>Mengadakan kerjasama dengan masyarakat, dunia usaha dan dunia industri.</ul>
-                        <li>Penelusuran alumni.</ul>
+                        <li>Merekrut dan menyalurkan calon tenaga kerja ke perusahaan-perusahaan.</li>
+                        <li>Memberikan pelayanan pelatihan untuk pemantapan memasuki dunia kerja.</li>
+                        <li>Mengadakan kerjasama dengan masyarakat, dunia usaha dan dunia industri.</li>
+                        <li>Penelusuran alumni.</li>
                     </ol>
                 </div>
             </div>

@@ -1,20 +1,22 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Livewire\Contact;
 use App\Livewire\Faq;
-use App\Livewire\Homepage;
-use App\Livewire\Information\Announcement;
-use App\Livewire\Information\TracerStudy;
 use App\Livewire\Login;
-use App\Livewire\Profil\ActivityFlow;
-use App\Livewire\Profil\OrganizationStructure;
-use App\Livewire\Profil\SupportingDocuments;
+use App\Livewire\Contact;
+use App\Livewire\Homepage;
 use App\Livewire\Profil\VisiMisi;
+use App\Livewire\Vacancy\Vacancy;
 use App\Livewire\Profil\WorkProgram;
-use App\Livewire\User\FillTracerStudy;
-use App\Livewire\Vacancy;
+use App\Livewire\Profil\ActivityFlow;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\User\FillTracerStudy;
+use App\Livewire\Vacancy\VacancyDetail;
+use App\Livewire\Information\TracerStudy;
+use App\Livewire\Information\Announcement;
+use App\Http\Controllers\ProfileController;
+use App\Livewire\Profil\SupportingDocuments;
+use App\Livewire\Profil\OrganizationStructure;
+use App\Livewire\Information\AnnouncementDetail;
 
 Route::get('/', Homepage::class)->name('beranda');
 Route::get('/faq', Faq::class)->name('faq');
@@ -29,10 +31,12 @@ Route::get('/dokumen-pendukung', SupportingDocuments::class)->name('dokumen-pend
 
 // Informasi dan berita route
 Route::get('/pengumuman', Announcement::class)->name('pengumuman');
+Route::get('/pengumuman/detail', AnnouncementDetail::class)->name('pengumuman-detail');
 Route::get('/tracer-study', TracerStudy::class)->name('tracer-study');
 
 // Lowongan
 Route::get('/lowongan', Vacancy::class)->name('lowongan');
+Route::get('/lowongan/detail', VacancyDetail::class)->name('lowongan-detail');
 
 // Route User Login
 Route::get('/user/isi-tracer-study', FillTracerStudy::class)->middleware('auth')->name('isi-tracer-study');

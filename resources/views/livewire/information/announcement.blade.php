@@ -1,70 +1,86 @@
 <div>
-    <section class="pt-32 lg:pt-40 bg-bkkNeutral-50">
-        <div class="container px-5 lg:px-0 mx-auto">
-            <h1 class="heading-48s text-neutral-900 mb-4">Pengumuman BKK</h1>
-            <p class="paragraph-16r text-bkkNeutral-600 w-full lg:w-[60%]">
-                Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing
-            </p>
+    <section class="pt-30 lg:pt-25">
+        <div 
+            style="background-image: url('{{ asset('/assets/static/background/hero-section.png') }}')"
+            class="container mx-auto px-5 lg:px-0 rounded-3xl bg-cover bg-center relative h-[50vh] overflow-hidden">
+            <div class="absolute inset-0 bg-linear-to-t from-bkkNeutral-900/90 to-88% to-bkkNeutral-900/45 z-1"></div>
+            <div class="relative z-2 w-full h-full flex flex-col justify-center mx-0 lg:mx-14">
+                <div class="flex items-center gap-2.5 paragraph-16s text-bkkNeutral-50 mb-7">
+                    <a href="{{ route('beranda') }}">Beranda</a>
+                    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L5 5L1 9" stroke="#FBFCFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <a href="#">Informasi & Pengumuman</a>
+                    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L5 5L1 9" stroke="#FBFCFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <a href="{{ route('pengumuman') }}">Pengumuman</a>
+                </div>
+                <h1 class="heading-48s text-bkkNeutral-50 mb-3 lg:w-[55%]">
+                    Pengumuman
+                </h1>
+                <div class="paragraph-16r text-bkkNeutral-100 w-full lg:w-[50%]">
+                    Memuat pengumuman resmi dan pemberitahuan penting dari BKK dan sekolah sebagai sarana penyampaian informasi terkini kepada siswa, alumni, dan mitra terkait kegiatan, jadwal, dan layanan.
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="py-16 bg-white">
+    <section class="py-15 lg:py-20">
         <div class="container mx-auto px-5 lg:px-0">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="heading-24s text-bkkNeutral-900">Periksa Pengumuman Terbaru</h2>
-                <!-- <div class="flex items-center gap-3">
+            <h2 class="heading-42s text-bkkNeutral-900">
+                Pengumuman Resmi BKK
+            </h2>
+            <div class="flex items-end justify-between mb-9">
+                <div class="paragraph-16r text-bkkNeutral-700 w-[65%]">
+                    Pengumuman resmi dan informasi terbaru dari BKK untuk siswa dan alumni terkait kegiatan dan layanan.
+                </div>
+                <div class="flex justify-end gap-3 w-[35%]">
+                    <input 
+                        class="w-[300px] py-3 px-6 border border-bkkNeutral-200 rounded-xl outline-none focus:border-bkkBlue-700 paragraph-14r"
+                        type="text"
+                        wire:model.live.debounce.500ms="filterSearch"
+                        placeholder="Masukkan kata kunci"
+                    />
                     <button 
-                        class="w-10 h-10 rounded-full border-2 border-bkkBlue-700 flex items-center justify-center text-bkkBlue-700 hover:bg-bkkBlue-700 hover:text-white transition duration-300 cursor-pointer"
-                        onclick="scrollAnnouncements(-1)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 19l-7-7 7-7"/>
-                        </svg>
+                        class="py-3 px-6 bg-bkkBlue-700 rounded-xl text-bkkNeutral-50 paragraph-16s cursor-pointer hover:bg-bkkBlue-800 transition duration-300">
+                        Cari
                     </button>
-                    <button 
-                        class="w-10 h-10 rounded-full bg-bkkBlue-700 flex items-center justify-center text-white hover:bg-bkkBlue-800 transition duration-300 cursor-pointer"
-                        onclick="scrollAnnouncements(1)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div> -->
+                </div>
             </div>
-
-            <div id="announcementContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div 
+                wire:loading.class="opacity-50 pointer-events-none"
+                id="pengumuman" 
+                class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-mt-25 mb-16">
                 @forelse ($announcements as $announcement)
-                    <div class="bg-bkkNeutral-50 rounded-2xl p-4 border border-bkkNeutral-200 hover:shadow-lg transition duration-300">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-full bg-bkkBlue-100 flex items-center justify-center shrink-0">
-                                <img 
-                                    src="{{ asset('/assets/static/logo/logo-bkk.png') }}" 
-                                    alt="BKK Logo" 
-                                    class="w-8 h-8 object-contain">
+                    <div class=" bg-white shadow-lg overflow-hidden rounded-[20px] my-2">
+                        <div class="w-full h-[256px]">
+                            <img 
+                                class="w-full h-full object-cover object-center"
+                                src="{{ $announcement->image ? asset('storage/' . $announcement->image) : asset('/assets/static/partial/image-fallback.webp') }}" />
+                        </div>
+                        <div class="p-5 lg:p-6">
+                            <h3 class="heading-20s text-black line-clamp-1 mb-4">
+                                {{$announcement->headline}}
+                            </h3>
+                            <div class="paragraph-16r text-bkkNeutral-700 line-clamp-3">
+                                {{ $announcement->content }}
                             </div>
-                            <div>
-                                <h3 class="heading-16s text-bkkNeutral-900">BKK SMK NEGERI 4 MALANG</h3>
-                                <p class="paragraph-14r text-bkkNeutral-500">{{ $announcement->created_at->format('d F Y') }}</p>
+                            {{-- Divider --}}
+                            <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-8"></div>
+                            <div class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 lg:items-center ">
+                                <div class="paragraph-14r text-bkkNeutral-700">
+                                    Diunggah pada {{ $announcement->created_at->translatedFormat('d F Y') }}
+                                </div>
+                                <a  href="#"
+                                    class="w-full lg:w-auto justify-self-center flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
+                                    <span class="paragraph-16s text-bkkNeutral-50">Baca Selengkapnya</span>
+                                    <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 6L14 1M19 6L14 11M19 6H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
-
-                        <p class="paragraph-16r text-bkkNeutral-700 mb-4 line-clamp-3">
-                            {{ Str::limit($announcement->content, 150) }}
-                        </p>
-
-                        @if($announcement->image)
-                            <div class="relative rounded-xl overflow-hidden mb-4">
-                                <img 
-                                    src="{{ asset('storage/' . $announcement->image) }}" 
-                                    alt="{{ $announcement->headline }}"
-                                    class="w-full h-128 object-cover object-top">
-                                <div class="absolute inset-0 bg-gradient-to-t from-bkkBlue-900/90 via-bkkBlue-800/40 via-10% to-transparent flex flex-col justify-end p-6">
-                                    <h4 class="heading-22s text-white uppercase tracking-wide">{{ $announcement->headline }}</h4>
-                                </div>
-                            </div>
-                        @else
-                            <div class="bg-bkkBlue-700 rounded-xl p-6 mb-4">
-                                <h4 class="heading-22s text-white uppercase">{{ $announcement->headline }}</h4>
-                            </div>
-                        @endif
                     </div>
                 @empty
                     <div class="col-span-full text-center py-16">
@@ -78,14 +94,7 @@
                     </div>
                 @endforelse
             </div>
+            {{ $announcements->links(data: ['scrollTo' => '#pengumuman']) }}
         </div>
     </section>
 </div>
-
-<!-- <script>
-    function scrollAnnouncements(direction) {
-        const container = document.getElementById('announcementContainer');
-        const scrollAmount = 400;
-        container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-    }
-</script> -->
