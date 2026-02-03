@@ -48,7 +48,7 @@ class AnnouncementResource extends Resource
     {
         return $table->columns([
             Tables\Columns\TextColumn::make('headline')->label('judul pengumuman')->searchable()->sortable(),
-            Tables\Columns\ImageColumn::make('image')->label('gambar pengumuman'),
+            Tables\Columns\ImageColumn::make('image')->label('gambar pengumuman')->disk('public'),
             Tables\Columns\TextColumn::make('content')->label('isi pengumuman')->limit(50),
             Tables\Columns\TextColumn::make('active_until')->label('aktif hingga')->date()->sortable(),
         ]);

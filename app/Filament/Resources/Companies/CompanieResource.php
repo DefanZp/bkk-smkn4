@@ -47,7 +47,7 @@ class CompanieResource extends Resource
     {
         return $table->columns([
             Tables\Columns\TextColumn::make('companies_name')->label('nama perusahaan')->searchable()->sortable(),
-            Tables\Columns\ImageColumn::make('companies_logo')->label('logo perusahaan'),
+            Tables\Columns\ImageColumn::make('companies_logo')->label('logo perusahaan')->disk('public'),
             Tables\Columns\TextColumn::make('companies_profile')->label('profil perusahaan')->limit(50),
             Tables\Columns\TextColumn::make('location')->label('lokasi perusahaan')->searchable()->sortable(),
         ]);
