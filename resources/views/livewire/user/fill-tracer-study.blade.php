@@ -65,24 +65,15 @@
             {{-- Container utama untuk form dengan styling card --}}
             {{-- ======================================== --}}
             <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-3xl p-6 md:p-10">
-                
-                {{-- ================================ --}}
-                {{-- STEP 1: DATA DIRI --}}
-                {{-- Ditampilkan hanya jika currentStep === 1 --}}
-                {{-- ================================ --}}
                 @if($currentStep === 1)
-                    @include('livewire.user.partials.step1-data-diri')
+                    {{-- Mengirim data awal ke Child --}}
+                    <livewire:user.partials.step1-data-diri-form :userData="$formData" wire:key="step1" />
                 @endif
                 
-                {{-- ================================ --}}
-                {{-- STEP 2: FORM STATUS --}}
-                {{-- Ditampilkan hanya jika currentStep === 2 --}}
-                {{-- Form akan berubah sesuai status yang dipilih --}}
-                {{-- ================================ --}}
                 @if($currentStep === 2)
-                    @include('livewire.user.partials.step2-status-form')
+                    {{-- Mengirim status terpilih ke Child --}}
+                    <livewire:user.partials.step2-status-diri-form :status="$formData['status']" wire:key="step2" />
                 @endif
-                
             </div>
         </div>
     </section>

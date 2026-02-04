@@ -214,3 +214,36 @@ html {
     transform: translateX(5px);
   }
 }
+
+.dynamic-vacancy h2,
+.dynamic-vacancy h3
+{
+  margin-bottom: 16px;
+}
+
+.dynamic-vacancy h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 175%;
+}
+
+.dynamic-vacancy p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 175%;
+  color: #364153;
+}
+
+.dynamic-vacancy ol {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  text-transform: capitalize;
+}
+
+.dynamic-vacancy ol li::marker{
+  color: #364153;
+}
+
+

@@ -192,14 +192,14 @@
     {{-- Buttons --}}
     <div class="flex flex-col sm:flex-row justify-between gap-4 mt-8 pt-6 border-t border-bkkNeutral-200">
         <button type="button" wire:click="previousStep"
-            class="flex items-center justify-center gap-3 py-3 px-8 border border-bkkNeutral-300 text-bkkNeutral-700 rounded-xl hover:bg-bkkNeutral-50 transition duration-300 paragraph-16s">
+            class="flex items-center justify-center gap-3 py-3 px-8 border border-bkkNeutral-300 text-bkkNeutral-700 rounded-xl hover:bg-bkkNeutral-50 transition duration-300 paragraph-16s cursor-pointer" >
             <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 6L6 1M1 6L6 11M1 6H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span>Kembali</span>
         </button>
-        <button type="button" wire:click="submit" wire:loading.attr="disabled" wire:loading.class="opacity-50"
-            class="flex items-center justify-center gap-3 py-3 px-8 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-white rounded-xl transition duration-300 paragraph-16s">
+        <button type="button" wire:click="submit" wire:loading.attr="disabled" wire:loading.class="opacity-50 cursor-pointer"
+            class="flex items-center justify-center gap-3 py-3 px-8 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-white rounded-xl transition duration-300 paragraph-16s cursor-pointer">
             <span wire:loading.remove wire:target="submit">Kirim Data</span>
             <span wire:loading wire:target="submit">Mengirim...</span>
             <svg wire:loading.remove wire:target="submit" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

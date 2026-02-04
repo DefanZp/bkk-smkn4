@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Livewire\Components;
+
+use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+
+class Logout extends Component
+{
+    public function logout()
+    {
+        Auth::logout();
+
+        // Hapus session agar benar-benar bersih
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect()->route('beranda');
+    }
+
+    public function render()
+    {
+        return view('livewire..components.logout');
+    }
+}

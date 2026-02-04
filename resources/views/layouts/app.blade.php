@@ -180,10 +180,7 @@
                                         class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                                         Profile
                                     </a>
-                                    <a href="#"
-                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
-                                        Logout
-                                    </a>
+                                    <livewire:components.logout />
                                 </div>
                             </div>
                         </div>

@@ -78,17 +78,9 @@
                 {{-- Divider --}}
                 <div class="w-full h-px bg-bkkNeutral-200 my-12"></div>
                 <div class="heading-20s text-bkkNeutral-900 mb-4">Kualifikasi</div>
-                <ol class="paragraph-14r text-bkkNeutral-700 list-disc list-inside space-y-1 mb-9">
-                    <li>Siswa kelas XII atau alumni SMK (jurusan RPL/TKJ atau sejenis)</li>
-                    <li>Memahami dasar pemrograman web (HTML, CSS, JavaScript)</li>
-                    <li>Memahami dasar backend (PHP / framework sederhana menjadi nilai tambah)</li>
-                    <li>Memahami dasar database (MySQL)</li>
-                    <li>Mampu mengoperasikan komputer dan internet dengan baik</li>
-                    <li>Mampu bekerja secara disiplin, jujur, dan bertanggung jawab</li>
-                    <li>Mampu bekerja secara mandiri maupun dalam tim</li>
-                    <li>Bersedia mengikuti pelatihan atau pembinaan dari perusahaan</li>
-                    <li>Fresh graduate dipersilakan melamar</li>
-                </ol>
+                <div class="dynamic-vacancy mb-9">
+                    {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($vacancy->requirements) }}
+                </div>
                 <div class="heading-20s text-bkkNeutral-900 mb-4">Profil Perusahaan</div>
                 <div class="p-6 rounded-[20px] border border-bkkNeutral-200">
                     <div class="w-11 h-11 rounded-full overflow-hidden shadow-lg mb-4">
@@ -114,7 +106,7 @@
                         <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <div class="paragraph-16r text-bkkNeutral-700">
-                            Software House
+                            {{ $vacancy->company->field }}
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
@@ -122,7 +114,7 @@
                         <path d="M18.75 15.7499C18.75 14.0083 17.0804 12.5267 14.75 11.9775M12.75 15.75C12.75 13.5409 10.0637 11.75 6.75 11.75C3.43629 11.75 0.75 13.5409 0.75 15.75M12.75 8.75C14.9591 8.75 16.75 6.95914 16.75 4.75C16.75 2.54086 14.9591 0.75 12.75 0.75M6.75 8.75C4.54086 8.75 2.75 6.95914 2.75 4.75C2.75 2.54086 4.54086 0.75 6.75 0.75C8.95914 0.75 10.75 2.54086 10.75 4.75C10.75 6.95914 8.95914 8.75 6.75 8.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <div class="paragraph-16r text-bkkNeutral-700">
-                            28 karyawan
+                            {{ $vacancy->company->employee }} karyawan
                         </div>
                     </div>  
                 </div>

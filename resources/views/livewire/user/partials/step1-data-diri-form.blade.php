@@ -86,7 +86,7 @@
         </div>
 
         <!-- Status -->
-        <div class="md:col-span-2">
+        <div class="md:col-span-2" x-data="{ localStatus: @entangle('status') }"> 
             <label class="block paragraph-14s text-bkkNeutral-700 mb-4">
                 Status Saat Ini <span class="text-red-500">*</span>
             </label>
@@ -99,32 +99,39 @@
                         'menganggur' => ['label' => 'Belum Bekerja']
                     ];
                 @endphp
+                
                 @foreach($statusOptions as $value => $data)
-                    <label class="flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition-all duration-200
-                        {{ $status === $value ? 'border-bkkBlue-700 bg-bkkBlue-50 shadow-md' : 'border-bkkNeutral-200 hover:border-bkkBlue-300' }}">
-                        <input type="radio" wire:model.live="status" value="{{ $value }}" class="sr-only">
+                    <label 
+                        {{-- Gunakan logika Alpine (localStatus) bukan Blade/Livewire ($status) untuk Class --}}
+                        class="flex flex-col items-center gap-2 p-4 border-2 rounded-2xl cursor-pointer transition-all duration-200"
+                        :class="localStatus === '{{ $value }}' ? 'border-bkkBlue-700 bg-bkkBlue-50 shadow-md' : 'border-bkkNeutral-200 hover:border-bkkBlue-300'"
+                    >
+                        {{-- Ganti wire:model.live menjadi wire:model biasa --}}
+                        <input type="radio" wire:model="status" value="{{ $value }}" class="sr-only" @click="localStatus = '{{ $value }}'">
                         
-                        <span class="paragraph-14s text-center {{ $status === $value ? 'text-bkkBlue-700' : 'text-bkkNeutral-700' }}">
+                        <span class="paragraph-14s text-center"
+                            :class="localStatus === '{{ $value }}' ? 'text-bkkBlue-700' : 'text-bkkNeutral-700'">
                             {{ $data['label'] }}
                         </span>
-                        @if($status === $value)
+
+                        {{-- Icon Checkmark dengan Alpine --}}
+                        <template x-if="localStatus === '{{ $value }}'">
                             <div class="w-5 h-5 bg-bkkBlue-700 rounded-full flex items-center justify-center">
                                 <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                        @endif
+                        </template>
                     </label>
                 @endforeach
             </div>
-            @error('status') <span class="text-red-500 text-sm mt-2 block">{{ $message }}</span> @enderror
         </div>
     </div>
 
     <!-- Button Lanjutkan -->
     <div class="flex justify-end mt-8 pt-6 border-t border-bkkNeutral-200">
         <button type="button" wire:click="nextStep"
-            class="flex items-center gap-3 py-3 px-8 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-white rounded-xl transition duration-300 paragraph-16s">
+            class="flex items-center gap-3 py-3 px-8 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-white rounded-xl transition duration-300 paragraph-16s cursor-pointer">
             <span>Lanjutkan</span>
             <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 6L14 1M19 6L14 11M19 6H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
