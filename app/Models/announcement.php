@@ -14,5 +14,10 @@ class announcement extends Model
         'image',
         'active_until',
     ];
+
+    protected $casts = [
+        'content' => 'array',
+        'active_until' => 'date',
+    ];
 }
 

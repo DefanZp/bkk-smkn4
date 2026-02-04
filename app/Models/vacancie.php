@@ -26,12 +26,12 @@ class vacancie extends Model
         'contact_person',
         'entryId',
         'vacancy_number',
-
-        
     ];
 
     protected $casts = [
     'major' => 'array',
+    'requirements' => 'array',
+    'deadline' => 'date',
     ];
 
     public function company(): BelongsTo

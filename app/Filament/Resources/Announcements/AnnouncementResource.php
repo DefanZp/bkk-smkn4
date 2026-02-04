@@ -18,7 +18,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Tables;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
+use Illuminate\Database\Eloquent\Model;
 
 class AnnouncementResource extends Resource
 {
@@ -39,7 +40,8 @@ class AnnouncementResource extends Resource
         return $schema->schema([
             TextInput::make('headline')->required()->label('judul pengumuman'),
             FileUpload::make('image')->required()->label('gambar pengumuman')->disk('public')->directory('announcements')->image(),
-            Textarea::make('content')->required()->label('isi pengumuman'),
+            RichEditor::make('content')->required()
+            ->json()->label('isi pengumuman'),
             DatePicker::make('active_until')->required()->label('aktif hingga'),
         ]);
     }
@@ -53,6 +55,8 @@ class AnnouncementResource extends Resource
             Tables\Columns\TextColumn::make('active_until')->label('aktif hingga')->date()->sortable(),
         ]);
     }
+
+    
 
     public static function getRelations(): array
     {
@@ -69,4 +73,18 @@ class AnnouncementResource extends Resource
             'edit' => EditAnnouncement::route('/{record}/edit'),
         ];
     }
+}
+
+class Post extends Model
+{
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'content' => 'array',
+        ];
+    }
+
 }
