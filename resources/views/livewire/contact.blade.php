@@ -26,22 +26,50 @@
             <h2 class="heading-42s text-bkkNeutral-900 mb-4">Butuh Bantuan BKK?</h1>
             <div class="paragraph-16r text-bkkNeutral-700 mb-9">Silakan hubungi BKK SMK Negeri 4 Malang untuk mendapatkan informasi dan bantuan terkait layanan, program, dan kerja sama.</div>
             <div class="flex flex-col lg:flex-row rounded-3xl shadow-lg bg-white overflow-hidden">
-                <div class="w-full lg:w-[50%] h-[350px] lg:h-[550px]">
+                <div class="w-full lg:w-[50%] h-[350px] lg:h-[600px]">
                     <iframe 
                         class="w-full h-full"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.088191723806!2d112.62473577415871!3d-7.98982897968068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281b75ea5485%3A0x90fd5c6fcedf6acf!2sSMK%20Negeri%204%20Kota%20Malang!5e0!3m2!1sid!2sid!4v1769496969328!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="w-full lg:w-[50%] p-6">
+                    @if (session('success'))
+                        <div x-data="{ open: true }" x-show="open"
+                            class="w-full rounded-xl p-4 flex gap-2 mb-6 items-center border border-bkkBlue-700 col-span-2 text-bkkBlue-700">
+                            <svg class="w-6 h-6 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <span class="paragraph-14r flex-1">{{ session('success') }}</span>
+                            <button type="button" @click="open = false" class="ml-auto   cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    @endif
+                    @error('error')
+                        <div x-data="{ open: true }" x-show="open"
+                            class="w-full rounded-xl p-4  flex gap-2 mb-6 items-center border border-bkkBlue-700 text-bkkBlue-700 col-span-2">
+                            <svg class="w-6 h-6 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <span class="paragraph-14r flex-1">{{ $message }}</span>
+                        </div>
+                    @enderror
                     <form 
                         class="space-y-9"
-                        wire:submit.prevent="sendContact">
+                        wire:submit.prevent="submitContact">
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="w-full md:w-[50%] flex flex-col gap-3">
                                 <label for="firstName" class="heading-16 text-bkkNeutral-900">Nama Depan</label>
                                 <input 
                                     id="firstName"
                                     type="text" 
-                                    wire:model="firstName" 
+                                    wire:model="contact.firstName" 
                                     placeholder="Masukkan nama depan"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
@@ -51,7 +79,7 @@
                                 <input 
                                     id="lastName"
                                     type="text" 
-                                    wire:model="lastName" 
+                                    wire:model="contact.lastName" 
                                     placeholder="Masukkan nama belakang"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
@@ -62,18 +90,18 @@
                             <input 
                                     id="email"
                                     type="email" 
-                                    wire:model="email" 
+                                    wire:model="contact.email" 
                                     placeholder="Masukkan email"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
                         </div>
                         <div class="w-full flex flex-col gap-3">
-                            <label for="sugest" class="heading-16 text-bkkNeutral-900">
+                            <label for="message" class="heading-16 text-bkkNeutral-900">
                                 Apa yang bisa kami bantu?
                             </label>
                             <textarea 
-                                    id="sugest"
-                                    wire:model="sugest" 
+                                    id="message"
+                                    wire:model="contact.message" 
                                     placeholder="Tuliskan pesan atau masukan"
                                     rows="5"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 

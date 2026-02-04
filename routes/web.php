@@ -31,12 +31,12 @@ Route::get('/dokumen-pendukung', SupportingDocuments::class)->name('dokumen-pend
 
 // Informasi dan berita route
 Route::get('/pengumuman', Announcement::class)->name('pengumuman');
-Route::get('/pengumuman/detail', AnnouncementDetail::class)->name('pengumuman-detail');
+Route::get('/pengumuman/detail/{id}', AnnouncementDetail::class)->name('pengumuman-detail');
 Route::get('/tracer-study', TracerStudy::class)->name('tracer-study');
 
 // Lowongan
 Route::get('/lowongan', Vacancy::class)->name('lowongan');
-Route::get('/lowongan/detail', VacancyDetail::class)->name('lowongan-detail');
+Route::get('/lowongan/detail/{id}', VacancyDetail::class)->name('lowongan-detail');
 
 // Route User Login
 Route::get('/user/isi-tracer-study', FillTracerStudy::class)->middleware('auth')->name('isi-tracer-study');

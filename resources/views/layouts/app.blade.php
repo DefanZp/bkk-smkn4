@@ -411,13 +411,13 @@
                                             </svg>
                                             <span>Jalan Tanimbar Nomor 22, Kota Malang, Jawa Timur, kode pos 65117</span>
                                         </a>
-                                        <a href="#" class="flex  gap-3 paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 ">
-                                            <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <a href="#" class="flex items-center gap-3 paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 ">
+                                            <svg class="shrink-0" width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1.58333 1.58333L6.67303 5.42689L6.67473 5.4283C7.23987 5.84274 7.52261 6.05008 7.8323 6.13018C8.10602 6.20098 8.39376 6.20098 8.66748 6.13018C8.97744 6.05001 9.261 5.84206 9.82715 5.42689C9.82715 5.42689 13.0917 2.92162 14.9167 1.58333M0.75 9.75016V3.41683C0.75 2.48341 0.75 2.01635 0.931656 1.65983C1.09144 1.34623 1.34623 1.09144 1.65983 0.931656C2.01635 0.75 2.48341 0.75 3.41683 0.75H13.0835C14.0169 0.75 14.483 0.75 14.8395 0.931656C15.1531 1.09144 15.4087 1.34623 15.5685 1.65983C15.75 2.016 15.75 2.4825 15.75 3.41409V9.75298C15.75 10.6846 15.75 11.1504 15.5685 11.5066C15.4087 11.8202 15.1531 12.0754 14.8395 12.2352C14.4833 12.4167 14.0175 12.4167 13.0859 12.4167H3.41409C2.48249 12.4167 2.016 12.4167 1.65983 12.2352C1.34623 12.0754 1.09144 11.8202 0.931656 11.5066C0.75 11.15 0.75 10.6836 0.75 9.75016Z" stroke="#FBFCFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                             <span>mail@smkn4malang.sch.id</span>
                                         </a>
-                                        <a href="#" class="flex  gap-3 paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 ">
+                                        <a href="#" class="flex items-center gap-3 paragraph-14r text-bkkNeutral-50 hover:text-bkkNeutral-200 transition duration-300 ">
                                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M6.16872 1.79768C5.91561 1.16492 5.30276 0.75 4.62126 0.75H2.32895C1.45692 0.75 0.75 1.45675 0.75 2.32878C0.75 9.74102 6.75898 15.75 14.1712 15.75C15.0433 15.75 15.75 15.043 15.75 14.171L15.7504 11.8783C15.7504 11.1968 15.3356 10.584 14.7028 10.3309L12.5058 9.45245C11.9374 9.22509 11.2902 9.32741 10.82 9.71932L10.2529 10.1922C9.59072 10.7441 8.61636 10.7002 8.00683 10.0907L6.41018 8.49255C5.80066 7.88302 5.75561 6.90945 6.30745 6.24724L6.78027 5.68025C7.17218 5.20996 7.27541 4.56263 7.04805 3.99424L6.16872 1.79768Z" stroke="#FBFCFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>

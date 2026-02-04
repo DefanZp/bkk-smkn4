@@ -10,7 +10,7 @@
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L5 5L1 9" stroke="#FBFCFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <a href="#">Informasi & Pengumuman</a>
+                    <a href="#" class="line-clamp-1">Informasi & Pengumuman</a>
                     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L5 5L1 9" stroke="#FBFCFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -31,13 +31,13 @@
             <h2 class="heading-42s text-bkkNeutral-900">
                 Pengumuman Resmi BKK
             </h2>
-            <div class="flex items-end justify-between mb-9">
-                <div class="paragraph-16r text-bkkNeutral-700 w-[65%]">
+            <div class="flex flex-col lg:flex-row items-end justify-between mb-9 gap-6 lg:gap-0">
+                <div class="paragraph-16r text-bkkNeutral-700 w-full lg:w-[65%]">
                     Pengumuman resmi dan informasi terbaru dari BKK untuk siswa dan alumni terkait kegiatan dan layanan.
                 </div>
-                <div class="flex justify-end gap-3 w-[35%]">
+                <div class="flex justify-end gap-3 w-full lg:w-[35%]">
                     <input 
-                        class="w-[300px] py-3 px-6 border border-bkkNeutral-200 rounded-xl outline-none focus:border-bkkBlue-700 paragraph-14r"
+                        class="w-full lg:w-[300px] py-3 px-6 border border-bkkNeutral-200 rounded-xl outline-none focus:border-bkkBlue-700 paragraph-14r"
                         type="text"
                         wire:model.live.debounce.500ms="filterSearch"
                         placeholder="Masukkan kata kunci"
@@ -67,12 +67,12 @@
                                 {{ $announcement->content }}
                             </div>
                             {{-- Divider --}}
-                            <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-8"></div>
+                            <div class="h-[1px] w-full bg-bkkNeutral-200 my-8"></div>
                             <div class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 lg:items-center ">
                                 <div class="paragraph-14r text-bkkNeutral-700">
                                     Diunggah pada {{ $announcement->created_at->translatedFormat('d F Y') }}
                                 </div>
-                                <a  href="#"
+                                <a  href="{{ route('pengumuman-detail', $announcement->id) }}"
                                     class="w-full lg:w-auto justify-self-center flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
                                     <span class="paragraph-16s text-bkkNeutral-50">Baca Selengkapnya</span>
                                     <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">

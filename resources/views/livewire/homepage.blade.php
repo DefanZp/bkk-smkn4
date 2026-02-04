@@ -287,7 +287,7 @@
                                 {{ $berita['description'] }}
                             </div>
                             {{-- Divider --}}
-                            <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-8"></div>
+                            <div class="h-[1px] w-full bg-bkkNeutral-200 my-8"></div>
                             <div class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 lg:items-center ">
                                 <div class="paragraph-14r text-bkkNeutral-700">
                                     Diunggah pada {{ $berita['upload_date'] }}

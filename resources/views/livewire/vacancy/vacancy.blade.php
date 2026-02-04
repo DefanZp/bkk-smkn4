@@ -28,6 +28,7 @@
                     <div class="heading-16 mb-3">Kompetensi Keahlian</div>
                     <div class="relative">
                         <select 
+                            wire:model.live="filterKompetensi2"
                             class="py-3 px-6 border border-bkkNeutral-200 rounded-xl w-full outline-none focus:border-bkkBlue-700 paragraph-14r"
                         >
                             <option 
@@ -35,15 +36,12 @@
                                 selected hidden>
                                 Pilih kompetensi keahlian
                             </option>
-                            <option>Teknik Komputer dan Jaringan</option>
-                            <option>Rekayasa Perangkat Lunak</option>
-                            <option>Multimedia</option>
-                            <option>Akuntansi dan Keuangan Lembaga</option>
-                            <option>Administrasi Perkantoran</option>
-                            <option>Bisnis Daring dan Pemasaran</option>
-                            <option>Otomatisasi dan Tata Kelola Perkantoran</option>
-                            <option>Perhotelan</option>
-                            <option>Teknik Audio Video</option>
+                            @foreach ($kompetensiKeahlians as $kompetensi)
+                                <option 
+                                    value="{{ $kompetensi }}">
+                                    {{ $kompetensi }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -52,6 +50,7 @@
                     <div class="relative">
                         <input 
                             class="py-3 px-6 border border-bkkNeutral-200 rounded-xl w-full outline-none focus:border-bkkBlue-700 paragraph-14r"
+                            wire:model.live.debounce.500ms="filterSearch"
                             type="text"
                             placeholder="Masukkan kata kunci"
                         />
@@ -91,18 +90,17 @@
                                 x-collapse
                                 x-cloak
                                 class="mt-4 space-y-1">
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="teknik-grafika" class="rounded-sm border-bkkNeutral-600" />
-                                    <label for="teknik-grafika" class="">Teknik Grafika</label>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="tkj" class="rounded-sm border-bkkNeutral-600" />
-                                    <label for="tkj" class="">Teknik Komputer dan Jaringan</label>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="logistik" class="rounded-sm border-bkkNeutral-600" />
-                                    <label for="logistik" class="">Teknik Logistik</label>
-                                </div>
+                                @foreach ( $kompetensiKeahlians as $kompetensi )
+                                    <div class="flex items-center gap-3">
+                                        <input 
+                                            type="checkbox" 
+                                            id="{{ $kompetensi }}" 
+                                            value="{{ $kompetensi }}"
+                                            wire:model.live="filterKompetensi"
+                                            class="rounded-sm border-bkkNeutral-600" />
+                                        <label for="{{ $kompetensi }}" class="">{{ $kompetensi }}</label>
+                                    </div>
+                                 @endforeach
                             </div>
                         </div>
                         {{-- divider --}}
@@ -127,14 +125,17 @@
                                 x-collapse
                                 x-cloak
                                 class="mt-4 space-y-1">
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="penuh-waktu" class="rounded-sm border-bkkNeutral-600" />
-                                    <label for="penuh-waktu" class="">Penuh Waktu</label>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="paruh-waktu" class="rounded-sm border-bkkNeutral-600" />
-                                    <label for="paruh-waktu" class="">Paruh Waktu</label>
-                                </div>                                
+                                @foreach ( $tipePekerjaans as $tipe )
+                                    <div class="flex items-center gap-3">
+                                        <input 
+                                            type="checkbox" 
+                                            id="{{ $tipe }}" 
+                                            value="{{ $tipe }}"
+                                            wire:model.live="filterTipe"
+                                            class="rounded-sm border-bkkNeutral-600" />
+                                        <label for="{{ $tipe }}" class="">{{ $tipe }}</label>
+                                    </div>
+                                 @endforeach                              
                             </div>
                         </div>
                         {{-- divider --}}
@@ -159,168 +160,108 @@
                                 x-collapse
                                 x-cloak
                                 class="mt-4 space-y-1">
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="24-jam" class="rounded-full border-bkkNeutral-700" />
-                                    <label for="24-jam" class="">24 Jam Terakhir</label>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="seminggu" class="rounded-full border-bkkNeutral-700" />
-                                    <label for="seminggu" class="">Seminggu Terakhir</label>
-                                </div>     
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="sebulan" class="rounded-full border-bkkNeutral-700" />
-                                    <label for="sebulan" class="">Sebulan Terakhir</label>
-                                </div>   
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" id="kapanpun" class="rounded-full border-bkkNeutral-700" />
-                                    <label for="kapanpun" class="">Kapan pun</label>
-                                </div>                          
+                                @foreach ( $terakhirDiperbarui as $diperbarui )
+                                    <div class="flex items-center gap-3">
+                                        <input 
+                                            type="checkbox" 
+                                            id="{{ $diperbarui }}" 
+                                            value="{{ $diperbarui }}"
+                                            wire:model.live="filterTerakhirDiperbarui"
+                                            class="rounded-full border-bkkNeutral-600" />
+                                        <label for="{{ $diperbarui }}" class="">{{ $diperbarui }}</label>
+                                    </div>
+                                 @endforeach                      
                             </div>
                         </div>
                     </div>
                     {{-- Job Vacancy Card --}}
-                    <div class="w-full lg:w-[75%] grid grid-cols-1 md:grid-cols-2 items-start gap-6">
-                        <div class="w-full p-6 bg-white shadow-lg rounded-[20px] my-2">
-                            <div class="flex flex-col lg::flex-row gap-2 items-start">
-                                <div class="flex items-center gap-4 lg:mb-6">
-                                    <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg">
-                                        <img 
-                                            src="{{ asset('/assets/static/partial/logo-loker2.png') }}" 
-                                            class="w-full h-full object-cover object-center">
+                    <div id="lowongan" class="w-full lg:w-[75%] scroll-mt-25">
+                        <div wire:loading.class="opacity-50" class="grid grid-cols-1 md:grid-cols-2 items-start gap-6">
+                            @forelse ( $vacancies as $vacancy )
+                            <div class="w-full p-6 bg-white shadow-lg rounded-[20px] my-2">
+                                <div class="flex flex-col lg:flex-row gap-6 justify-between items-start">
+                                    <div class="flex items-center gap-4 lg:mb-6">
+                                        <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg flex-shrink-0">
+                                            <img 
+                                                src="{{ asset('storage/' . $vacancy->company->companies_logo ) }}" 
+                                                class="w-full h-full object-cover object-center">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <h3 class="heading-20s text-black line-clamp-1 capitalize">
+                                                {{ $vacancy->vacancy_name }} 
+                                            </h3>
+                                            <div class="paragraph-14r text-bkkNeutral-700 capitalize">
+                                                {{ $vacancy->company->companies_name }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="space-y-1">
-                                        <h3 class="heading-20s text-black line-clamp-1">
-                                            Junior Web Developer
-                                        </h3>
-                                        <div class="paragraph-14r text-bkkNeutral-700">
-                                            PT Nusantara Digital Solusi 
+                                    <div class="paragraph-12s text-bkkYellow-800 bg-bkkYellow-600 my-4 lg:my-0 lg:mt-4 px-2 py-1 rounded-md">
+                                        Rekomendasi
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-4">
+                                        <svg class="shrink-0 w-5 h-5" width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.75 7.67285C0.75 12.5247 4.99448 16.5369 6.87319 18.0752C7.14206 18.2954 7.27811 18.4068 7.47871 18.4632C7.63491 18.5072 7.8648 18.5072 8.021 18.4632C8.22197 18.4067 8.35707 18.2963 8.62695 18.0754C10.5057 16.5371 14.7499 12.5251 14.7499 7.6733C14.7499 5.83718 14.0125 4.07605 12.6997 2.77772C11.387 1.47939 9.6066 0.75 7.75008 0.75C5.89357 0.75 4.11301 1.4795 2.80025 2.77783C1.4875 4.07616 0.75 5.83674 0.75 7.67285Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M5.75 7.75C5.75 8.85457 6.64543 9.75 7.75 9.75C8.85457 9.75 9.75 8.85457 9.75 7.75C9.75 6.64543 8.85457 5.75 7.75 5.75C6.64543 5.75 5.75 6.64543 5.75 7.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <div class="paragraph-16r text-bkkNeutral-700 capitalize">
+                                            {{ $vacancy->company->location }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <svg class="shrink-0 w-5 h-5" width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <div class="paragraph-16r text-bkkNeutral-700 line-clamp-1">
+                                            @foreach ( $vacancy->major as $major)
+                                                {{ $major }}{{ !$loop->last ? ', ' : '' }}
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <svg class="shrink-0 w-5 h-5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.75 4.75V9.75H14.75M9.75 18.75C4.77944 18.75 0.75 14.7206 0.75 9.75C0.75 4.77944 4.77944 0.75 9.75 0.75C14.7206 0.75 18.75 4.77944 18.75 9.75C18.75 14.7206 14.7206 18.75 9.75 18.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <div class="paragraph-16r text-bkkNeutral-700 capitalize">
+                                            {{ $vacancy->employment_classification }}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <svg class="shrink-0 w-5 h-5" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.75 2.75V1.75C5.75 1.48478 5.85536 1.23043 6.04289 1.04289C6.23043 0.855357 6.48478 0.75 6.75 0.75H17.75C18.0152 0.75 18.2696 0.855357 18.4571 1.04289C18.6446 1.23043 18.75 1.48478 18.75 1.75V8.75C18.75 9.01522 18.6446 9.26957 18.4571 9.45711C18.2696 9.64464 18.0152 9.75 17.75 9.75H16.75M0.75 13.75V6.75C0.75 6.48478 0.855357 6.23043 1.04289 6.04289C1.23043 5.85536 1.48478 5.75 1.75 5.75H12.75C13.0152 5.75 13.2696 5.85536 13.4571 6.04289C13.6446 6.23043 13.75 6.48478 13.75 6.75V13.75C13.75 14.0152 13.6446 14.2696 13.4571 14.4571C13.2696 14.6446 13.0152 14.75 12.75 14.75H1.75C1.48478 14.75 1.23043 14.6446 1.04289 14.4571C0.855357 14.2696 0.75 14.0152 0.75 13.75ZM8.75 10.25C8.75 10.6478 8.59196 11.0294 8.31066 11.3107C8.02936 11.592 7.64782 11.75 7.25 11.75C6.85218 11.75 6.47064 11.592 6.18934 11.3107C5.90804 11.0294 5.75 10.6478 5.75 10.25C5.75 9.85218 5.90804 9.47064 6.18934 9.18934C6.47064 8.90804 6.85218 8.75 7.25 8.75C7.64782 8.75 8.02936 8.90804 8.31066 9.18934C8.59196 9.47064 8.75 9.85218 8.75 10.25Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                        <div class="paragraph-16r text-bkkNeutral-700">
+                                            {{ 'Rp ' . number_format($vacancy->salary, 0, ',', '.') . ' / bulan'}}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="paragraph-12s text-bkkYellow-800 bg-bkkYellow-600 my-4 lg:my-0 lg:mt-4 px-2 py-1 rounded-md">
-                                    Rekomendasi
+                                {{-- Divider --}}
+                                <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-5"></div>
+                                <div class="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-0 lg:items-center ">
+                                    <div class="paragraph-14r text-bkkNeutral-700">
+                                        Lamar sebelum {{ \Carbon\Carbon::parse( $vacancy->deadline )->translatedFormat('d F Y') }}
+                                    </div>
+                                    <a 
+                                        href="{{ route('lowongan-detail', ['id' => $vacancy->entryId]) }}" 
+                                        class="w-full lg:w-auto text-center lg:text-start paragraph-16s text-bkkNeutral-50 bg-bkkBlue-700 hover:bg-bkkBlue-800 py-3 px-4 rounded-[12px] transition duration-300">
+                                        Detail Lowongan
+                                    </a>
                                 </div>
                             </div>
-                            <div class="space-y-2">
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.75 7.67285C0.75 12.5247 4.99448 16.5369 6.87319 18.0752C7.14206 18.2954 7.27811 18.4068 7.47871 18.4632C7.63491 18.5072 7.8648 18.5072 8.021 18.4632C8.22197 18.4067 8.35707 18.2963 8.62695 18.0754C10.5057 16.5371 14.7499 12.5251 14.7499 7.6733C14.7499 5.83718 14.0125 4.07605 12.6997 2.77772C11.387 1.47939 9.6066 0.75 7.75008 0.75C5.89357 0.75 4.11301 1.4795 2.80025 2.77783C1.4875 4.07616 0.75 5.83674 0.75 7.67285Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M5.75 7.75C5.75 8.85457 6.64543 9.75 7.75 9.75C8.85457 9.75 9.75 8.85457 9.75 7.75C9.75 6.64543 8.85457 5.75 7.75 5.75C6.64543 5.75 5.75 6.64543 5.75 7.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Klojen, Malang
-                                    </div>
+                            @empty
+                                <div class="text-center w-full py-10">
+                                    <p class="paragraph-16r text-bkkNeutral-700">Tidak ada lowongan yang tersedia saat ini.</p>
                                 </div>
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Rekayasa Perangkat Lunak
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.75 4.75V9.75H14.75M9.75 18.75C4.77944 18.75 0.75 14.7206 0.75 9.75C0.75 4.77944 4.77944 0.75 9.75 0.75C14.7206 0.75 18.75 4.77944 18.75 9.75C18.75 14.7206 14.7206 18.75 9.75 18.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Penuh Waktu
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.75 2.75V1.75C5.75 1.48478 5.85536 1.23043 6.04289 1.04289C6.23043 0.855357 6.48478 0.75 6.75 0.75H17.75C18.0152 0.75 18.2696 0.855357 18.4571 1.04289C18.6446 1.23043 18.75 1.48478 18.75 1.75V8.75C18.75 9.01522 18.6446 9.26957 18.4571 9.45711C18.2696 9.64464 18.0152 9.75 17.75 9.75H16.75M0.75 13.75V6.75C0.75 6.48478 0.855357 6.23043 1.04289 6.04289C1.23043 5.85536 1.48478 5.75 1.75 5.75H12.75C13.0152 5.75 13.2696 5.85536 13.4571 6.04289C13.6446 6.23043 13.75 6.48478 13.75 6.75V13.75C13.75 14.0152 13.6446 14.2696 13.4571 14.4571C13.2696 14.6446 13.0152 14.75 12.75 14.75H1.75C1.48478 14.75 1.23043 14.6446 1.04289 14.4571C0.855357 14.2696 0.75 14.0152 0.75 13.75ZM8.75 10.25C8.75 10.6478 8.59196 11.0294 8.31066 11.3107C8.02936 11.592 7.64782 11.75 7.25 11.75C6.85218 11.75 6.47064 11.592 6.18934 11.3107C5.90804 11.0294 5.75 10.6478 5.75 10.25C5.75 9.85218 5.90804 9.47064 6.18934 9.18934C6.47064 8.90804 6.85218 8.75 7.25 8.75C7.64782 8.75 8.02936 8.90804 8.31066 9.18934C8.59196 9.47064 8.75 9.85218 8.75 10.25Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Rp 2.000.000 / bulan
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Divider --}}
-                            <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-5"></div>
-                            <div class="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-0 lg:items-center ">
-                                <div class="paragraph-14r text-bkkNeutral-700">
-                                    Lamar sebelum 28 Februari 2026
-                                </div>
-                                <a 
-                                    href="#" 
-                                    class="w-full lg:w-auto text-center lg:text-start paragraph-16s text-bkkNeutral-50 bg-bkkBlue-700 hover:bg-bkkBlue-800 py-3 px-4 rounded-[12px] transition duration-300">
-                                    Detail Lowongan
-                                </a>
-                            </div>
+                            @endforelse
+                        </div>  
+                        <div class="mt-16 flex justify-center w-full">
+                            {{ $vacancies->links(data: ['scrollTo' => '#lowongan']) }}
                         </div>
-                        <div class="w-full p-6 bg-white shadow-lg rounded-[20px] my-2">
-                            <div class="flex flex-col lg::flex-row gap-2 items-start">
-                                <div class="flex items-center gap-4 lg:mb-6">
-                                    <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg">
-                                        <img 
-                                            src="{{ asset('/assets/static/partial/logo-loker2.png') }}" 
-                                            class="w-full h-full object-cover object-center">
-                                    </div>
-                                    <div class="space-y-1">
-                                        <h3 class="heading-20s text-black line-clamp-1">
-                                            Junior Web Developer
-                                        </h3>
-                                        <div class="paragraph-14r text-bkkNeutral-700">
-                                            PT Nusantara Digital Solusi 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="paragraph-12s text-bkkYellow-800 bg-bkkYellow-600 my-4 lg:my-0 lg:mt-4 px-2 py-1 rounded-md">
-                                    Rekomendasi
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.75 7.67285C0.75 12.5247 4.99448 16.5369 6.87319 18.0752C7.14206 18.2954 7.27811 18.4068 7.47871 18.4632C7.63491 18.5072 7.8648 18.5072 8.021 18.4632C8.22197 18.4067 8.35707 18.2963 8.62695 18.0754C10.5057 16.5371 14.7499 12.5251 14.7499 7.6733C14.7499 5.83718 14.0125 4.07605 12.6997 2.77772C11.387 1.47939 9.6066 0.75 7.75008 0.75C5.89357 0.75 4.11301 1.4795 2.80025 2.77783C1.4875 4.07616 0.75 5.83674 0.75 7.67285Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M5.75 7.75C5.75 8.85457 6.64543 9.75 7.75 9.75C8.85457 9.75 9.75 8.85457 9.75 7.75C9.75 6.64543 8.85457 5.75 7.75 5.75C6.64543 5.75 5.75 6.64543 5.75 7.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Klojen, Malang
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Rekayasa Perangkat Lunak
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.75 4.75V9.75H14.75M9.75 18.75C4.77944 18.75 0.75 14.7206 0.75 9.75C0.75 4.77944 4.77944 0.75 9.75 0.75C14.7206 0.75 18.75 4.77944 18.75 9.75C18.75 14.7206 14.7206 18.75 9.75 18.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Penuh Waktu
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <svg class="shrink-0 w-5 h-5" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.75 2.75V1.75C5.75 1.48478 5.85536 1.23043 6.04289 1.04289C6.23043 0.855357 6.48478 0.75 6.75 0.75H17.75C18.0152 0.75 18.2696 0.855357 18.4571 1.04289C18.6446 1.23043 18.75 1.48478 18.75 1.75V8.75C18.75 9.01522 18.6446 9.26957 18.4571 9.45711C18.2696 9.64464 18.0152 9.75 17.75 9.75H16.75M0.75 13.75V6.75C0.75 6.48478 0.855357 6.23043 1.04289 6.04289C1.23043 5.85536 1.48478 5.75 1.75 5.75H12.75C13.0152 5.75 13.2696 5.85536 13.4571 6.04289C13.6446 6.23043 13.75 6.48478 13.75 6.75V13.75C13.75 14.0152 13.6446 14.2696 13.4571 14.4571C13.2696 14.6446 13.0152 14.75 12.75 14.75H1.75C1.48478 14.75 1.23043 14.6446 1.04289 14.4571C0.855357 14.2696 0.75 14.0152 0.75 13.75ZM8.75 10.25C8.75 10.6478 8.59196 11.0294 8.31066 11.3107C8.02936 11.592 7.64782 11.75 7.25 11.75C6.85218 11.75 6.47064 11.592 6.18934 11.3107C5.90804 11.0294 5.75 10.6478 5.75 10.25C5.75 9.85218 5.90804 9.47064 6.18934 9.18934C6.47064 8.90804 6.85218 8.75 7.25 8.75C7.64782 8.75 8.02936 8.90804 8.31066 9.18934C8.59196 9.47064 8.75 9.85218 8.75 10.25Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round"/>
-                                    </svg>
-                                    <div class="paragraph-16r text-bkkNeutral-700">
-                                        Rp 2.000.000 / bulan
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Divider --}}
-                            <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-5"></div>
-                            <div class="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-0 lg:items-center ">
-                                <div class="paragraph-14r text-bkkNeutral-700">
-                                    Lamar sebelum 28 Februari 2026
-                                </div>
-                                <a 
-                                    href="#" 
-                                    class="w-full lg:w-auto text-center lg:text-start paragraph-16s text-bkkNeutral-50 bg-bkkBlue-700 hover:bg-bkkBlue-800 py-3 px-4 rounded-[12px] transition duration-300">
-                                    Detail Lowongan
-                                </a>
-                            </div>
-                        </div>
-                    </div>                        
+                    </div>                      
                 </div>
             </div>
         </div>
     </section>
 </div>
+
