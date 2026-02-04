@@ -78,7 +78,7 @@ class ApplicationResource extends Resource
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->label('hapus pilihan'),
 
                     BulkAction::make('updateStatus')
                         ->label('Ubah Status')
@@ -118,7 +118,7 @@ class ApplicationResource extends Resource
                         ->modalHeading('Export Lamaran')
                         ->modalDescription('Download data kandidat terpilih beserta CV dan Sertifikat sebagai ZIP?')
                         ->deselectRecordsAfterCompletion(),
-                ]),
+                ])->label('Aksi'),
             ]);
     }
 
