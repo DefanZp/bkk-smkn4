@@ -16,8 +16,8 @@ use App\Models\UnemployedFill;
 #[Layout('layouts.app')]
 class FillTracerStudy extends Component
 {   
-
-    public $currentStop;
+    // Step tracker
+    public $currentStep = 1;
 
     //1. data diri
     public $full_name;
@@ -27,8 +27,7 @@ class FillTracerStudy extends Component
     public $address;
     public $no_hp;
     public $status;
-
-    public $currentStep = 2;
+    public $graduation_year;
 
     //2. bekerja
 
@@ -64,6 +63,24 @@ class FillTracerStudy extends Component
 
     /* ===================== */
 
+    /**
+     * Mount method - populate form with authenticated user data
+     */
+    public function mount()
+    {
+        $user = auth()->user();
+        
+        if ($user) {
+            $this->full_name = $user->full_name;
+            $this->nik = $user->nik;
+            $this->nisn = $user->nisn;
+            $this->major = $user->major;
+            $this->address = $user->address;
+            $this->no_hp = $user->no_hp;
+            $this->status = $user->status;
+            $this->graduation_year = $user->graduation_year;
+        }
+    }
     
     protected function rulesStep1()
     {
@@ -125,14 +142,14 @@ class FillTracerStudy extends Component
         ];
     }
 
-    public function nextstep()
+    public function nextStep()
     {
         $this->validate($this->rulesStep1());
 
         $this->currentStep = 2;
     }
     
-    public function previouStep()
+    public function previousStep()
     {
         $this->currentStep = 1;
     }

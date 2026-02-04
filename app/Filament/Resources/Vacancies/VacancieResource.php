@@ -24,6 +24,7 @@ use Illuminate\Validation\Rules\Numeric;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Components\RichEditor;
+use Illuminate\Database\Eloquent\Model;
 
 
 class VacancieResource extends Resource
@@ -139,4 +140,18 @@ class VacancieResource extends Resource
         ];
     }
     
+}
+
+class Post extends Model
+{
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'content' => 'array',
+        ];
+    }
+
 }
