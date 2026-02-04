@@ -23,6 +23,7 @@ use Filament\Forms\Components\Textarea;
 use Illuminate\Validation\Rules\Numeric;
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Forms\Components\RichEditor;
 
 
 class VacancieResource extends Resource
@@ -77,7 +78,8 @@ class VacancieResource extends Resource
             ->label('deskripsi pekerjaan')
             ->required(),
 
-            Textarea::make('requirements')
+            RichEditor::make('requirements')
+            ->json()
             ->label('persyaratan')
             ->required(),
 
