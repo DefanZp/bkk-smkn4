@@ -63,8 +63,8 @@
                             <h3 class="heading-20s text-black line-clamp-1 mb-4">
                                 {{$announcement->headline}}
                             </h3>
-                            <div class="paragraph-16r text-bkkNeutral-700 line-clamp-3">
-                                {{ $announcement->content }}
+                            <div class="dynamic-announce line-clamp-3">
+                                {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($announcement->content) }}
                             </div>
                             {{-- Divider --}}
                             <div class="h-[1px] w-full bg-bkkNeutral-200 my-8"></div>

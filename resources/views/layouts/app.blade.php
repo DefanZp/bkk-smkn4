@@ -180,6 +180,10 @@
                                         class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
                                         Profile
                                     </a>
+                                    <a href="{{ route('isi-tracer-study') }}"
+                                        class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300">
+                                        Isi Tracer Study
+                                    </a>
                                     <livewire:components.logout />
                                 </div>
                             </div>

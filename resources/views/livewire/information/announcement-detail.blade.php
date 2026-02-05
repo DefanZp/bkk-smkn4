@@ -24,53 +24,9 @@
             </div>
             {{-- divider --}}
             <div class="w-full h-[1.5px] bg-bkkNeutral-200 my-9"></div>
-            <div class="paragraph-16r text-bkkNeutral-700 mb-6">
-                BKK SMK Negeri 4 Malang membuka pendaftaran Tracer Study Alumni sebagai upaya untuk mengumpulkan data terkait kelanjutan karier, pendidikan, dan pengalaman alumni setelah lulus. Program ini bertujuan untuk membantu sekolah dalam mengevaluasi kualitas lulusan serta meningkatkan relevansi pembelajaran dengan kebutuhan dunia kerja dan industri. Partisipasi alumni sangat diharapkan karena data yang terkumpul akan digunakan sebagai bahan pengembangan program sekolah, peningkatan layanan karier, serta sebagai dasar dalam menjalin kerja sama dengan mitra industri. Tracer Study ini terbuka untuk seluruh alumni SMK Negeri 4 Malang dari berbagai angkatan. Proses pengisian dilakukan secara online melalui formulir resmi yang telah disediakan oleh BKK.
+            <div class="dynamic-announce mb-9">
+                    {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($announcement->content) }}
             </div>
-            <div class="heading-20s text-bkkNeutral-900 mb-2">
-                Tujuan Tracer Study
-            </div>
-            <ol class="paragraph-16r text-bkkNeutral-700 list-disc list-inside space-y-2 mb-6 pl-3">
-                <li>Mengumpulkan data lulusan terkait pekerjaan dan pendidikan lanjutan</li>
-                <li>Mengetahui kesesuaian kompetensi lulusan dengan dunia kerja</li>
-                <li>Meningkatkan kualitas pembelajaran dan layanan BKK</li>
-                <li>Mendukung pengembangan kerja sama dengan industri dan mitra kerja</li>
-            </ol>
-            <div class="heading-20s text-bkkNeutral-900 mb-2">
-                Sasaran Peserta
-            </div>
-            <div class="paragraph-16r text-bkkNeutral-700 mb-6">
-                Program ini ditujukan bagi alumni SMK Negeri 4 Malang dari seluruh jurusan dan angkatan, baik yang sudah bekerja, berwirausaha, melanjutkan pendidikan, maupun yang sedang mencari pekerjaan.
-            </div>
-            <div class="heading-20s text-bkkNeutral-900 mb-2">
-                Periode Pendaftaran
-            </div>
-            <div class="paragraph-16r text-bkkNeutral-700 mb-6">
-                Pendaftaran Tracer Study dibuka mulai 10 Januari 2026 hingga 28 Februari 2026. Alumni diharapkan mengisi formulir sebelum batas waktu yang telah ditentukan.
-            </div>
-            <div class="heading-20s text-bkkNeutral-900 mb-2">
-                Cara Mengikuti:
-            </div>
-            <ol class="paragraph-16r text-bkkNeutral-700 list-decimal list-inside space-y-2 mb-6 pl-3">
-                <li>Kunjungi halaman Tracer Study melalui website resmi BKK</li>
-                <li>Login menggunakan akun alumni atau data pribadi</li>
-                <li>Isi formulir Tracer Study dengan lengkap dan jujur</li>
-                <li>Kirim formulir dan tunggu konfirmasi dari pihak BKK</li>
-            </ol>
-            <div class="heading-20s text-bkkNeutral-900 mb-2">
-                Catatan Penting
-            </div>
-            <ol class="paragraph-16r text-bkkNeutral-700 list-disc list-inside space-y-2 mb-6 pl-3">
-                <li>Data yang dikirim akan dijaga kerahasiaannya</li>
-                <li>Informasi yang akurat sangat membantu evaluasi sekolah</li>
-                <li>Alumni diimbau mengisi formulir dengan sebenar-benarnya</li>
-            </ol>
-            <div class="heading-20s text-bkkNeutral-900">
-                Link Pendaftaran
-            </div>
-            <a href="https://bkksmkn4malang.sch.id/tracer-study" class="paragraph-16r text-bkkBlue-700 underline">
-                https://bkksmkn4malang.sch.id/tracer-study
-            </a>
         </div>
     </section>
 </div>
