@@ -43,15 +43,12 @@ class UserResource extends Resource
 
             TextInput::make('nisn')->required()->unique(ignoreRecord: true)->label('NISN'),
             TextInput::make('full_name')->required()->label('nama lengkap'),
+            FileUpload::make('photo')->label('Foto Profil')->disk('public')->directory('user-photos'),
             TextInput::make('email')->email()->unique(ignoreRecord: true)->label('Email'),
             Select::make('major')->options(User::MAJORS)->required()->label('Jurusan'),
             Select::make('role')->options(User::ROLES)->label('role'),
-            DatePicker::make('birth_date')->label('tanggal lahir'),
-            TextInput::make('birth_place')->label('tempat lahir'),
             TextArea::make('address')->label('alamat'),    
             TextInput::make('no_hp')->tel()->label('nomor hp'),
-            Select::make('religion')->options(User::RELIGIONS)->label('agama'),
-            Select::make('gender')->options(User::GENDERS)->label('jenis kelamin'),
             FileUpload::make('CVuser')->label('CV')->disk('public')->directory('cv-users'),
             FileUpload::make('certificate')->label('sertifikat')->disk('public')->directory('certificates'),
             Select::make('status')->options(User::STATUSES)->label('status'),
@@ -64,7 +61,7 @@ class UserResource extends Resource
         return $table->columns([
             Tables\Columns\TextColumn::make('nisn')->label('NISN')->searchable(),
             Tables\Columns\TextColumn::make('full_name')->label('Nama Lengkap')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('email')->label('Email'),
+            Tables\Columns\ImageColumn::make('photo')->label('Foto Profil')->disk('public')->directory('user-photos')->rounded(),
             Tables\Columns\TextColumn::make('major')->label('Jurusan')->searchable()->sortable(),
             Tables\Columns\TextColumn::make('status')->label('Status')->sortable(),
             Tables\Columns\TextColumn::make('no_hp')->label('Nomor HP')->searchable(),]);

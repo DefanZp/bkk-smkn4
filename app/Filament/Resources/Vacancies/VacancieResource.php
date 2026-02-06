@@ -93,8 +93,12 @@ class VacancieResource extends Resource
             ->options(vacancie::LOKER_TYPES)
             ->required(),
 
-            TextInput::make('contact_person')
-            ->label('kontak person')
+            TextInput::make('email_company')
+            ->label('email perusahaan')
+            ->required(),
+
+            TextInput::make('phone_company')
+            ->label('nomor telepon perusahaan')
             ->required(),
 
             TextInput::make('vacancy_number')
