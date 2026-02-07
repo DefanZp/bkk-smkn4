@@ -50,29 +50,3 @@
     --color-bkkNeutral-50: #FBFCFD;
 }
 
-
-
-.fi-sidebar {
-    background-color: white;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-}
-
-.fi-sidebar-header {
-    background-color: white;
-}
-
-.fi-sidebar-item-btn {
-    color: var(--color-bkkNeutral-700);
-    &:hover {
-        background-color: var(--color-bkkNeutral-100);
-    }
-}
-
-.fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-    background-color: var(--color-bkkBlue-700);
-    color: white;
-}
-
-.fi-sidebar-item.fi-active .fi-sidebar-item-icon {
-    color: white;
-}
