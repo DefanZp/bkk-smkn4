@@ -20,6 +20,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 
 use function Laravel\Prompts\select;
 
@@ -59,6 +60,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
+            Tables\Columns\ImageColumn::make('photo')->label('Foto Profil')->disk('public')->rounded(),
             Tables\Columns\TextColumn::make('nisn')->label('NISN')->searchable(),
             Tables\Columns\TextColumn::make('full_name')->label('Nama Lengkap')->searchable()->sortable(),
             Tables\Columns\TextColumn::make('major')->label('Jurusan')->searchable()->sortable(),
