@@ -23,7 +23,8 @@ class vacancie extends Model
         'requirements',
         'deadline',
         'loker_tipe',
-        'contact_person',
+        'email_company',
+        'phone_company',
         'entryId',
         'vacancy_number',
     ];

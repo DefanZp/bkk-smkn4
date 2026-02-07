@@ -26,14 +26,11 @@ class User extends Authenticatable implements FilamentUser, HasName
     protected $fillable = [
         'full_name',
         'email',
+        'photo',
         'password',
         'nisn', 
-        'birth_date',
-        'birth_place',
         'address',
         'no_hp',
-        'religion',
-        'gender',
         'major',
         'CVuser',
         'certificate',
@@ -90,23 +87,9 @@ class User extends Authenticatable implements FilamentUser, HasName
         'Rekayasa Perangkat Lunak' => 'Rekayasa Perangkat Lunak',
     ];
 
-    public const GENDERS = [
-        'laki-laki' => 'Laki-laki',
-        'perempuan' => 'Perempuan',
-    ];
-
     public const ROLES = [
         'admin' => 'Admin',
         'user' => 'User',
-    ];
-
-    public const RELIGIONS = [
-        'islam' => 'Islam',
-        'protestan' => 'Protestan',
-        'kristen' => 'Kristen',
-        'buddha' => 'Buddha',
-        'hindu' => 'Hindu',
-        'konghucu' => 'Konghucu',
     ];
 
     public const STATUSES = [
