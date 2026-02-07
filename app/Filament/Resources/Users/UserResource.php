@@ -20,6 +20,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 
 use function Laravel\Prompts\select;
 
@@ -48,6 +49,7 @@ class UserResource extends Resource
             Select::make('major')->options(User::MAJORS)->required()->label('Jurusan'),
             Select::make('role')->options(User::ROLES)->label('role'),
             TextArea::make('address')->label('alamat'),    
+            TextInput::make('birth_place')->label('tempat lahir'),
             TextInput::make('no_hp')->tel()->label('nomor hp'),
             FileUpload::make('CVuser')->label('CV')->disk('public')->directory('cv-users'),
             FileUpload::make('certificate')->label('sertifikat')->disk('public')->directory('certificates'),
@@ -59,11 +61,13 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
+            Tables\Columns\ImageColumn::make('photo')->label('Foto Profil')->disk('public')->rounded(),
             Tables\Columns\TextColumn::make('nisn')->label('NISN')->searchable(),
             Tables\Columns\TextColumn::make('full_name')->label('Nama Lengkap')->searchable()->sortable(),
             Tables\Columns\TextColumn::make('major')->label('Jurusan')->searchable()->sortable(),
             Tables\Columns\TextColumn::make('status')->label('Status')->sortable(),
-            Tables\Columns\TextColumn::make('no_hp')->label('Nomor HP')->searchable(),]);
+            Tables\Columns\TextColumn::make('no_hp')->label('Nomor HP')->searchable(),
+            ]);
     }
 
     public static function getRelations(): array
