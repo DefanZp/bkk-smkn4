@@ -72,8 +72,22 @@
                         <div>{{ $vacancy->vacancy_number }} orang</div>
                     </div>
                 </div>
-                <div class="py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-bkkNeutral-50 rounded-lg w-max paragraph-16s cursor-pointer transition duration-300">
-                    Lamar Sekarang
+                <div 
+                    wire:click="applyNow"
+                    wire:loading.attr="disabled"
+                    class="py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-bkkNeutral-50 rounded-lg w-max paragraph-16s cursor-pointer transition duration-300 
+                    @if ($alredyApplied) pointer-events-none @endif">
+                    <span wire:loading.remove wire:target="applyNow">
+                        @if ($alredyApplied)
+                            Sudah dilamar
+                        @else
+                            Lamar sekarang
+                        @endif
+                    </span>
+
+                    <span wire:loading wire:target="applyNow">
+                        Mengirim..
+                    </span>
                 </div>
                 {{-- Divider --}}
                 <div class="w-full h-px bg-bkkNeutral-200 my-12"></div>
@@ -128,7 +142,7 @@
                 Lowongan Lainnya Untukmu
             </div>
             <div class="flex flex-col gap-6">
-                @foreach ($otherVacancies as $otherVacancy)
+                @forelse ($otherVacancies as $otherVacancy)
                     <div class="w-full p-6 bg-white shadow-lg rounded-[20px] my-2">
                         <div class="flex gap-4 items-start mb-4">
                             <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg">
@@ -196,7 +210,22 @@
                             </a>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="w-full flex flex-col items-center justify-center py-20 px-6 bg-white rounded-[32px] border border-bkkNeutral-100 shadow-sm">
+                            <div class="w-24 h-24 bg-bkkBlue-50 rounded-full flex items-center justify-center mb-6">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 15.5L19 19" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V9C3 7.89543 3.89543 7 5 7Z" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 7V5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+
+                            <h2 class="heading-32s text-bkkNeutral-900 mb-2 text-center">Lowongan Belum Tersedia</h2>
+                            <p class="paragraph-16r text-bkkNeutral-600 text-center max-w-sm">
+                                Saat ini belum ada lowongan yang sesuai. Silakan cek kembali nanti atau coba kata kunci lain.
+                            </p>
+                        </div>
+                @endforelse
             </div>
         </div>
         </div>

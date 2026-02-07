@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Profil\SupportingDocuments;
 use App\Livewire\Profil\OrganizationStructure;
 use App\Livewire\Information\AnnouncementDetail;
+use App\Livewire\User\Profile\PersonalData;
 
 Route::get('/', Homepage::class)->name('beranda');
 Route::get('/faq', Faq::class)->name('faq');
@@ -39,16 +40,8 @@ Route::get('/lowongan', Vacancy::class)->name('lowongan');
 Route::get('/lowongan/detail/{id}', VacancyDetail::class)->name('lowongan-detail');
 
 // Route User Login
-Route::get('/user/isi-tracer-study', FillTracerStudy::class)->middleware('auth')->name('isi-tracer-study');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
+Route::middleware('auth.modal')->group(function () {
+    Route::get('/isi-tracer-study', FillTracerStudy::class)->middleware('auth.modal')->name('isi-tracer-study')->prefix('user');
+    Route::get('/data-pribadi', PersonalData::class)->middleware('auth.modal')->name('data-pribadi')->prefix('user');
+}); 

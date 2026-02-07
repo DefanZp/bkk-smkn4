@@ -21,6 +21,15 @@ class Contact extends Component
             'contact.lastName' => 'required|max:255',
             'contact.email' => 'required|email|max:255',
             'contact.message' => 'required|max:255'
+        ], [
+            'contact.firstName.required' => 'Nama depan harus diisi.',
+            'contact.firstName.max' => 'Nama depan harus kurang dari 255 karakter.',
+            'contact.lastName.required' => 'Nama belakang harus diisi.',
+            'contact.lastName.max' => 'Nama belakang harus kurang dari 255 karakter.',
+            'contact.email.required' => 'Email harus diisi.',
+            'contact.email.max' => 'Email harus kurang dari 255 karakter.',
+            'contact.message.required' => 'Pesan harus diisi.',
+            'contact.message.max' => 'Pesan harus kurang dari 255 karakter.',
         ]);
 
         DB::table('contacts')->insert([

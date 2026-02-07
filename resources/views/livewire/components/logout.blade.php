@@ -1,6 +1,16 @@
 <div>
-    <button wire:click="logout"
-        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300 cursor-pointer">
-        Logout
-    </button>
+    <div 
+        wire:click="logout"
+        class="paragraph-16r text-[#C70035] transition duration-300 flex items-center gap-3 cursor-pointer">
+
+        <svg 
+            class="w-4 h-4 shrink-0"
+            width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.08333 8.08333L8.08333 6.08333M8.08333 6.08333L6.08333 4.08333M8.08333 6.08333H0.75M4.08333 2.91573V2.88346C4.08333 2.13673 4.08333 1.76308 4.22866 1.47786C4.35649 1.22698 4.56032 1.02316 4.8112 0.895325C5.09641 0.75 5.47006 0.75 6.2168 0.75H9.28346C10.0302 0.75 10.403 0.75 10.6883 0.895325C10.9391 1.02316 11.1437 1.22698 11.2715 1.47786C11.4167 1.7628 11.4167 2.136 11.4167 2.88127V9.28572C11.4167 10.031 11.4167 10.4037 11.2715 10.6886C11.1437 10.9395 10.9391 11.1437 10.6883 11.2715C10.4033 11.4167 10.0307 11.4167 9.28539 11.4167H6.21461C5.46933 11.4167 5.09613 11.4167 4.8112 11.2715C4.56032 11.1437 4.35649 10.9393 4.22866 10.6884C4.08333 10.4032 4.08333 10.0301 4.08333 9.28333V9.25" stroke="#C70035" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <span>
+            Keluar
+        </span>
+    </div>
 </div>

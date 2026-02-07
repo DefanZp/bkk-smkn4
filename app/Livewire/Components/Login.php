@@ -24,7 +24,7 @@ class Login extends Component
             return redirect()->intended(route('beranda'));
         }
 
-        $this->addError('nisn', 'NISN atau Password Salah');
+        $this->addError('error', 'NISN atau Password Salah');
 
 
     }

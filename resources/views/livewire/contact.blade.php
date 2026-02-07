@@ -64,7 +64,7 @@
                         class="space-y-9"
                         wire:submit.prevent="submitContact">
                         <div class="flex flex-col md:flex-row gap-4">
-                            <div class="w-full md:w-[50%] flex flex-col gap-3">
+                            <div class="w-full md:w-[50%] flex flex-col gap-3 relative">
                                 <label for="firstName" class="heading-16 text-bkkNeutral-900">Nama Depan</label>
                                 <input 
                                     id="firstName"
@@ -73,8 +73,13 @@
                                     placeholder="Masukkan nama depan"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
+                                <div class="absolute -bottom-6">
+                                    @error('contact.firstName')
+                                        <span class="text-red-500 text-xs ">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="w-full md:w-[50%] flex flex-col gap-3">
+                            <div class="w-full md:w-[50%] flex flex-col gap-3 relative">
                                 <label for="lastName" class="heading-16 text-bkkNeutral-900">Nama Depan</label>
                                 <input 
                                     id="lastName"
@@ -83,9 +88,14 @@
                                     placeholder="Masukkan nama belakang"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
+                                <div class="absolute -bottom-6">
+                                    @error('contact.lastName')
+                                        <span class="text-red-500 text-xs ">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                        <div class="w-full flex flex-col gap-3">
+                        <div class="w-full flex flex-col gap-3 relative">
                             <label for="email" class="heading-16 text-bkkNeutral-900">Email</label>
                             <input 
                                     id="email"
@@ -94,8 +104,13 @@
                                     placeholder="Masukkan email"
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6"/>
+                            <div class="absolute -bottom-6">
+                                @error('contact.email')
+                                    <span class="text-red-500 text-xs ">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="w-full flex flex-col gap-3">
+                        <div class="w-full flex flex-col gap-3 relative">
                             <label for="message" class="heading-16 text-bkkNeutral-900">
                                 Apa yang bisa kami bantu?
                             </label>
@@ -107,6 +122,11 @@
                                     class="paragraph-14r text-bkkNeutral-900 outline-none 
                                     border border-bkkNeutral-200 rounded-2xl focus:border-bkkBlue-700 py-3.5 px-6">
                             </textarea>
+                            <div class="absolute -bottom-6">
+                                @error('contact.message')
+                                    <span class="text-red-500 text-xs ">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="flex justify-end">
                             <button 

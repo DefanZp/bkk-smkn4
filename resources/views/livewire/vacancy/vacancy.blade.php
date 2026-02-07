@@ -24,28 +24,7 @@
     <section class="py-15 lg:py-20">
         <div class="container mx-auto px-5 lg:px-0">
             <div class="flex flex-col md:flex-row items-start md:items-end gap-3 mb-10">
-                <div class="w-full md:w-[45%]">
-                    <div class="heading-16 mb-3">Kompetensi Keahlian</div>
-                    <div class="relative">
-                        <select 
-                            wire:model.live="filterKompetensi2"
-                            class="py-3 px-6 border border-bkkNeutral-200 rounded-xl w-full outline-none focus:border-bkkBlue-700 paragraph-14r"
-                        >
-                            <option 
-                                class="paragraph-14r text-bkkNeutral-500"
-                                selected hidden>
-                                Pilih kompetensi keahlian
-                            </option>
-                            @foreach ($kompetensiKeahlians as $kompetensi)
-                                <option 
-                                    value="{{ $kompetensi }}">
-                                    {{ $kompetensi }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="w-full md:w-[45%]">
+                <div class="w-full md:w-[90%]">
                     <div class="heading-16 mb-3">Kata Kunci Pekerjaan</div>
                     <div class="relative">
                         <input 
@@ -250,8 +229,19 @@
                                 </div>
                             </div>
                             @empty
-                                <div class="text-center w-full py-10">
-                                    <p class="paragraph-16r text-bkkNeutral-700">Tidak ada lowongan yang tersedia saat ini.</p>
+                                <div class="col-span-2 flex flex-col items-center justify-center py-20 px-6 bg-white rounded-[32px] border border-bkkNeutral-100 shadow-sm">
+                                    <div class="w-24 h-24 bg-bkkBlue-50 rounded-full flex items-center justify-center mb-6">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.5 15.5L19 19" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M5 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V9C3 7.89543 3.89543 7 5 7Z" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M9 7V5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+
+                                    <h2 class="heading-32s text-bkkNeutral-900 mb-2">Lowongan Belum Tersedia</h2>
+                                    <p class="paragraph-16r text-bkkNeutral-600 text-center max-w-sm">
+                                        Saat ini belum ada lowongan yang sesuai. Silakan cek kembali nanti atau coba kata kunci lain.
+                                    </p>
                                 </div>
                             @endforelse
                         </div>  

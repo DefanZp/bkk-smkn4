@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Vacancy;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Models\vacancie;
+use App\Models\Application;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Auth;
 
 #[Title('Detail Lowongan - BKK SMKN 4 MALANG')]
 #[Layout('layouts.app')]
@@ -14,6 +17,7 @@ class VacancyDetail extends Component
     public $vacancyId;
     public $vacancy;
     public $otherVacancies;
+    public $alredyApplied = false;
 
     public function mount($id)
     {
@@ -32,6 +36,38 @@ class VacancyDetail extends Component
         ->inRandomOrder()
         ->take(2)
         ->get();
+
+        if (auth()->check()) {
+            $this->checkApplication();
+        }
+    }
+
+    public function checkApplication() {
+        $this->alredyApplied = Application::where('id_user', Auth::id())
+        ->where('id_vacancy', $this->vacancy->id)
+        ->exists();
+    }
+
+    public function applyNow() {
+
+        if (!auth()->check()) {
+            $this->dispatch('open-login-modal');
+            return;
+        }
+
+        if (!$this->alredyApplied) {
+            Application::create([
+                'id_vacancy' => $this->vacancy->id,
+                'id_user' => Auth::id(),
+                'status' => 'dikirim',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            $this->alredyApplied = true;
+
+            session()->flash('success', 'Lamaran berhasil dikirim!');
+        } 
     }
 
     public function render()

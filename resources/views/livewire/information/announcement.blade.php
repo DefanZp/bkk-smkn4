@@ -83,14 +83,19 @@
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-full text-center py-16">
-                        <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-bkkNeutral-100 flex items-center justify-center">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-bkkNeutral-400" stroke-width="1.5">
-                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    <div class="col-span-2 flex flex-col items-center justify-center py-20 px-6 bg-white rounded-[32px] border border-bkkNeutral-100 shadow-sm">
+                        <div class="w-24 h-24 bg-bkkBlue-50 rounded-full flex items-center justify-center mb-6">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 6H6C4.89543 6 4 6.89543 4 8V16C4 17.1046 4.89543 18 6 18H11L15 21V3L11 6Z" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19 8C20.1046 8 21 8.89543 21 10V14C21 15.1046 20.1046 16 19 16" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 12H17" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <p class="heading-20s text-bkkNeutral-700 mb-2">Belum ada pengumuman</p>
-                        <p class="paragraph-16r text-bkkNeutral-500">Pengumuman terbaru akan muncul di sini</p>
+
+                        <h2 class="heading-32s text-bkkNeutral-900 mb-2">Belum Ada Pengumuman</h2>
+                        <p class="paragraph-16r text-bkkNeutral-600 text-center max-w-sm">
+                            Saat ini tidak ada pengumuman resmi yang aktif. Pantau terus halaman ini untuk mendapatkan informasi terbaru dari BKK.
+                        </p>
                     </div>
                 @endforelse
             </div>

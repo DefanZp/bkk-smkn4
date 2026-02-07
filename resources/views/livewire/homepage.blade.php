@@ -52,10 +52,29 @@
 
 <section class="py-15 md:py-20">
     <div class="container mx-auto px-5 lg:px-0 grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-0 w-[90%]">
-        @foreach ($statisticContent as $statistic)
-            <div class="flex flex-col items-center">
+         @foreach ($statisticContent as $statistic)
+            <div class="flex flex-col items-center" 
+                 x-data="{ 
+                    current: 0, 
+                    target: {{ $statistic['amount'] }}, 
+                    time: 1500,
+                    startCounter() {
+                        let start = null;
+                        const step = (timestamp) => {
+                            if (!start) start = timestamp;
+                            const progress = Math.min((timestamp - start) / this.time, 1);
+                            this.current = Math.floor(progress * this.target);
+                            if (progress < 1) {
+                                window.requestAnimationFrame(step);
+                            }
+                        };
+                        window.requestAnimationFrame(step);
+                    }
+                 }" 
+                 x-intersect.once="startCounter()">
+                
                 <h2 class="heading-56s text-bkkNeutral-900 mb-2">
-                    {{ $statistic['amount'] }}
+                    <span x-text="current.toLocaleString('id-ID')">0</span>{{ $statistic['suffix'] }}
                 </h2>
                 <div class="paragraph-16r text-center text-bkkNeutral-600">
                     {{ $statistic['title'] }}
@@ -119,20 +138,20 @@
         </div>
         <div class="swiper loker-swiper w-full overflow-hidden rounded-[24px] mb-8">
             <div class="swiper-wrapper">
-                @foreach ($lokerSwiperContent as $loker)
+                @forelse ($vacancies as $vacancy)
                     <div class="swiper-slide p-6 bg-white shadow-lg rounded-[20px] my-2">
                         <div class="flex items-center gap-4 mb-6">
                             <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg">
                                 <img 
-                                    src="{{ asset($loker['company_image']) }}" 
+                                    src="{{ asset('storage/' . $vacancy->company->companies_logo) }}" 
                                     class="w-full h-full object-cover object-center">
                             </div>
                             <div class="space-y-1">
                                 <h3 class="heading-20s text-black">
-                                    {{ $loker['title'] }}
+                                    {{ $vacancy->vacancy_name }}
                                 </h3>
                                 <div class="paragraph-14r text-bkkNeutral-700">
-                                    {{ $loker['company_name'] }}
+                                    {{ $vacancy->company->companies_name }}
                                 </div>
                             </div>
                         </div>
@@ -143,7 +162,7 @@
                                 <path d="M5.75 7.75C5.75 8.85457 6.64543 9.75 7.75 9.75C8.85457 9.75 9.75 8.85457 9.75 7.75C9.75 6.64543 8.85457 5.75 7.75 5.75C6.64543 5.75 5.75 6.64543 5.75 7.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 <div class="paragraph-16r text-bkkNeutral-700">
-                                    {{ $loker['location'] }}
+                                    {{ $vacancy->location }}
                                 </div>
                             </div>
                             <div class="flex items-center gap-4">
@@ -151,7 +170,9 @@
                                 <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 <div class="paragraph-16r text-bkkNeutral-700">
-                                    {{ $loker['major'] }}
+                                    @foreach ($vacancy->major as $major)
+                                        {{ $major }}{{ !$loop->last ? ', ' : '' }}
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="flex items-center gap-4">
@@ -159,7 +180,7 @@
                                 <path d="M9.75 4.75V9.75H14.75M9.75 18.75C4.77944 18.75 0.75 14.7206 0.75 9.75C0.75 4.77944 4.77944 0.75 9.75 0.75C14.7206 0.75 18.75 4.77944 18.75 9.75C18.75 14.7206 14.7206 18.75 9.75 18.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 <div class="paragraph-16r text-bkkNeutral-700">
-                                    {{ $loker['type_job'] }}
+                                    {{ $vacancy->employment_classification }}
                                 </div>
                             </div>
                             <div class="flex items-center gap-4">
@@ -167,7 +188,7 @@
                                 <path d="M5.75 2.75V1.75C5.75 1.48478 5.85536 1.23043 6.04289 1.04289C6.23043 0.855357 6.48478 0.75 6.75 0.75H17.75C18.0152 0.75 18.2696 0.855357 18.4571 1.04289C18.6446 1.23043 18.75 1.48478 18.75 1.75V8.75C18.75 9.01522 18.6446 9.26957 18.4571 9.45711C18.2696 9.64464 18.0152 9.75 17.75 9.75H16.75M0.75 13.75V6.75C0.75 6.48478 0.855357 6.23043 1.04289 6.04289C1.23043 5.85536 1.48478 5.75 1.75 5.75H12.75C13.0152 5.75 13.2696 5.85536 13.4571 6.04289C13.6446 6.23043 13.75 6.48478 13.75 6.75V13.75C13.75 14.0152 13.6446 14.2696 13.4571 14.4571C13.2696 14.6446 13.0152 14.75 12.75 14.75H1.75C1.48478 14.75 1.23043 14.6446 1.04289 14.4571C0.855357 14.2696 0.75 14.0152 0.75 13.75ZM8.75 10.25C8.75 10.6478 8.59196 11.0294 8.31066 11.3107C8.02936 11.592 7.64782 11.75 7.25 11.75C6.85218 11.75 6.47064 11.592 6.18934 11.3107C5.90804 11.0294 5.75 10.6478 5.75 10.25C5.75 9.85218 5.90804 9.47064 6.18934 9.18934C6.47064 8.90804 6.85218 8.75 7.25 8.75C7.64782 8.75 8.02936 8.90804 8.31066 9.18934C8.59196 9.47064 8.75 9.85218 8.75 10.25Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round"/>
                                 </svg>
                                 <div class="paragraph-16r text-bkkNeutral-700">
-                                    {{ $loker['salary'] }}
+                                    {{ 'Rp ' . number_format($vacancy->salary, 0, ',', '.') . ' / bulan'}}
                                 </div>
                             </div>
                         </div>
@@ -175,16 +196,31 @@
                         <div class="h-[1.5px] w-full bg-bkkNeutral-200 my-5"></div>
                         <div class="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-0 lg:items-center ">
                             <div class="paragraph-14r text-bkkNeutral-700">
-                                Terakhir di perbarui {{ $loker['last_modified'] }} 
+                                Terakhir di perbarui {{ \Carbon\Carbon::parse( $vacancy->updated_at )->translatedFormat('d F Y') }} 
                             </div>
                             <a 
-                                href="{{ $loker['detail_link'] }}" 
+                                href="{{ route('lowongan-detail', $vacancy->entryId) }}" 
                                 class="w-full lg:w-auto text-center lg:text-start paragraph-16s text-bkkNeutral-50 bg-bkkBlue-700 hover:bg-bkkBlue-800 py-3 px-4 rounded-[12px] transition duration-300">
                                 Detail Lowongan
                             </a>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                     <div class="w-full flex flex-col items-center justify-center py-20 px-6 bg-white rounded-[32px] border border-bkkNeutral-100 shadow-sm">
+                        <div class="w-24 h-24 bg-bkkBlue-50 rounded-full flex items-center justify-center mb-6">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.5 15.5L19 19" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V9C3 7.89543 3.89543 7 5 7Z" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 7V5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <h2 class="heading-32s text-bkkNeutral-900 mb-2">Lowongan Belum Tersedia</h2>
+                        <p class="paragraph-16r text-bkkNeutral-600 text-center max-w-sm">
+                            Saat ini belum ada lowongan yang sesuai. Silakan cek kembali nanti atau coba kata kunci lain.
+                        </p>
+                    </div>
+                @endforelse
             </div>
         </div>
         {{-- Pagination --}}
@@ -272,27 +308,27 @@
         </div>
         <div class="swiper berita-swiper w-full overflow-hidden mb-8">
             <div class="swiper-wrapper">
-                @foreach ($beritaSwiperContent as $berita)
+                @forelse ($announcements as $announcement)
                     <div class="swiper-slide bg-white shadow-lg overflow-hidden rounded-[20px] my-2">
                         <div class="w-full h-[256px]">
                             <img 
                                 class="w-full h-full object-cover object-center"
-                                src="{{ asset($berita['berita_image']) }}" />
+                                src="{{ asset('storage/' . $announcement->image) }}" />
                         </div>
                         <div class="p-5 lg:p-6">
                             <h3 class="heading-20s text-black line-clamp-1 mb-4">
-                                {{$berita['title']}}
+                                {{$announcement->headline}}
                             </h3>
-                            <div class="paragraph-16r text-bkkNeutral-700 line-clamp-3">
-                                {{ $berita['description'] }}
+                            <div class="dynamic-announce line-clamp-3">
+                                {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($announcement->content) }}
                             </div>
                             {{-- Divider --}}
                             <div class="h-[1px] w-full bg-bkkNeutral-200 my-8"></div>
                             <div class="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 lg:items-center ">
                                 <div class="paragraph-14r text-bkkNeutral-700">
-                                    Diunggah pada {{ $berita['upload_date'] }}
+                                    Diunggah pada {{ $announcement->created_at->translatedFormat('d F Y') }}
                                 </div>
-                                <a  href="{{ $berita['detail_link'] }}"
+                                <a  href="{{ route('pengumuman-detail', $announcement->id) }}"
                                     class="w-full lg:w-auto justify-self-center flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
                                     <span class="paragraph-16s text-bkkNeutral-50">Baca Selengkapnya</span>
                                     <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -302,7 +338,22 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                <div class="w-full flex flex-col items-center justify-center py-20 px-6 bg-white rounded-[32px] border border-bkkNeutral-100 shadow-sm">
+                    <div class="w-24 h-24 bg-bkkBlue-50 rounded-full flex items-center justify-center mb-6">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 6H6C4.89543 6 4 6.89543 4 8V16C4 17.1046 4.89543 18 6 18H11L15 21V3L11 6Z" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19 8C20.1046 8 21 8.89543 21 10V14C21 15.1046 20.1046 16 19 16" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 12H17" stroke="#073AE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <h2 class="heading-32s text-bkkNeutral-900 mb-2">Belum Ada Pengumuman</h2>
+                    <p class="paragraph-16r text-bkkNeutral-600 text-center max-w-sm">
+                        Saat ini tidak ada pengumuman resmi yang aktif. Pantau terus halaman ini untuk mendapatkan informasi terbaru dari BKK.
+                    </p>
+                </div>
+                @endforelse
             </div>
         </div>
         {{-- Pagination --}}
@@ -317,7 +368,7 @@
             <div class="w-full lg:w-[50%]">
                 <h2 class="heading-42s text-bkkNeutral-900 mb-4">Survei Kepuasan</h2>
                 <div class="paragraph-16r text-bkkNeutral-700 mb-12">Bantu kami meningkatkan layanan BKK dengan mengisi survei kepuasan. Partisipasi anda sangat berarti untuk kemajuan sekolah kami.</div>
-                <a  href="{{ $berita['detail_link'] }}"
+                <a  href="#"
                     class="w-full lg:w-auto justify-self-start flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
                     <span class="paragraph-16s text-bkkNeutral-50">Isi Survei Kepuasan</span>
                     <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -461,6 +512,11 @@
     }
 </style>
 </div>
+
+{{-- Script for intersect --}}
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+ 
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <script>
     // Hero slider
