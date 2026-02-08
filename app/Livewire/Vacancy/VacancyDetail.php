@@ -59,6 +59,7 @@ class VacancyDetail extends Component
             Application::create([
                 'id_vacancy' => $this->vacancy->id,
                 'id_user' => Auth::id(),
+                'id_company' => $this->vacancy->company->id,
                 'status' => 'dikirim',
                 'created_at' => now(),
                 'updated_at' => now(),

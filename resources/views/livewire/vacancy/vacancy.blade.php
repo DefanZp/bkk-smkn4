@@ -162,7 +162,9 @@
                                     <div class="flex items-center gap-4 lg:mb-6">
                                         <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg flex-shrink-0">
                                             <img 
-                                                src="{{ asset('storage/' . $vacancy->company->companies_logo ) }}" 
+                                                src="{{ $vacancy->company->companies_logo 
+                                                ? \Illuminate\Support\Facades\Storage::url($vacancy->company->companies_logo) 
+                                                : asset('assets/static/partial/fallbackUser.webp') }}" 
                                                 class="w-full h-full object-cover object-center">
                                         </div>
                                         <div class="space-y-1">

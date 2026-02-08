@@ -30,8 +30,8 @@
                         Profil Saya
                     </span>
                 </a>
-                <a href="#"
-                    class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 flex items-center gap-3">
+                <a href="{{ route('riwayat-lamaran') }}"
+                    class="paragraph-16r {{ request()->routeIs('riwayat-lamaran') ? 'text-bkkBlue-700' : 'text-bkkNeutral-900 hover:text-bkkBlue-700' }} transition duration-300 flex items-center gap-3">
                     <svg 
                         class="w-4 h-4 shrink-0"
                         width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">

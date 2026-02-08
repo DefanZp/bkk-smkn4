@@ -12,7 +12,9 @@
             <div class="w-full lg:w-[60%]">
                 <div class="w-20 h-20 rounded-full overflow-hidden shadow-lg mb-6">
                     <img 
-                        src="{{ asset('storage/' . $vacancy->company->companies_logo) }}" 
+                        src="{{ $vacancy->company->companies_logo 
+                            ? \Illuminate\Support\Facades\Storage::url($vacancy->company->companies_logo) 
+                            : asset('assets/static/partial/fallbackUser.webp') }}" 
                         class="w-full h-full object-cover object-center">
                 </div>
                 <h1 class="heading-42s text-bkkNeutral-900 mb-1 capitalize">
@@ -72,34 +74,63 @@
                         <div>{{ $vacancy->vacancy_number }} orang</div>
                     </div>
                 </div>
-                <div 
-                    wire:click="applyNow"
-                    wire:loading.attr="disabled"
-                    class="py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 text-bkkNeutral-50 rounded-lg w-max paragraph-16s cursor-pointer transition duration-300 
-                    @if ($alredyApplied) pointer-events-none @endif">
-                    <span wire:loading.remove wire:target="applyNow">
-                        @if ($alredyApplied)
-                            Sudah dilamar
-                        @else
-                            Lamar sekarang
-                        @endif
-                    </span>
+                {{-- Tampilkan jika loker tipenya bkk --}}
+                @if ($vacancy->loker_tipe == 'kebkk')
+                    <div 
+                        wire:click="applyNow"
+                        wire:loading.attr="disabled"
+                        class="py-3 px-6 {{ $alredyApplied 
+                        ? 'bg-bkkNeutral-200 text-bkkNeutral-500'
+                        : 'bg-bkkBlue-700 hover:bg-bkkBlue-800 text-bkkNeutral-50' }} 
+                        rounded-lg w-max paragraph-16s cursor-pointer transition duration-300 
+                        @if ($alredyApplied) pointer-events-none @endif">
+                        <span wire:loading.remove wire:target="applyNow">
+                            @if ($alredyApplied)
+                                Sudah dilamar
+                            @else
+                                Lamar sekarang
+                            @endif
+                        </span>
 
-                    <span wire:loading wire:target="applyNow">
-                        Mengirim..
-                    </span>
-                </div>
+                        <span wire:loading wire:target="applyNow">
+                            Mengirim..
+                        </span>
+                    </div>
+                @endif
                 {{-- Divider --}}
                 <div class="w-full h-px bg-bkkNeutral-200 my-12"></div>
                 <div class="heading-20s text-bkkNeutral-900 mb-4">Kualifikasi</div>
                 <div class="dynamic-vacancy mb-9">
                     {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($vacancy->requirements) }}
                 </div>
+                {{-- Tampilkan jika tipe loker ke perusahaan --}}
+                @if ($vacancy->loker_tipe == 'keperusahaan')
+                    <div class="heading-20s text-bkkNeutral-900 mb-4">Kontak Perusahaan</div>
+                    <div class="paragraph-14r text-bkkNeutral-700 mb-2">Hubungi:</div>
+                    <div class="flex items-center gap-3 paragraph-14r text-bkkNeutral-700 mb-2">
+                        <svg class="w-4 h-4 shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.25246 2.00722C6.94873 1.2479 6.21332 0.75 5.39551 0.75H2.64474C1.5983 0.75 0.75 1.5981 0.75 2.64453C0.75 11.5392 7.96078 18.75 16.8555 18.75C17.9019 18.75 18.75 17.9016 18.75 16.8552L18.7505 14.104C18.7505 13.2861 18.2527 12.5509 17.4934 12.2471L14.8569 11.1929C14.1749 10.9201 13.3983 11.0429 12.8339 11.5132L12.1535 12.0807C11.3589 12.7429 10.1896 12.6902 9.4582 11.9588L7.54222 10.0411C6.81079 9.30962 6.75673 8.14134 7.41895 7.34668L7.98633 6.6663C8.45661 6.10195 8.58049 5.32516 8.30766 4.64309L7.25246 2.00722Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>
+                            {{ $vacancy->phone_company }}
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-3 paragraph-14r text-bkkNeutral-700 mb-9">
+                        <svg class="w-4 h-4 shrink-0" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.75 1.75L7.85764 6.36227L7.85967 6.36396C8.53785 6.86128 8.87714 7.1101 9.24876 7.20621C9.57723 7.29117 9.92251 7.29117 10.251 7.20621C10.6229 7.11001 10.9632 6.86047 11.6426 6.36227C11.6426 6.36227 15.5601 3.35594 17.75 1.75M0.75 11.5502V3.9502C0.75 2.83009 0.75 2.26962 0.967987 1.8418C1.15973 1.46547 1.46547 1.15973 1.8418 0.967987C2.26962 0.75 2.83009 0.75 3.9502 0.75H15.5502C16.6703 0.75 17.2296 0.75 17.6574 0.967987C18.0337 1.15973 18.3405 1.46547 18.5322 1.8418C18.75 2.2692 18.75 2.82899 18.75 3.94691V11.5536C18.75 12.6715 18.75 13.2305 18.5322 13.6579C18.3405 14.0342 18.0337 14.3405 17.6574 14.5322C17.23 14.75 16.671 14.75 15.5531 14.75H3.94691C2.82899 14.75 2.2692 14.75 1.8418 14.5322C1.46547 14.3405 1.15973 14.0342 0.967987 13.6579C0.75 13.2301 0.75 12.6703 0.75 11.5502Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>
+                            {{ $vacancy->email_company }}
+                        </span>
+                    </div>
+                @endif
                 <div class="heading-20s text-bkkNeutral-900 mb-4">Profil Perusahaan</div>
                 <div class="p-6 rounded-[20px] border border-bkkNeutral-200">
                     <div class="w-11 h-11 rounded-full overflow-hidden shadow-lg mb-4">
                         <img 
-                            src="{{ asset('storage/' . $vacancy->company->companies_logo) }}" 
+                            src="{{ $vacancy->company->companies_logo 
+                            ? \Illuminate\Support\Facades\Storage::url($vacancy->company->companies_logo) 
+                            : asset('assets/static/partial/fallbackUser.webp') }}" 
                             class="w-full h-full object-cover object-center">
                     </div>
                     <h1 class="heading-20s text-bkkNeutral-900 mb-3">
@@ -147,7 +178,9 @@
                         <div class="flex gap-4 items-start mb-4">
                             <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg">
                                 <img 
-                                    src="{{ asset('storage/' . $otherVacancy->company->companies_logo) }}" 
+                                    src="{{ $vacancy->company->companies_logo 
+                                    ? \Illuminate\Support\Facades\Storage::url($vacancy->company->companies_logo) 
+                                    : asset('assets/static/partial/fallbackUser.webp') }}"
                                     class="w-full h-full object-cover object-center">
                             </div>
                             <div class="space-y-1">
@@ -173,7 +206,7 @@
                                 <svg class="shrink-0 w-5 h-5" width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <div class="paragraph-16r text-bkkNeutral-700 line-clamp-2 ">
+                                <div class="paragraph-16r text-bkkNeutral-700 line-clamp-1 ">
                                     @foreach ($vacancy->major as $major)
                                         {{ $major }}{{ !$loop->last ? ', ' : '' }}
                                     @endforeach

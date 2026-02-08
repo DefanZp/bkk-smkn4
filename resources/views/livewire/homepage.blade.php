@@ -276,7 +276,7 @@
                 </div>
             </div>
         </div>
-        <a  href="#"
+        <a  href="{{ route('tracer-study') }}"
             class="w-full lg:w-auto justify-self-center flex justify-center items-center gap-3 py-3 px-6 bg-bkkBlue-700 hover:bg-bkkBlue-800 transition duration-300 rounded-[8px] group">
             <span class="paragraph-16s text-bkkNeutral-50">Lihat Laporan Tracer Study</span>
             <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
