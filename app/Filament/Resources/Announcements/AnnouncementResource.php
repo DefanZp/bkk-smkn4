@@ -20,6 +20,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 
 class AnnouncementResource extends Resource
 {
@@ -28,6 +30,8 @@ class AnnouncementResource extends Resource
     protected static ?string $navigationLabel = 'Pengumuman';
 
     protected static ?string $modelLabel = 'Pengumuman';
+
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $pluralModelLabel = 'Daftar Pengumuman';
 
@@ -38,21 +42,39 @@ class AnnouncementResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([
-            TextInput::make('headline')->required()->label('judul pengumuman'),
-            FileUpload::make('image')->required()->label('gambar pengumuman')->disk('public')->directory('announcements')->image(),
-            RichEditor::make('content')->required()
-            ->json()->label('isi pengumuman'),
-            DatePicker::make('active_until')->required()->label('aktif hingga'),
+            TextInput::make('headline')
+            ->required()
+            ->label('judul pengumuman'),
+            FileUpload::make('image')
+            ->required()
+            ->label('gambar pengumuman')
+            ->disk('public')
+            ->directory('announcements')
+            ->image(),
+            RichEditor::make('content')
+            ->required()
+            ->json()
+            ->label('isi pengumuman')
+            ->columnSpan('full')
+            ->extraInputAttributes(['style' => 'min-height: 200px;']),
+            DatePicker::make('active_until')
+            ->required()
+            ->label('aktif hingga'),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('headline')->label('judul pengumuman')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('headline')->label('judul pengumuman')->searchable(),
             Tables\Columns\ImageColumn::make('image')->label('gambar pengumuman')->disk('public'),
-            Tables\Columns\TextColumn::make('content')->label('isi pengumuman')->limit(50),
             Tables\Columns\TextColumn::make('active_until')->label('aktif hingga')->date()->sortable(),
+        ])
+        ->actions([
+            EditAction::make()
+                ->label('edit'),
+            DeleteAction::make()
+                ->label('Hapus'),
         ]);
     }
 

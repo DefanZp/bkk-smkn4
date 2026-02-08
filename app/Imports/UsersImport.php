@@ -14,7 +14,12 @@ use Carbon\Carbon;
 class UsersImport implements ToModel, WithHeadingRow, SkipsOnError
 {
     use SkipsErrors;
-    // Daftar jurusan yang valid (sama dengan enum di database)
+
+    public function headingRow(): int
+    {
+        return 2;
+    }
+
     private array $validMajors = [
         'Animasi',
         'Desain Komunikasi Visual',
@@ -23,6 +28,7 @@ class UsersImport implements ToModel, WithHeadingRow, SkipsOnError
         'Teknik Grafika',
         'Teknik Komputer dan Jaringan',
         'Rekayasa Perangkat Lunak',
+        'Mekatronika',
     ];
     public function model(array $row)
     {
@@ -61,7 +67,7 @@ class UsersImport implements ToModel, WithHeadingRow, SkipsOnError
     public function customValidationMessages()
     {
         return [
-            'jurusan.in' => 'Jurusan tidak valid. Pilihan: Animasi, DKV, Logistik, Perhotelan, Teknik Grafika, TKJ, RPL',
+            'jurusan.in' => 'Jurusan tidak valid. Pilihan: Animasi, DKV, Logistik, Perhotelan, Teknik Grafika, TKJ, RPL, Mekatronika',
         ];
     }
 }

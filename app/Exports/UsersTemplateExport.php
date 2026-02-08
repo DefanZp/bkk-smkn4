@@ -8,39 +8,50 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class UsersTemplateExport implements FromArray, WithHeadings, WithStyles, WithColumnWidths
+class UsersTemplateExport implements FromArray, WithStyles, WithColumnWidths
 {
-    public function headings(): array
-    {
-        return [
-            'nisn',
-            'nama_lengkap',
-            'jurusan',
-            'tahun_lulus',
-        ];
-    }
+
 
     public function array(): array
     {
         return [
+            ['PETUNJUK: Gunakan tanda petik satu (\') sebelum angka NISN agar terbaca sebagai teks. Format Tahun Lulus: YYYY.'],
+            ['nisn', 'nama_lengkap', 'jurusan', 'tahun_lulus'],
             [
-                '1234567890',
+                "'1234567890",
                 'Zain artis',
                 'Rekayasa Perangkat Lunak',
-                '2025-04-25',
+                '2025',
             ],
             [
-                '0987654321',
+                "'0987654321",
                 'Rehan Kopling',
                 'Teknik Komputer dan Jaringan',
-                '2025-04-25',
+                '2025',
             ],
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:D1')->applyFromArray([
+        // Merge instruction row
+        $sheet->mergeCells('A1:D1');
+
+        // Style the instruction row (Row 1)
+        $sheet->getStyle('A1')->applyFromArray([
+            'font' => [
+                'italic' => true,
+                'color' => ['rgb' => 'FF0000'], // Red for attention
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+        ]);
+
+        // Style the header row (Row 2) - same style as before but moved to row 2
+        $sheet->getStyle('A2:D2')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'color' => ['rgb' => 'FFFFFF'],
@@ -50,21 +61,6 @@ class UsersTemplateExport implements FromArray, WithHeadings, WithStyles, WithCo
                 'startColor' => ['rgb' => '4F46E5'],
             ],
         ]);
-
-        $sheet->getComment('C1')->getText()->createTextRun(
-            "Pilihan jurusan yang valid:\n" .
-            "- Animasi\n" .
-            "- Desain Komunikasi Visual\n" .
-            "- Logistik\n" .
-            "- Perhotelan\n" .
-            "- Teknik Grafika\n" .
-            "- Teknik Komputer dan Jaringan\n" .
-            "- Rekayasa Perangkat Lunak"
-        );
-
-        $sheet->getComment('D1')->getText()->createTextRun(
-            "Format tanggal: YYYY-MM-DD\nContoh: 2025-04-25"
-        );
 
         return [];
     }

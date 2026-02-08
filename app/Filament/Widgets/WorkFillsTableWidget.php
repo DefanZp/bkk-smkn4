@@ -27,12 +27,6 @@ class WorkFillsTableWidget extends BaseWidget
                 Tables\Columns\TextColumn::make('company_name')
                     ->label('Perusahaan')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('position')
-                    ->label('Posisi'),
-                Tables\Columns\TextColumn::make('location')
-                    ->label('Lokasi'),
-                Tables\Columns\TextColumn::make('salary')
-                    ->label('Gaji'),
                 Tables\Columns\TextColumn::make('major_relevance')
                     ->label('Kesesuaian Jurusan')
                     ->badge()
@@ -42,10 +36,8 @@ class WorkFillsTableWidget extends BaseWidget
                         'mungkin' => 'warning',
                         default => 'gray',
                     }),
-                Tables\Columns\TextColumn::make('start_date')
-                    ->label('Mulai Bekerja')
-                    ->date(),
             ])
+            ->recordUrl(null)
             ->defaultSort('created_at', 'desc');
     }
 }

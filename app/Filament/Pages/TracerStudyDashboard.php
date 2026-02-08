@@ -15,11 +15,12 @@ class TracerStudyDashboard extends Page
 {
     protected static ?string $navigationLabel = 'Tracer Study';
     
-    protected static ?string $title = 'Dashboard Tracer Study';
+    protected static ?string $title = 'Tracer Study';
+
+    protected static ?int $navigationSort = 1;
     
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
     
-    protected static ?int $navigationSort = 5;
     
     protected function getHeaderWidgets(): array
     {

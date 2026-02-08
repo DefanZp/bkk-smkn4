@@ -18,6 +18,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Textarea;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 
 class CompanieResource extends Resource
 {
@@ -26,6 +28,8 @@ class CompanieResource extends Resource
     protected static ?string $navigationLabel = 'Perusahaan';
 
     protected static ?string $modelLabel = 'Perusahaan';
+
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $pluralModelLabel = 'Daftar Perusahaan';
 
@@ -37,9 +41,9 @@ class CompanieResource extends Resource
     {
         return $schema->schema([
             TextInput::make('companies_name')->required()->label('nama perusahaan'),
-            FileUpload::make('companies_logo')->required()->label('logo perusahaan')->disk('public')->directory('companies')->image(),
-            Textarea::make('companies_profile')->required()->label('profil perusahaan'),
-            TextInput::make('location')->required()->label('lokasi perusahaan'),
+            FileUpload::make('companies_logo')->label('logo perusahaan')->disk('public')->directory('companies')->image(),
+            Textarea::make('companies_profile')->label('profil perusahaan'),
+            TextInput::make('location')->label('lokasi perusahaan'),
             TextInput::make('field')->label('bidang perusahaan'),
             TextInput::make('employee')->label('jumlah karyawan')->numeric(),
         ]);
@@ -51,9 +55,14 @@ class CompanieResource extends Resource
             Tables\Columns\TextColumn::make('companies_name')->label('nama perusahaan')->searchable()->sortable(),
             Tables\Columns\ImageColumn::make('companies_logo')->label('logo perusahaan')->disk('public'),
             Tables\Columns\TextColumn::make('companies_profile')->label('profil perusahaan')->limit(50),
-            Tables\Columns\TextColumn::make('location')->label('lokasi perusahaan')->searchable()->sortable(),
-            
-        ]);
+            Tables\Columns\TextColumn::make('location')->label('lokasi perusahaan')->searchable()->sortable(),  
+        ])
+        ->actions([
+            EditAction::make()
+                ->label('edit'),
+            DeleteAction::make()
+                ->label('Hapus'),
+        ]);;
     }
 
     public static function getRelations(): array

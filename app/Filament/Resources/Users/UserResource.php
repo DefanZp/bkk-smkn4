@@ -21,6 +21,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 
 use function Laravel\Prompts\select;
 
@@ -29,6 +31,8 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationLabel = 'Pengguna';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $modelLabel = 'Pengguna';
 
@@ -66,7 +70,12 @@ class UserResource extends Resource
             Tables\Columns\TextColumn::make('full_name')->label('Nama Lengkap')->searchable()->sortable(),
             Tables\Columns\TextColumn::make('major')->label('Jurusan')->searchable()->sortable(),
             Tables\Columns\TextColumn::make('status')->label('Status')->sortable(),
-            Tables\Columns\TextColumn::make('no_hp')->label('Nomor HP')->searchable(),
+            ])
+            ->actions([
+                EditAction::make()
+                    ->label('edit'),
+                DeleteAction::make()
+                    ->label('Hapus'),
             ]);
     }
 
@@ -85,4 +94,7 @@ class UserResource extends Resource
             'edit' => EditUser::route('/{record}/edit'),
         ];
     }
+
+    
 }
+
