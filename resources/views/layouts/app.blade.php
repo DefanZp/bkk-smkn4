@@ -229,8 +229,8 @@
                                         Profil Saya
                                     </span>
                                 </a>
-                                <a href="#"
-                                    class="paragraph-16r text-bkkNeutral-900 hover:text-bkkBlue-700 transition duration-300 flex items-center gap-3">
+                                <a href="{{ route('riwayat-lamaran') }}"
+                                    class="paragraph-16r {{ request()->routeIs('riwayat-lamaran') ? 'text-bkkBlue-700' : 'text-bkkNeutral-900 hover:text-bkkBlue-700' }} transition duration-300 flex items-center gap-3">
                                     <span>
                                         Riwayat Lamaran
                                     </span>
@@ -360,8 +360,8 @@
             {{-- Footer --}}
             <footer class="bg-bkkNeutral-800">
                 <div class="container mx-auto lg:px-0 px-5 pt-20 ">
-                    <div class="flex flex-col lg:flex-row items-start border-b-[1px] border-bkkNeutral-500 pb-10 lg:pb-20">
-                        <div class="w-full md:w-[60%] lg:w-[40%] text-bkkNeutral-50 mb-12 lg:mb-0">
+                    <div class="flex flex-col lg:flex-row lg:justify-between items-start border-b-[1px] border-bkkNeutral-500 pb-10 lg:pb-20">
+                        <div class="w-full md:w-[60%] lg:w-[35%] text-bkkNeutral-50 mb-12 lg:mb-0">
                             <div class="w-[170px] mb-7">
                                 <img 
                                     class="w-full h-full object-contain object-center"
@@ -393,7 +393,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="w-full lg:w-[60%] flex justify-between gap-0 lg:gap-16 flex-wrap lg:flex-nowrap">
+                        <div class="w-full lg:w-[65%] flex justify-between gap-0 lg:gap-16 flex-wrap lg:flex-nowrap">
                         <div class="w-1/2 lg:w-1/3">
                                 <div class="space-y-6">
                                     <h3 class="paragraph-16s text-bkkNeutral-50">Link Terkait</h3>

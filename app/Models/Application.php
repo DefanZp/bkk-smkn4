@@ -9,6 +9,7 @@ class Application extends Model
     protected $fillable = [
         'id_vacancy',
         'id_user',
+        'id_company',
         'status',
 
             
@@ -28,5 +29,9 @@ class Application extends Model
     public function vacancy()
     {
         return $this->belongsTo(Vacancie::class, 'id_vacancy');
+    }
+    public function company()
+    {
+        return $this->belongsTo(companie::class, 'id_company');
     }
 }

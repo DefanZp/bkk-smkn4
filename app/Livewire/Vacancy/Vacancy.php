@@ -20,9 +20,6 @@ class Vacancy extends Component
     #[Url('k')]
     public $filterKompetensi = [];
 
-    #[Url('k-2')]
-    public $filterKompetensi2 = [];
-
     #[Url('tipe')]
     public $filterTipe = [];
 
@@ -34,17 +31,6 @@ class Vacancy extends Component
         $this->resetPage();
     }
 
-    public function updatedFilterKompetensi()
-    {
-        $this->filterKompetensi2 = [];
-        $this->resetPage();
-    }
-
-    public function updatedFilterKompetensi2()
-    {
-        $this->filterKompetensi = [];
-        $this->resetPage();
-    }
 
     public function updatedFilterTipe()
     {
@@ -88,17 +74,6 @@ class Vacancy extends Component
         ->when($this->filterKompetensi, function ($query) {
             $query->where(function ($q) {
                 foreach ($this->filterKompetensi as $kompetensi) {
-                    $q->orWhereJsonContains('major', $kompetensi);
-                }
-            });
-        })
-        ->when($this->filterKompetensi2, function ($query) {
-            $kompetensiArray = is_array($this->filterKompetensi2) 
-                ? $this->filterKompetensi2 
-                : [$this->filterKompetensi2];
-
-            $query->where(function ($q) use ($kompetensiArray) {
-                foreach ($kompetensiArray as $kompetensi) {
                     $q->orWhereJsonContains('major', $kompetensi);
                 }
             });
