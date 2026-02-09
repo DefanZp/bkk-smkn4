@@ -5,8 +5,6 @@ namespace App\Filament\Resources\Users;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\ListUsers;
-use App\Filament\Resources\Users\Schemas\UserForm;
-use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
 use BackedEnum;
 use Filament\Forms\Components\TextInput;
@@ -16,13 +14,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextArea;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
+use Illuminate\Database\Eloquent\Builder;
 
 use function Laravel\Prompts\select;
 
@@ -76,7 +73,13 @@ class UserResource extends Resource
                     ->label('edit'),
                 DeleteAction::make()
                     ->label('Hapus'),
-            ]);
+            ])->actionsColumnLabel('Aksi');
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('role', 'user');
     }
 
     public static function getRelations(): array

@@ -132,7 +132,7 @@ class VacancieResource extends Resource
                 ->label('edit'),
             DeleteAction::make()
                 ->label('Hapus'),
-        ]);
+        ])->actionsColumnLabel('Aksi');
     }
 
     public static function getRelations(): array
