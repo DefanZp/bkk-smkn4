@@ -80,7 +80,7 @@ class PersonalData extends Component
 
         $this->isCvExist = $user->CVuser ? true : false;
 
-        Session::flash('success', 'Message sent successfully');
+        Session::flash('success', 'Data pribadi berhasil diperbarui.');
 
         $this->dispatch('scroll-to-top');
     }

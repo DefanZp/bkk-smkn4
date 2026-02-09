@@ -31,7 +31,9 @@
                         class="w-full h-full"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.088191723806!2d112.62473577415871!3d-7.98982897968068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281b75ea5485%3A0x90fd5c6fcedf6acf!2sSMK%20Negeri%204%20Kota%20Malang!5e0!3m2!1sid!2sid!4v1769496969328!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="w-full lg:w-[50%] p-6">
+                <div
+                    x-on:scroll-to-top.window="document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' })" 
+                    class="w-full lg:w-[50%] p-6">
                     @if (session('success'))
                         <div x-data="{ open: true }" x-show="open"
                             class="w-full rounded-xl p-4 flex gap-2 mb-6 items-center border border-bkkBlue-700 col-span-2 text-bkkBlue-700">
@@ -61,7 +63,8 @@
                         </div>
                     @enderror
                     <form 
-                        class="space-y-9"
+                        id="contactForm"
+                        class="space-y-9 scroll-mt-60"
                         wire:submit.prevent="submitContact">
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="w-full md:w-[50%] flex flex-col gap-3 relative">

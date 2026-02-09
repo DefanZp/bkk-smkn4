@@ -27,7 +27,7 @@
     </section>
     <section class="py-15 lg:py-20">
         <div class="container mx-auto px-5 lg:px-0">
-            <h2 class="heading-42s text-bkkNeutral-900">
+            <h2 class="heading-42s text-bkkNeutral-900 mb-2">
                 Hasil Tracer Study Alumni
             </h2>
             <div class="paragraph-16r text-bkkNeutral-700 mb-9">
@@ -36,7 +36,7 @@
             {{-- Chart js cdn --}}
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="p-6 bg-white rounded-3xl shadow-lg">
                     <h2 class="heading-32s text-bkkNeutral-900 mb-6">Distribusi Status Alumni</h2>
                     <div class="h-[300px]">
@@ -53,8 +53,8 @@
         </div>
     </section>
     <section class="py-15 lg:py-20">
-        <div class="container flex items-center mx-auto px-5 lg:px-0">
-            <div class="w-[50%]">
+        <div class="container flex flex-col-reverse lg:flex-row items-center mx-auto px-5 lg:px-0 gap-5 lg:gap-0">
+            <div class="w-full lg:w-[50%]">
                 <h2 class="heading-42s text-bkkNeutral-900 mb-4">
                 Hasil Tracer Study Alumni
                 </h2>
@@ -69,7 +69,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="w-[50%]">
+            <div class="w-full lg:w-[50%]">
                 <img 
                     class="w-full h-full object-contain object-center"
                     src="{{ asset('/assets/static/partial/hasil_tracer.webp') }}"

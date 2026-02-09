@@ -65,43 +65,46 @@ class Vacancy extends Component
     ];
 
     public function render()
-    {
-        $vacancies = vacancie::with('company')
-        ->where('deadline', '>=', now())
-        ->when($this->filterSearch, function ($query) {
-            $query->where('vacancy_name', 'like', '%' . $this->filterSearch . '%');
-        })
-        ->when($this->filterKompetensi, function ($query) {
-            $query->where(function ($q) {
-                foreach ($this->filterKompetensi as $kompetensi) {
-                    $q->orWhereJsonContains('major', $kompetensi);
-                }
-            });
-        })
-        ->when($this->filterTipe, function ($query) {
-            $cleanedTypes = array_map('strtolower', $this->filterTipe);
-            $query->whereIn('employment_classification', $cleanedTypes);
-        })
-        ->when($this->filterTerakhirDiperbarui, function ($query) {
-            $query->where(function ($subQuery) {
-                foreach ($this->filterTerakhirDiperbarui as $filter) {
-                    if ($filter === '24 Jam Terakhir') {
-                        $subQuery->orWhere('created_at', '>=', now()->subDay());
-                    } elseif ($filter === 'Seminggu Terakhir') {
-                        $subQuery->orWhere('created_at', '>=', now()->subWeek());
-                    } elseif ($filter === 'Sebulan Terakhir') {
-                        $subQuery->orWhere('created_at', '>=', now()->subMonth());
-                    } elseif ($filter === 'Kapan pun') {
-                        $subQuery->orWhereNotNull('created_at');
-                    }
-                }
-            });
-        })
-        ->orderBy('created_at', 'desc')
+{
+    $userMajor = auth()->check() ? auth()->user()->major : null;
+
+    $query = vacancie::with('company')
+        ->where('deadline', '>=', now());
+
+    $query->when($this->filterSearch, function ($q) {
+        $q->where('vacancy_name', 'like', '%' . $this->filterSearch . '%');
+    })
+    ->when($this->filterKompetensi, function ($q) {
+        $q->where(function ($sub) {
+            foreach ($this->filterKompetensi as $kompetensi) {
+                $sub->orWhereJsonContains('major', $kompetensi);
+            }
+        });
+    })
+    ->when($this->filterTipe, function ($q) {
+        $cleanedTypes = array_map('strtolower', $this->filterTipe);
+        $q->whereIn('employment_classification', $cleanedTypes);
+    })
+    ->when($this->filterTerakhirDiperbarui, function ($q) {
+        $q->where(function ($sub) {
+            foreach ($this->filterTerakhirDiperbarui as $filter) {
+                if ($filter === '24 Jam Terakhir') $sub->orWhere('created_at', '>=', now()->subDay());
+                elseif ($filter === 'Seminggu Terakhir') $sub->orWhere('created_at', '>=', now()->subWeek());
+                elseif ($filter === 'Sebulan Terakhir') $sub->orWhere('created_at', '>=', now()->subMonth());
+            }
+        });
+    });
+
+    if ($userMajor) {
+        $query->orderByRaw("JSON_CONTAINS(major, '\"$userMajor\"') DESC");
+    }
+    
+    $vacancies = $query->orderBy('created_at', 'desc')
         ->paginate(8);
 
-        return view('livewire..vacancy.vacancy', [
-            'vacancies' => $vacancies,
-        ]);
-    }
+    return view('livewire.vacancy.vacancy', [
+        'vacancies' => $vacancies,
+        'userMajor' => $userMajor 
+    ]);
+}
 }

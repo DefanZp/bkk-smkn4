@@ -20,7 +20,7 @@ class Contact extends Component
             'contact.firstName' => 'required|max:255',
             'contact.lastName' => 'required|max:255',
             'contact.email' => 'required|email|max:255',
-            'contact.message' => 'required|max:255'
+            'contact.message' => 'required|max:500'
         ], [
             'contact.firstName.required' => 'Nama depan harus diisi.',
             'contact.firstName.max' => 'Nama depan harus kurang dari 255 karakter.',
@@ -29,7 +29,7 @@ class Contact extends Component
             'contact.email.required' => 'Email harus diisi.',
             'contact.email.max' => 'Email harus kurang dari 255 karakter.',
             'contact.message.required' => 'Pesan harus diisi.',
-            'contact.message.max' => 'Pesan harus kurang dari 255 karakter.',
+            'contact.message.max' => 'Pesan harus kurang dari 500 karakter.',
         ]);
 
         DB::table('contacts')->insert([
@@ -41,8 +41,10 @@ class Contact extends Component
             'updated_at' => now(),
         ]);
         
-        Session::flash('success', 'Message sent successfully');
+        Session::flash('success', 'Pesan berhasil dikirim!');
         $this->reset('contact');
+
+        $this->dispatch('scroll-to-top');
     }
 
     public function render()

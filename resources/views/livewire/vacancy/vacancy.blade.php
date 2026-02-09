@@ -37,7 +37,7 @@
                 </div>
                 <div class=" md:w-[10%]">
                     <button 
-                        class="py-3 px-6 bg-bkkBlue-700 rounded-xl text-bkkNeutral-50 paragraph-16s cursor-pointer hover:bg-bkkBlue-800 transition duration-300"
+                        class="md:w-full py-2 md:py-3 px-6 bg-bkkBlue-700 rounded-xl text-bkkNeutral-50 paragraph-16s cursor-pointer hover:bg-bkkBlue-800 transition duration-300"
                     >
                         Cari
                     </button>
@@ -159,7 +159,7 @@
                             @forelse ( $vacancies as $vacancy )
                             <div class="w-full p-6 bg-white shadow-lg rounded-[20px] my-2">
                                 <div class="flex flex-col lg:flex-row gap-6 justify-between items-start">
-                                    <div class="flex items-center gap-4 lg:mb-6">
+                                    <div class="flex items-center gap-4">
                                         <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg flex-shrink-0">
                                             <img 
                                                 src="{{ $vacancy->company->companies_logo 
@@ -167,20 +167,30 @@
                                                 : asset('assets/static/partial/fallbackUser.webp') }}" 
                                                 class="w-full h-full object-cover object-center">
                                         </div>
-                                        <div class="space-y-1">
-                                            <h3 class="heading-20s text-black line-clamp-1 capitalize">
-                                                {{ $vacancy->vacancy_name }} 
+                                        <div 
+                                            x-data="{vacancyName: '{{ $vacancy->vacancy_name }}'}"
+                                            class="space-y-1">
+                                            <h3 
+                                                class="heading-20s text-black capitalize"
+                                                x-text="vacancyName.length > 15 ? vacancyName.substring(0, 15) + '...' : vacancyName">
                                             </h3>
                                             <div class="paragraph-14r text-bkkNeutral-700 capitalize">
                                                 {{ $vacancy->company->companies_name }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="paragraph-12s text-bkkYellow-800 bg-bkkYellow-600 my-4 lg:my-0 lg:mt-4 px-2 py-1 rounded-md">
+                                    @if (
+                                        $vacancies->onFirstPage() &&               
+                                        $loop->index < 4 &&                        
+                                        $userMajor &&                              
+                                        in_array($userMajor, $vacancy->major)      
+                                        )
+                                    <div class="paragraph-12s text-bkkYellow-800 bg-bkkYellow-600 my-2 lg:my-0 lg:mt-4 px-2 py-1 rounded-md">
                                         Rekomendasi
                                     </div>
+                                    @endif
                                 </div>
-                                <div class="space-y-2">
+                                <div class="space-y-2 mt-6">
                                     <div class="flex items-center gap-4">
                                         <svg class="shrink-0 w-5 h-5" width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.75 7.67285C0.75 12.5247 4.99448 16.5369 6.87319 18.0752C7.14206 18.2954 7.27811 18.4068 7.47871 18.4632C7.63491 18.5072 7.8648 18.5072 8.021 18.4632C8.22197 18.4067 8.35707 18.2963 8.62695 18.0754C10.5057 16.5371 14.7499 12.5251 14.7499 7.6733C14.7499 5.83718 14.0125 4.07605 12.6997 2.77772C11.387 1.47939 9.6066 0.75 7.75008 0.75C5.89357 0.75 4.11301 1.4795 2.80025 2.77783C1.4875 4.07616 0.75 5.83674 0.75 7.67285Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

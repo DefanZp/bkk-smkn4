@@ -147,7 +147,7 @@
                                     class="w-full h-full object-cover object-center">
                             </div>
                             <div class="space-y-1">
-                                <h3 class="heading-20s text-black">
+                                <h3 class="heading-20s text-black line-clamp-1 capitalize">
                                     {{ $vacancy->vacancy_name }}
                                 </h3>
                                 <div class="paragraph-14r text-bkkNeutral-700">
@@ -169,7 +169,7 @@
                                 <svg class="shrink-0 w-5 h-5" width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.75 17.75H2.75M2.75 17.75H12.75M2.75 17.75V3.9502C2.75 2.83009 2.75 2.26962 2.96799 1.8418C3.15973 1.46547 3.46547 1.15973 3.8418 0.967987C4.26962 0.75 4.83009 0.75 5.9502 0.75H9.5502C10.6703 0.75 11.2296 0.75 11.6574 0.967987C12.0337 1.15973 12.3405 1.46547 12.5322 1.8418C12.75 2.2692 12.75 2.82899 12.75 3.94691V9.75M12.75 17.75H18.75M12.75 17.75V9.75M18.75 17.75H20.75M18.75 17.75V9.75C18.75 8.81812 18.7499 8.35241 18.5977 7.98486C18.3947 7.49481 18.0057 7.10523 17.5156 6.90224C17.1481 6.75 16.6816 6.75 15.7497 6.75C14.8179 6.75 14.3519 6.75 13.9844 6.90224C13.4943 7.10523 13.1052 7.49481 12.9022 7.98486C12.75 8.35241 12.75 8.81812 12.75 9.75M5.75 7.75H9.75M5.75 4.75H9.75" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <div class="paragraph-16r text-bkkNeutral-700">
+                                <div class="paragraph-16r text-bkkNeutral-700 line-clamp-1">
                                     @foreach ($vacancy->major as $major)
                                         {{ $major }}{{ !$loop->last ? ', ' : '' }}
                                     @endforeach
@@ -231,8 +231,8 @@
 
 <section class="py-15 md:py-24 px-5 lg:px-0">
     <div 
-        style="background-image: url('{{ asset('/assets/static/background/tracerHome.png') }}')"
-        class="container mx-auto px-5 lg:px-16 py-8 lg:py-16 bg-white shadow-lg rounded-[24px] bg-cover bg-center">
+        style="background-image: url('{{ asset('/assets/static/background/Tracer-Home.webp') }}')"
+        class="container mx-auto px-5 lg:px-16 py-8 lg:py-16 bg-white shadow-lg rounded-[24px] bg-cover bg-left">
         <h2 class="heading-42s text-bkkNeutral-900 mb-4">Tracer Study</h2>
         <div class="paragraph-16r text-bkkNeutral-700 mb-10 lg:mb-[56px]">Kami melacak karier alumni untuk meningkatkan mutu pembelajaran dan relevansi dengan industri.</div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-14">
@@ -512,11 +512,6 @@
     }
 </style>
 </div>
-
-{{-- Script for intersect --}}
-<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
- 
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <script>
     // Hero slider

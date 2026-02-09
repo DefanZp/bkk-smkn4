@@ -178,8 +178,8 @@
                         <div class="flex gap-4 items-start mb-4">
                             <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg">
                                 <img 
-                                    src="{{ $vacancy->company->companies_logo 
-                                    ? \Illuminate\Support\Facades\Storage::url($vacancy->company->companies_logo) 
+                                    src="{{ $otherVacancy->company->companies_logo 
+                                    ? \Illuminate\Support\Facades\Storage::url($otherVacancy->company->companies_logo) 
                                     : asset('assets/static/partial/fallbackUser.webp') }}"
                                     class="w-full h-full object-cover object-center">
                             </div>

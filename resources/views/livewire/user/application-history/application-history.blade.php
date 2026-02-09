@@ -16,7 +16,7 @@
                 </div>
                 <div class=" md:w-[10%]">
                     <button 
-                        class="py-3 px-6 bg-bkkBlue-700 rounded-xl text-bkkNeutral-50 paragraph-16s cursor-pointer hover:bg-bkkBlue-800 transition duration-300"
+                        class="md:w-full py-3 px-6 bg-bkkBlue-700 rounded-xl text-bkkNeutral-50 paragraph-16s cursor-pointer hover:bg-bkkBlue-800 transition duration-300"
                     >
                         Cari
                     </button>
