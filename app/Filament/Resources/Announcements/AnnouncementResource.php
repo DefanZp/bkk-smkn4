@@ -22,6 +22,7 @@ use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
+use Filament\Tables\Enums\ActionsPosition;
 
 class AnnouncementResource extends Resource
 {
@@ -75,7 +76,9 @@ class AnnouncementResource extends Resource
                 ->label('edit'),
             DeleteAction::make()
                 ->label('Hapus'),
-        ]);
+        ])
+        ->actionsColumnLabel('Aksi')
+        ->actionsAlignment('start');
     }
 
     

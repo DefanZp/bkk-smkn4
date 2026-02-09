@@ -55,6 +55,7 @@ class vacancie extends Model
         'Teknik Grafika' => 'Teknik Grafika',
         'Teknik Komputer dan Jaringan' => 'Teknik Komputer dan Jaringan',
         'Rekayasa Perangkat Lunak' => 'Rekayasa Perangkat Lunak',
+        'Mekatronika' => 'Mekatronika',
     ];
 
     public const EMPLOYMENT_TYPES = [

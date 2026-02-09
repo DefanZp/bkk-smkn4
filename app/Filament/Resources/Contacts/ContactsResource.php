@@ -67,7 +67,9 @@ class ContactsResource extends Resource
                 ->label('Lihat'),
             DeleteAction::make()
                 ->label('Hapus'),
-        ]);
+        ])
+        ->actionsColumnLabel('Aksi')
+        ->actionsAlignment('end');
     }
 
     public static function getRelations(): array

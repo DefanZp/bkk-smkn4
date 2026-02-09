@@ -14,8 +14,12 @@ class UsersTemplateExport implements FromArray, WithStyles, WithColumnWidths
 
     public function array(): array
     {
+        $majors = implode(', ', array_keys(\App\Models\vacancie::MAJORS));
+        
         return [
             ['PETUNJUK: Gunakan tanda petik satu (\') sebelum angka NISN agar terbaca sebagai teks. Format Tahun Lulus: YYYY.'],
+            ['JURUSAN TERSEDIA: ' . $majors],
+            [],
             ['nisn', 'nama_lengkap', 'jurusan', 'tahun_lulus'],
             [
                 "'1234567890",
@@ -34,8 +38,11 @@ class UsersTemplateExport implements FromArray, WithStyles, WithColumnWidths
 
     public function styles(Worksheet $sheet)
     {
-        // Merge instruction row
+        // Merge instruction row (Row 1)
         $sheet->mergeCells('A1:D1');
+        
+        // Merge majors info row (Row 2)
+        $sheet->mergeCells('A2:D2');
 
         // Style the instruction row (Row 1)
         $sheet->getStyle('A1')->applyFromArray([
@@ -49,9 +56,23 @@ class UsersTemplateExport implements FromArray, WithStyles, WithColumnWidths
                 'wrapText' => true,
             ],
         ]);
+        
+        // Style the majors info row (Row 2)
+        $sheet->getStyle('A2')->applyFromArray([
+            'font' => [
+                'italic' => true,
+                'bold' => true,
+                'color' => ['rgb' => '059669'], // Green
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+        ]);
 
-        // Style the header row (Row 2) - same style as before but moved to row 2
-        $sheet->getStyle('A2:D2')->applyFromArray([
+        // Style the header row (Row 4) - header is now at row 4
+        $sheet->getStyle('A4:D4')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'color' => ['rgb' => 'FFFFFF'],
