@@ -35,6 +35,8 @@ class ApplicationResource extends Resource
     protected static ?string $modelLabel = 'Lamaran';
 
     protected static ?string $pluralModelLabel = 'Lamaran';
+
+    protected static ?int $navigationSort = 5;
     
     public static function form(Schema $schema): Schema
     {
@@ -47,16 +49,15 @@ class ApplicationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.full_name')
                     ->label('Nama Pelamar')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
+                    
                 Tables\Columns\TextColumn::make('vacancy.vacancy_name')
                     ->label('Lowongan')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
+                    
                 Tables\Columns\TextColumn::make('vacancy.company.companies_name')
                     ->label('Perusahaan')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 Tables\Columns\SelectColumn::make('status')
                     ->options(Application::STATUSES)
                     ->label('Status'),
@@ -65,6 +66,7 @@ class ApplicationResource extends Resource
                     ->date()
                     ->sortable(),
             ])
+            ->recordUrl(null)
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')

@@ -25,6 +25,9 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 
 
 class VacancieResource extends Resource
@@ -32,6 +35,8 @@ class VacancieResource extends Resource
     protected static ?string $model = \App\Models\vacancie::class;
 
     protected static ?string $navigationLabel = 'Lowongan';
+
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $modelLabel = 'Lowongan';
 
@@ -53,35 +58,11 @@ class VacancieResource extends Resource
             ->preload(),
 
             TextInput::make('vacancy_name')
-            ->label('nama lowongan')
+            ->label('judul lowongan')
             ->required(),
 
             TextInput::make('location')
             ->label('lokasi')
-            ->required(),
-
-            TextInput::make('salary')
-            ->label('gaji')
-            ->numeric()
-            ->required(),
-
-            CheckboxList::make('major')
-                ->label('jurusan')
-                ->options(vacancie::MAJORS)
-                ->required(), 
-
-            Select::make('employment_classification')
-            ->label('tipe pekerjaan')
-            ->options(vacancie::EMPLOYMENT_TYPES)
-            ->required(),
-
-            TextInput::make('jobdesk')
-            ->label('deskripsi pekerjaan')
-            ->required(),
-
-            RichEditor::make('requirements')
-            ->json()
-            ->label('persyaratan')
             ->required(),
 
             DatePicker::make('deadline')
@@ -91,27 +72,48 @@ class VacancieResource extends Resource
             Select::make('loker_tipe')
             ->label('tipe loker')
             ->options(vacancie::LOKER_TYPES)
-            ->required(),
+            ->required()
+            ->live(),
+
+            RichEditor::make('requirements')
+            ->json()
+            ->label('persyaratan')
+            ->required()
+            ->columnSpan('full')
+            ->extraInputAttributes(['style' => 'min-height: 200px;']),
+
+            TextInput::make('salary')
+            ->label('gaji')
+            ->numeric(),
+
+            CheckboxList::make('major')
+            ->label('jurusan')
+            ->options(vacancie::MAJORS), 
+
+            Select::make('employment_classification')
+            ->label('tipe pekerjaan')
+            ->options(vacancie::EMPLOYMENT_TYPES),
+
+            TextInput::make('jobdesk')
+            ->label('deskripsi / posisi pekerjaan'),
 
             TextInput::make('email_company')
             ->label('email perusahaan')
-            ->required(),
+            ->visible(fn (Get $get) => $get('loker_tipe') === 'keperusahaan'),
 
             TextInput::make('phone_company')
             ->label('nomor telepon perusahaan')
-            ->required(),
+            ->visible(fn (Get $get) => $get('loker_tipe') === 'keperusahaan'),
 
             TextInput::make('vacancy_number')
-            ->label('nomor lowongan')
-            ->numeric()
-            ->required(), 
+            ->label('kuota lowongan')
+            ->numeric(), 
 
             FileUpload::make('image')
             ->label('gambar lowongan')
             ->disk('public')
             ->directory('vacancies')
-            ->image()
-            ->required(),
+            ->image(),
 
             ]);
     }
@@ -119,12 +121,17 @@ class VacancieResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('company.companies_name')->label('Perusahaan')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('vacancy_name')->label('Nama Lowongan')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('location')->label('Lokasi')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('employment_classification')->label('Tipe Pekerjaan')->searchable()->sortable(),
-            Tables\Columns\TextColumn::make('salary')->label('Gaji')->money('idr', true)->sortable(),
-            Tables\Columns\TextColumn::make('deadline')->label('Batas Akhir')->date()->sortable(),
+            Tables\Columns\TextColumn::make('company.companies_name')->label('Perusahaan')->searchable(),
+            Tables\Columns\TextColumn::make('vacancy_name')->label('judul Lowongan')->searchable(),
+            Tables\Columns\TextColumn::make('location')->label('Lokasi')->searchable(),
+            Tables\Columns\TextColumn::make('vacancy_number')->label('kuota Lowongan')->searchable(),
+            Tables\Columns\TextColumn::make('deadline')->label('Batas waktu')->date()->sortable(),
+        ])
+        ->actions([
+            EditAction::make()
+                ->label('edit'),
+            DeleteAction::make()
+                ->label('Hapus'),
         ]);
     }
 
@@ -143,19 +150,8 @@ class VacancieResource extends Resource
             'edit' => EditVacancie::route('/{record}/edit'),
         ];
     }
+
+    
     
 }
 
-class Post extends Model
-{
-    /**
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'content' => 'array',
-        ];
-    }
-
-}

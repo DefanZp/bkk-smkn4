@@ -50,3 +50,84 @@
     --color-bkkNeutral-50: #FBFCFD;
 }
 
+.fi-sidebar {
+    width: 280px;
+    background-color: white;
+}
+
+.fi-main {
+    background-color: #F9FAFB;
+}
+
+.fi-sidebar-item-label {
+    color : var(--color-bkkNeutral-800);
+}
+
+.fi-sidebar-item-icon {
+    color: var(--color-bkkNeutral-800) !important;
+}
+
+/* ============================================aktif============================================== */
+
+
+.fi-sidebar-item {
+    &.fi-active {
+        & > .fi-sidebar-item-btn {
+            & > .fi-sidebar-item-label {
+                color: white;
+            }
+        }
+    }
+}
+
+.fi-sidebar-item {
+    &.fi-active {
+        & > .fi-sidebar-item-btn {
+            background-color: var(--color-bkkBlue-700);
+            icon {
+                color: white;
+            }
+        }
+    }
+}
+
+.fi-sidebar-item.fi-active 
+.fi-sidebar-item-icon {
+    color: white !important;
+}
+
+.fi-sidebar-item {
+    position: relative;
+}
+
+.fi-sidebar-item.fi-active::before {
+    content: "";
+    position: absolute;
+    left: -20px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 40px; 
+    background-color: var(--color-bkkBlue-700);
+    border-radius: 0 8px 8px 0;
+    z-index: 10;
+}
+
+.fi-sidebar-item:hover:not(.fi-active)::before {
+    content: "";
+    position: absolute;
+    left: -20px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 40px; 
+    background-color: var(--color-bkkNeutral-100);
+    border-radius: 0 8px 8px 0;
+    transition: all 0.2s ease-in-out; 
+}
+
+
+.fi-sidebar-item.fi-active:hover::before {
+    background-color: #0000FF;
+    height: 40px; 
+}

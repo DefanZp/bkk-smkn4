@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Contacts;
 
 use App\Filament\Resources\Contacts\Pages\CreateContacts;
 use App\Filament\Resources\Contacts\Pages\EditContacts;
+use App\Filament\Resources\Contacts\Pages\ViewContacts;
 use App\Filament\Resources\Contacts\Pages\ListContacts;
 use App\Filament\Resources\Contacts\Schemas\ContactsForm;
 use App\Filament\Resources\Contacts\Tables\ContactsTable;
@@ -20,6 +21,8 @@ use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 
 
 
@@ -32,6 +35,8 @@ class ContactsResource extends Resource
     protected static ?string $navigationLabel = 'pesan';
 
     protected static ?string $modelLabel = 'pesan';
+
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $pluralModelLabel = 'daftar pesan';
 
@@ -56,6 +61,12 @@ class ContactsResource extends Resource
                 TextColumn::make('message')->label('Pesan')->limit(50),
                         ]) 
             ]),
+        ])
+        ->actions([
+            ViewAction::make()
+                ->label('Lihat'),
+            DeleteAction::make()
+                ->label('Hapus'),
         ]);
     }
 
@@ -71,6 +82,7 @@ class ContactsResource extends Resource
         return [
             'index' => ListContacts::route('/'),
             'create' => CreateContacts::route('/create'),
+            'view' => ViewContacts::route('/{record}'),
             'edit' => EditContacts::route('/{record}/edit'),
         ];
     }

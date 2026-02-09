@@ -27,16 +27,8 @@ class CollegeFillsTableWidget extends BaseWidget
                 Tables\Columns\TextColumn::make('university_name')
                     ->label('Universitas')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('major')
-                    ->label('Program Studi'),
-                Tables\Columns\TextColumn::make('degre')
-                    ->label('Jenjang')
-                    ->badge()
-                    ->color('info'),
-                Tables\Columns\TextColumn::make('start_date')
-                    ->label('Mulai Kuliah')
-                    ->date(),
             ])
+            ->recordUrl(null)
             ->defaultSort('created_at', 'desc');
     }
 }
