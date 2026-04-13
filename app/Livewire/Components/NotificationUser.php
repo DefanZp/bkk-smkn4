@@ -11,6 +11,7 @@ class NotificationUser extends Component
 
     public function mount()
     {
+        $this->deleteOldNotifications();
         
         $this->checkIsTracerStudyFilled();
 
@@ -25,13 +26,24 @@ class NotificationUser extends Component
         foreach ($dbNotifs as $notif) {
            
             $payload = json_decode($notif->data, true);
+            $type = 'job-notif';
+            if ($notif->type === 'App\Notifications\AdminMessageNotification') {
+                $type = 'admin-message';
+            }
+
+            $link = '#';
+            if (isset($payload['application_id'])) {
+                $link = route('riwayat-lamaran');
+            } elseif (isset($payload['vacancy_id'])) {
+                $link = route('lowongan-detail', $payload['vacancy_id']);
+            }
 
             $this->notifications[] = [
                 'id' => $notif->id,
-                'type' => 'job-notif',
+                'type' => $type,
                 'title' => $payload['title'] ?? 'Info Lowongan',
                 'message' => $payload['message'] ?? '',
-                'link' => isset($payload['vacancy_id']) ? route('lowongan-detail', $payload['vacancy_id']) : '#',
+                'link' => $link,
                 'created_at' => $notif->created_at,
                 'is_read' => !is_null($notif->read_at),
             ];
@@ -52,6 +64,15 @@ class NotificationUser extends Component
                 'is_read' => false,
             ];
         }
+    }
+
+    public function deleteOldNotifications()
+    {
+        DB::table('notifications')
+            ->where('notifiable_id', auth()->id())
+            ->where('notifiable_type', 'App\Models\User')
+            ->where('created_at', '<', now()->subDays(30))
+            ->delete();
     }
 
     public function render()

@@ -1,6 +1,5 @@
-<div>
+<div x-data="{ openNotif: false, openMessageModal: false, selectedMessage: null }">
     <div 
-        x-data="{ openNotif: false }"
         class="text-bkkNeutral-900 relative ">
         <div  
             @click="openNotif = !openNotif"
@@ -36,14 +35,23 @@
             {{-- List Notifikasi --}}
             <div class="max-h-[400px] overflow-y-auto">
                 @forelse ($notifications as $notification)
+                    @if($notification['type'] === 'admin-message')
+                    <button type="button" @click="selectedMessage = {{ \Illuminate\Support\Js::from($notification) }}; openMessageModal = true; openNotif = false"
+                    class="flex text-left w-full items-start gap-4 px-6 py-5 hover:bg-bkkNeutral-50 transition border-b border-bkkNeutral-50 last:border-none group">
+                    @else
                     <a href="{{ $notification['link'] }}" 
                     class="flex items-start gap-4 px-6 py-5 hover:bg-bkkNeutral-50 transition border-b border-bkkNeutral-50 last:border-none group">
+                    @endif
                         
                         {{-- Ikon Berdasarkan Type --}}
                         <div class="mt-1 shrink-0">
                             @if($notification['type'] === 'tracer-study')
                                 <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                </div>
+                            @elseif($notification['type'] === 'admin-message')
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                                 </div>
                             @else
                                 {{-- Ikon untuk Job/Status Lamaran --}}
@@ -60,13 +68,17 @@
                             </h4>
                     
                             <p class="text-[13px] text-bkkNeutral-600 leading-snug line-clamp-2">
-                                {{ $notification['message'] }}
+                                {!! strip_tags($notification['message']) !!}
                             </p>
                             <span class="text-[10px] text-bkkNeutral-400 mt-1">
                                 {{ \Carbon\Carbon::parse($notification['created_at'])->diffForHumans() }}
                             </span>
                         </div>
+                    @if($notification['type'] === 'admin-message')
+                    </button>
+                    @else
                     </a>
+                    @endif
                 @empty
                     <div class="flex flex-col items-center justify-center py-12 px-6">
                         <div class="w-16 h-16 bg-bkkNeutral-100 rounded-full flex items-center justify-center mb-4">
@@ -83,4 +95,42 @@
         </div>
     </div>
 
+    <!-- Modal Pesan -->
+    <div 
+        x-cloak
+        x-show="openMessageModal"
+        class="fixed inset-0 flex items-center justify-center bg-black/50 z-[9999]"
+    >
+        <!-- Modal Content -->
+        <div 
+            @click.outside="openMessageModal = false; selectedMessage = null"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95"
+            class="bg-white rounded-2xl w-full max-w-lg mx-4 flex flex-col max-h-[80vh] overflow-hidden shadow-2xl relative"
+        >
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-bkkNeutral-100 flex justify-between items-center bg-gray-50/50">
+                <h3 class="heading-16s text-bkkNeutral-900 font-bold max-w-[80%] truncate" x-text="selectedMessage?.title"></h3>
+                <button @click="openMessageModal = false; selectedMessage = null" class="text-bkkNeutral-400 hover:text-bkkNeutral-700 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="px-6 py-5 overflow-y-auto custom-scrollbar flex-1 relative">
+                <div class="dynamic-global text-bkkNeutral-800" x-html="selectedMessage?.message"></div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 border-t border-bkkNeutral-100 flex justify-end bg-gray-50/50">
+                <button @click="openMessageModal = false; selectedMessage = null" class="px-5 py-2 bg-bkkNeutral-100 hover:bg-bkkNeutral-200 text-bkkNeutral-700 font-bold text-sm rounded-lg transition duration-200">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
