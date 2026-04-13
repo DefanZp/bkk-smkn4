@@ -58,3 +58,15 @@ Route::middleware('auth.modal')->group(function () {
     Route::get('/data-pribadi', PersonalData::class)->middleware('auth.modal')->name('data-pribadi')->prefix('user');
     Route::get('/riwayat-lamaran', ApplicationHistory::class)->middleware('auth.modal')->name('riwayat-lamaran')->prefix('user');
 }); 
+
+// Storage file serving route (untuk hosting yang tidak support symlink)
+Route::get('/storage/{path}', function (string $path) {
+    $fullPath = storage_path('app/public/' . $path);
+
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+
+    return response()->file($fullPath);
+})->where('path', '.*')->name('storage.serve');
+
