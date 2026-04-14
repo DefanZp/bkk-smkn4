@@ -71,7 +71,7 @@
                                             class="space-y-1">
                                             <h3 
                                                 class="heading-20s text-black capitalize"
-                                                x-text="companiesName.length > 15 ? companiesName.substring(0, 15) + '...' : companiesName">
+                                                x-text="companiesName.length > 30 ? companiesName.substring(0, 30) + '...' : companiesName">
                                             </h3>
                                         </div>
                                     </div>

@@ -372,6 +372,9 @@
                                 class="paragraph-16r {{ request()->routeIs('tracer-study') ? 'text-primary' : 'text-bkkNeutral-900 hover:text-primary' }} transition duration-300">
                                 Tracer Study
                             </a>
+                            <a href="{{ route('survey') }}"
+                                class="paragraph-16r {{ request()->routeIs('survey') ? 'text-primary' : 'text-bkkNeutral-900 hover:text-primary' }} transition duration-300">Survey Kepuasan
+                            </a>
                         </div>
                     </div>
                     <a 
@@ -385,16 +388,20 @@
                         Kontak
                     </a>
 
-                    <a  
-                    @click="openModalLogin = true"
-                    class="w-full lg:w-auto mt-8 flex justify-center items-center gap-3 py-3 px-6 bg-primary hover:bg-primary-hover transition duration-300 rounded-[8px] group">
-                        <span class="paragraph-16s text-bkkNeutral-50">
-                            Login
-                        </span>
-                        <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 6L14 1M19 6L14 11M19 6H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+                    @auth
+                        
+                    @else
+                        <a  
+                        @click="openModalLogin = true"
+                        class="w-full lg:w-auto mt-8 flex justify-center items-center gap-3 py-3 px-6 bg-primary hover:bg-primary-hover transition duration-300 rounded-[8px] group">
+                            <span class="paragraph-16s text-bkkNeutral-50">
+                                Login
+                            </span>
+                            <svg class="shrink-0 group-hover:translate-x-1 transition duration-300" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 6L14 1M19 6L14 11M19 6H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    @endauth
                 </div>
             </nav>
 
