@@ -53,9 +53,9 @@ class NotificationUser extends Component
     public function checkIsTracerStudyFilled() 
     {
         $user = auth()->user();
-        if ($user && $user->status === null) {
+        if ($user && $user->status === null && !session('tracer-study-notif-shown')) {
             $this->notifications[] = [
-                'id' => null,
+                'id' => 'tracer-study',
                 'type' => 'tracer-study',
                 'title' => 'Tracer Study',
                 'message' => 'Anda belum mengisi tracer study. Isi sekarang.',
@@ -66,15 +66,19 @@ class NotificationUser extends Component
         }
     }
 
-    public function deleteOldNotifications()
+    public function markAsRead($id, $link)
     {
-        DB::table('notifications')
-            ->where('notifiable_id', auth()->id())
-            ->where('notifiable_type', 'App\Models\User')
-            ->where('created_at', '<', now()->subDays(30))
-            ->delete();
-    }
+        if ($id === 'tracer-study') {
+            session(['tracer-study-notif-shown' => true]);
+        } else {
+            DB::table('notifications')
+                ->where('id', $id)
+                ->update(['read_at' => now()]);
+        }
 
+        return redirect($link);
+    }
+    
     public function render()
     {
         return view('livewire.components.notification-user');

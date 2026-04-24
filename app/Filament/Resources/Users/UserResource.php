@@ -14,7 +14,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -58,7 +58,7 @@ class UserResource extends Resource
             TextInput::make('email')->email()->unique(ignoreRecord: true)->label('Email'),
             Select::make('major')->options(User::MAJORS)->required()->label('Jurusan'),
             Select::make('role')->options(User::ROLES)->label('Role'),
-            TextArea::make('address')->label('Alamat'),
+            Textarea::make('address')->label('Alamat'),
             TextInput::make('birth_place')->label('Tempat Lahir'),
             TextInput::make('no_hp')->tel()->label('Nomor HP'),
             FileUpload::make('CVuser')->label('CV')->disk('public')->directory('cv-users'),

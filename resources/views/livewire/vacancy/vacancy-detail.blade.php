@@ -152,7 +152,7 @@
                         <path d="M5.75 7.75C5.75 8.85457 6.64543 9.75 7.75 9.75C8.85457 9.75 9.75 8.85457 9.75 7.75C9.75 6.64543 8.85457 5.75 7.75 5.75C6.64543 5.75 5.75 6.64543 5.75 7.75Z" stroke="#364153" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <div class="paragraph-16r text-bkkNeutral-700">
-                            {{ $vacancy->company->address }}
+                            {{ $vacancy->company->short_address ?? 'Lokasi belum tersedia' }}
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
@@ -172,8 +172,10 @@
                         </div>
                     </div>  
                 </div>
-                <div class="paragraph-16r text-bkkNeutral-700 capitalize">
-                    {{ $vacancy->company->companies_profile }}
+                <div class="paragraph-16r text-bkkNeutral-700 dynamic-vacancy">
+                    {{ $vacancy->company->companies_profile 
+                        ? \Filament\Forms\Components\RichEditor\RichContentRenderer::make($vacancy->company->companies_profile)
+                        : 'Belum ada deskripsi perusahaan' }}
                 </div>
             </div>
         </div>
